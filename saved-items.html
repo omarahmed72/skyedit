@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKYPIONEERS - Saved Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+
+    <!-- Page Specific Styles -->
+    <style>
+      /* Saved Page Layout */
+      .saved-content-wrapper {
+        position: relative;
+        z-index: 2;
+        padding-top: 100px;
+        min-height: 100vh;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 60px;
+      }
+
+      .saved-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .saved-title {
+        font-size: 40px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: var(--text-color);
+      }
+
+      .saved-count {
+        font-size: 14px;
+        color: var(--accent-gold);
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        background: rgba(197, 160, 89, 0.1);
+        padding: 8px 16px;
+        border-radius: 50px;
+        border: 1px solid rgba(197, 160, 89, 0.3);
+      }
+
+      /* Grid Layout */
+      .saved-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+      }
+
+      /* Remove Button Styling */
+      .remove-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ff4757;
+        cursor: pointer;
+        z-index: 20;
+        transition: all 0.3s ease;
+      }
+
+      .remove-btn:hover {
+        background: #ff4757;
+        color: white;
+        transform: scale(1.1);
+        box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+      }
+
+      /* Empty State Styling */
+      .empty-state {
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 80px 20px;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        margin-top: 20px;
+      }
+
+      .empty-icon {
+        font-size: 60px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        opacity: 0.5;
+      }
+
+      .empty-text {
+        font-size: 24px;
+        color: var(--text-color);
+        margin-bottom: 10px;
+        font-weight: 300;
+      }
+
+      .empty-subtext {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 30px;
+        max-width: 400px;
+      }
+
+      .explore-btn {
+        padding: 15px 40px;
+        background: var(--accent-gold);
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 50px;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .explore-btn:hover {
+        background: #b08d4e;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+      }
+
+      /* Animation for removal */
+      .fade-out {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.4s ease;
+      }
+
+      @media (max-width: 768px) {
+        .saved-grid {
+          grid-template-columns: 1fr;
+        }
+        .saved-title {
+          font-size: 28px;
+        }
+        .saved-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sound Indicator -->
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
+    </div>
+
+    <!-- Tesla Style Liquid Navbar with Mega Menu -->
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <!-- Home Link -->
+        <!-- <div class="nav-item">
+          <a href="index.html">Home</a>
+        </div> -->
+
+        <!-- Explore Link -->
+        <!-- <div class="nav-item">
+          <a href="explore.html">Explore</a>
+        </div> -->
+
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Link triggers Page Switch -->
+        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="nav-item">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="nav-item">
+          <a href="developers.html">Developers</a>
+        </div>
+        <div class="nav-item">
+          <a href="calculator.html">Calculator</a>
+        </div> -->
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Same as projects.html) -->
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="mobile-nav-link"><a href="index.html">Home</a></div>
+      <div class="mobile-nav-link"><a href="projects.html">Projects</a></div>
+      <div class="mobile-nav-link"><a href="saved-items.html">Saved</a></div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="page-section">
+      <!-- Full Page Background (Using same video/overlay style as Explore) -->
+      <div class="explore-full-bg">
+        <!-- Optional: Use a static image or a different video for Saved page -->
+        <!-- <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+          style="opacity: 0.6"
+        >
+          <source src="video sky.mp4" type="video/mp4" />
+        </video> -->
+        <div
+          class="explore-video-overlay"
+          style="background: var(--bg-color); opacity: 0.85"
+        ></div>
+      </div>
+
+      <div class="saved-content-wrapper">
+        <!-- Header -->
+        <div class="saved-header">
+          <h1 class="saved-title">Saved Projects</h1>
+          <div class="saved-count">
+            <span id="item-count">3</span> Items Saved
+          </div>
+        </div>
+
+        <!-- Empty State Container -->
+        <div id="empty-state" class="empty-state">
+          <i class="fa-regular fa-bookmark empty-icon"></i>
+          <h2 class="empty-text">Your collection is empty</h2>
+          <p class="empty-subtext">
+            It looks like you haven't saved any projects yet. Browse our
+            exclusive listings and save your favorites to view them here.
+          </p>
+          <a href="projects.html" class="explore-btn">Start Exploring</a>
+        </div>
+
+        <!-- Grid -->
+        <div class="saved-grid" id="saved-grid">
+          <!-- Card 1 -->
+          <div class="developer-card" id="card-1">
+            <button
+              class="remove-btn"
+              onclick="removeCard('card-1')"
+              title="Remove from saved"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <div
+              class="date"
+              style="
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 12px;
+                padding: 8px 15px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                color: white;
+                z-index: 10;
+              "
+            >
+              Featured
+            </div>
+
+            <a
+              href="project-details.html"
+              style="text-decoration: none; color: inherit"
+            >
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0; height: 250px"
+              >
+                <img
+                  src="imgs/newsletter-1.webp"
+                  class="prop-img"
+                  style="width: 100%; height: 100%; object-fit: cover"
+                />
+              </div>
+              <div class="developer-details">
+                <div
+                  class="pro-title"
+                  style="gap: 15px; display: flex; align-items: flex-start"
+                >
+                  <img
+                    style="
+                      width: 45px;
+                      height: 45px;
+                      border-radius: 50%;
+                      object-fit: contain;
+                      background: white;
+                      padding: 2px;
+                    "
+                    src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                    alt=""
+                  />
+                  <div style="width: 100%">
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 18px;
+                        font-weight: 700;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      El Centro Business Complex
+                    </h2>
+                    <div class="attributes">
+                      <span
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          align-items: center;
+                          font-size: 12px;
+                          color: var(--text-muted);
+                        "
+                      >
+                        <i class="fas fa-map-marker-alt text-yellow-500"></i>
+                        New Administrative Capital
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="prop-price"
+                  style="text-align: right; margin-top: 15px"
+                >
+                  <span
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      display: block;
+                    "
+                    >Starting from</span
+                  >
+                  <span
+                    style="
+                      font-weight: 700;
+                      font-size: 18px;
+                      color: var(--accent-gold);
+                    "
+                    >7,375,464 EGP</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="developer-card" id="card-2">
+            <button
+              class="remove-btn"
+              onclick="removeCard('card-2')"
+              title="Remove from saved"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <div
+              class="date"
+              style="
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 12px;
+                padding: 8px 15px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                color: white;
+                z-index: 10;
+              "
+            >
+              For Sale
+            </div>
+
+            <a
+              href="project-details.html"
+              style="text-decoration: none; color: inherit"
+            >
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0; height: 250px"
+              >
+                <!-- Placeholder Image from Unsplash matching theme -->
+                <img
+                  src="https://images.unsplash.com/photo-1600596542815-e3289cab6f58?q=80&w=600&auto=format&fit=crop"
+                  class="prop-img"
+                  style="width: 100%; height: 100%; object-fit: cover"
+                />
+              </div>
+              <div class="developer-details">
+                <div
+                  class="pro-title"
+                  style="gap: 15px; display: flex; align-items: flex-start"
+                >
+                  <div
+                    style="
+                      width: 45px;
+                      height: 45px;
+                      border-radius: 50%;
+                      background: #0b0829;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      font-weight: bold;
+                    "
+                  >
+                    SK
+                  </div>
+                  <div style="width: 100%">
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 18px;
+                        font-weight: 700;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      Skyline Luxury Apartments
+                    </h2>
+                    <div class="attributes">
+                      <span
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          align-items: center;
+                          font-size: 12px;
+                          color: var(--text-muted);
+                        "
+                      >
+                        <i class="fas fa-map-marker-alt text-yellow-500"></i>
+                        Sheikh Zayed City
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="prop-price"
+                  style="text-align: right; margin-top: 15px"
+                >
+                  <span
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      display: block;
+                    "
+                    >Starting from</span
+                  >
+                  <span
+                    style="
+                      font-weight: 700;
+                      font-size: 18px;
+                      color: var(--accent-gold);
+                    "
+                    >12,500,000 EGP</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="developer-card" id="card-3">
+            <button
+              class="remove-btn"
+              onclick="removeCard('card-3')"
+              title="Remove from saved"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+
+            <a
+              href="project-details.html"
+              style="text-decoration: none; color: inherit"
+            >
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0; height: 250px"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600&auto=format&fit=crop"
+                  class="prop-img"
+                  style="width: 100%; height: 100%; object-fit: cover"
+                />
+              </div>
+              <div class="developer-details">
+                <div
+                  class="pro-title"
+                  style="gap: 15px; display: flex; align-items: flex-start"
+                >
+                  <div
+                    style="
+                      width: 45px;
+                      height: 45px;
+                      border-radius: 50%;
+                      background: #c5a059;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      color: white;
+                      font-weight: bold;
+                    "
+                  >
+                    MV
+                  </div>
+                  <div style="width: 100%">
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 18px;
+                        font-weight: 700;
+                        margin-bottom: 5px;
+                      "
+                    >
+                      Mountain View Lagoon
+                    </h2>
+                    <div class="attributes">
+                      <span
+                        style="
+                          display: flex;
+                          gap: 8px;
+                          align-items: center;
+                          font-size: 12px;
+                          color: var(--text-muted);
+                        "
+                      >
+                        <i class="fas fa-map-marker-alt text-yellow-500"></i>
+                        New Cairo
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="prop-price"
+                  style="text-align: right; margin-top: 15px"
+                >
+                  <span
+                    style="
+                      font-size: 11px;
+                      color: var(--text-muted);
+                      display: block;
+                    "
+                    >Starting from</span
+                  >
+                  <span
+                    style="
+                      font-weight: 700;
+                      font-size: 18px;
+                      color: var(--accent-gold);
+                    "
+                    >9,200,000 EGP</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer (Same as projects.html) -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div>
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- REAL ESTATE CHATBOT WIDGET -->
+    <!-- Position adjusted in CSS to center above bottom bar -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div class="chat-header">
+        <div class="chat-title-group">
+          <div class="chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="chat-info">
+            <h3>SkyBot</h3>
+            <span class="status-dot"></span> Online
+          </div>
+        </div>
+        <button class="close-chat" onclick="toggleChat()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="message bot-message">
+          Hello! 👋 I'm SkyBot. How can I assist you with your real estate
+          journey today?
+        </div>
+        <!-- Quick Option Buttons -->
+        <div class="chat-options">
+          <button onclick="sendOption('Browse Projects')">
+            <i class="fas fa-building"></i> Browse Projects
+          </button>
+          <button onclick="sendOption('Sell My Unit')">
+            <i class="fas fa-tag"></i> Sell Unit
+          </button>
+          <button onclick="sendOption('Contact Sales')">
+            <i class="fas fa-phone"></i> Contact Sales
+          </button>
+          <button onclick="sendOption('Price Range')">
+            <i class="fas fa-dollar-sign"></i> Price Range
+          </button>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Ask about price, location..."
+          onkeypress="handleChatKey(event)"
+        />
+        <button class="send-chat-btn" onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Replaces Chat Toggle) -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input
+          type="text"
+          id="bottom-bar-input"
+          placeholder="Ask SkyBot a Question..."
+          onkeypress="handleBottomBarKey(event)"
+        />
+        <button class="send-btn" onclick="sendFromBottomBar()">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+      // Page Specific Logic for Removing Items
+      function removeCard(cardId) {
+        const card = document.getElementById(cardId);
+
+        // Add fade out animation class
+        card.classList.add("fade-out");
+
+        // Wait for animation to finish then remove
+        setTimeout(() => {
+          card.style.display = "none";
+          updateCount();
+        }, 400);
+      }
+
+      function updateCount() {
+        // Count visible cards
+        const cards = document.querySelectorAll(".developer-card");
+        const visibleCards = Array.from(cards).filter(
+          (c) => c.style.display !== "none",
+        );
+        const countSpan = document.getElementById("item-count");
+        const emptyState = document.getElementById("empty-state");
+        const grid = document.getElementById("saved-grid");
+
+        countSpan.textContent = visibleCards.length;
+
+        // Show empty state if no cards left
+        if (visibleCards.length === 0) {
+          grid.style.display = "none";
+          emptyState.style.display = "flex";
+        }
+      }
+    </script>
+  </body>
+</html>

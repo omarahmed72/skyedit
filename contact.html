@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKYPIONEERS - Real Estate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
+    </div>
+
+    <!-- Tesla Style Liquid Navbar with Mega Menu -->
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <!-- Home Link -->
+        <!-- <div class="nav-item">
+          <a href="index.html">Home</a>
+        </div> -->
+
+        <!-- Explore Link -->
+        <!-- <div class="nav-item">
+          <a href="explore.html">Explore</a>
+        </div> -->
+
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Link triggers Page Switch -->
+        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="nav-item">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="nav-item">
+          <a href="developers.html">Developers</a>
+        </div>
+        <div class="nav-item">
+          <a href="calculator.html">Calculator</a>
+        </div> -->
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Residential</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Commercial</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Upcoming</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+    <!-- CONTACT PAGE VIEW WRAPPER -->
+    <div id="contact-page" class="page-section">
+      <!-- Reusing Explore Background for consistent feel -->
+      <div class="explore-full-bg">
+        <!-- <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source src="video sky.mp4" type="video/mp4" />
+        </video> -->
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-glass-wrapper">
+          <!-- Title -->
+          <h1 class="contact-title">Contact Us</h1>
+          <h2 class="contact-subtitle">We'd love to hear from you</h2>
+
+          <!-- Info Icons Row -->
+          <div class="contact-info-row">
+            <div class="info-col">
+              <i class="fas fa-mobile-alt"></i>
+              <h3>Phone</h3>
+              <p>+63 996 632 621<br />+63 7256 222 005</p>
+            </div>
+            <div class="info-col">
+              <i class="fas fa-map-marker-alt"></i>
+              <h3>Address</h3>
+              <p>SkyPioneers Tower, New Capital<br />Cairo, Egypt</p>
+            </div>
+            <div class="info-col">
+              <i class="far fa-envelope"></i>
+              <h3>Email</h3>
+              <p>info@skypioneers.com<br />sales@skypioneers.com</p>
+            </div>
+            <div class="info-col">
+              <i class="far fa-clock"></i>
+              <h3>Working Hours</h3>
+              <p>Sunday-Thursday<br />10:00 AM - 6:00 PM</p>
+            </div>
+          </div>
+
+          <!-- Form Section -->
+          <form class="contact-form-new">
+            <div style="display: flex; gap: 20px">
+              <input type="text" class="new-input" placeholder="Your Name" />
+              <input type="email" class="new-input" placeholder="Your Email" />
+            </div>
+            <input type="text" class="new-input" placeholder="Subject" />
+            <textarea
+              class="new-input"
+              rows="5"
+              placeholder="Message"
+              style="resize: none"
+            ></textarea>
+            <button class="send-btn">Send Message</button>
+          </form>
+
+          <!-- Socials -->
+          <div class="social-row">
+            <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+            <div class="social-box"><i class="fab fa-twitter"></i></div>
+            <div class="social-box"><i class="fab fa-instagram"></i></div>
+            <div class="social-box"><i class="fab fa-linkedin-in"></i></div>
+          </div>
+        </div>
+
+        <!-- Map Section -->
+
+        <div class="map-container">
+          <div class="map-overlay-text">Our Location</div>
+          <!-- 
+                        استبدل الرابط داخل src بالرابط الخاص بشركتك من خرائط جوجل 
+                        Replace the src link below with your company's Embed Map link from Google Maps 
+                    -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.60389552708!2d31.554095849999996!3d30.0596185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145818956877477b%3A0x6b777a9223390cce!2sNew%20Cairo%201%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+            class="map-iframe"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
+        <!-- <div
+          class="contact-glass-wrapper"
+          style="padding: 0; overflow: hidden; height: 400px"
+        >
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.377099646166!2d31.71984606733236!3d30.04441963403197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583cd3d0b23023%3A0x6b6c2c99a073f8e4!2sNew%20Administrative%20Capital!5e0!3m2!1sen!2seg!4v1709400000000!5m2!1sen!2seg"
+            width="100%"
+            height="100%"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div>
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- REAL ESTATE CHATBOT WIDGET -->
+    <!-- Position adjusted in CSS to center above bottom bar -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div class="chat-header">
+        <div class="chat-title-group">
+          <div class="chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="chat-info">
+            <h3>SkyBot</h3>
+            <span class="status-dot"></span> Online
+          </div>
+        </div>
+        <button class="close-chat" onclick="toggleChat()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="message bot-message">
+          Hello! 👋 I'm SkyBot. How can I assist you with your real estate
+          journey today?
+        </div>
+        <!-- Quick Option Buttons -->
+        <div class="chat-options">
+          <button onclick="sendOption('Browse Projects')">
+            <i class="fas fa-building"></i> Browse Projects
+          </button>
+          <button onclick="sendOption('Sell My Unit')">
+            <i class="fas fa-tag"></i> Sell Unit
+          </button>
+          <button onclick="sendOption('Contact Sales')">
+            <i class="fas fa-phone"></i> Contact Sales
+          </button>
+          <button onclick="sendOption('Price Range')">
+            <i class="fas fa-dollar-sign"></i> Price Range
+          </button>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Ask about price, location..."
+          onkeypress="handleChatKey(event)"
+        />
+        <button class="send-chat-btn" onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Replaces Chat Toggle) -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input
+          type="text"
+          id="bottom-bar-input"
+          placeholder="Ask SkyBot a Question..."
+          onkeypress="handleBottomBarKey(event)"
+        />
+        <button class="send-btn" onclick="sendFromBottomBar()">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

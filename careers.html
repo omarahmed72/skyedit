@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKYPIONEERS - Careers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <!-- Sound Hint -->
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
+    </div>
+
+    <!-- Tesla Style Liquid Navbar with Mega Menu -->
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <!-- Home Link -->
+        <!-- <div class="nav-item">
+          <a href="index.html">Home</a>
+        </div> -->
+
+        <!-- Explore Link -->
+        <!-- <div class="nav-item">
+          <a href="explore.html">Explore</a>
+        </div> -->
+
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Link triggers Page Switch -->
+        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="nav-item">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="nav-item">
+          <a href="developers.html">Developers</a>
+        </div>
+        <div class="nav-item">
+          <a href="calculator.html">Calculator</a>
+        </div> -->
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Residential</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Commercial</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Upcoming</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <!-- === CAREERS PAGE SECTION === -->
+    <div id="careers-page" class="page-section" style="padding-top: 100px">
+      <!-- Background Video -->
+      <div class="explore-full-bg">
+        <!-- <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source src="video sky.mp4" type="video/mp4" />
+        </video> -->
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <div
+        class="sell-hero-content"
+        style="position: relative; padding-bottom: 60px"
+      >
+        <h1 class="calc-title">Join Our Team</h1>
+
+        <!-- Career Wrapper -->
+        <div class="career-wrapper">
+          <!-- Search & Filter Bar (Glass Panel) -->
+          <div class="glass-panel career-controls">
+            <!-- Search Input -->
+            <div class="career-search-box">
+              <i class="fas fa-search search-icon"></i>
+              <input
+                type="text"
+                placeholder="Search jobs..."
+                class="career-input"
+              />
+            </div>
+
+            <!-- Filters Row -->
+            <div class="career-filters-row">
+              <div class="filter-wrapper">
+                <select class="glass-select">
+                  <option value="" disabled selected>Workplace type</option>
+                  <option>On-site</option>
+                  <option>Remote</option>
+                  <option>Hybrid</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+
+              <div class="filter-wrapper">
+                <select class="glass-select">
+                  <option value="" disabled selected>Location</option>
+                  <option>Cairo, Egypt</option>
+                  <option>Giza, Egypt</option>
+                  <option>Alexandria</option>
+                  <option>New Capital</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+
+              <div class="filter-wrapper">
+                <select class="glass-select">
+                  <option value="" disabled selected>Department</option>
+                  <option>Sales</option>
+                  <option>Marketing</option>
+                  <option>Finance</option>
+                  <option>Engineering</option>
+                  <option>HR</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+
+              <div class="filter-wrapper">
+                <select class="glass-select">
+                  <option value="" disabled selected>Work type</option>
+                  <option>Full-time</option>
+                  <option>Part-time</option>
+                  <option>Internship</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Job Listings List -->
+          <div class="job-list-container">
+            <!-- Job Card 1 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Accounts Payable Specialist</h3>
+                <span class="posted-date">Posted today</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">Maadi, Cairo, Egypt</span>
+                <span class="meta-item">Finance</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 2 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Summer Internship Program 2026</h3>
+                <span class="posted-date">Posted 3 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">New Cairo, Egypt</span>
+                <span class="meta-item">Nawy Partners</span>
+                <span class="meta-item highlight">Internship</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 3 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Business Development Team Leader</h3>
+                <span class="posted-date">Posted 3 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">Hybrid</span>
+                <span class="meta-item">New Cairo City, Egypt</span>
+                <span class="meta-item">Sales</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 4 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Senior Site Engineer</h3>
+                <span class="posted-date">Posted 5 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">October Gardens, Giza</span>
+                <span class="meta-item">Engineering</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 5 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Sales Executive</h3>
+                <span class="posted-date">Posted 1 week ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">Sheikh Zayed, Giza</span>
+                <span class="meta-item">Sales</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+            <!-- Job Card 6 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Accounts Payable Specialist</h3>
+                <span class="posted-date">Posted today</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">Maadi, Cairo, Egypt</span>
+                <span class="meta-item">Finance</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 7 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Summer Internship Program 2026</h3>
+                <span class="posted-date">Posted 3 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">New Cairo, Egypt</span>
+                <span class="meta-item">Nawy Partners</span>
+                <span class="meta-item highlight">Internship</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 8 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Business Development Team Leader</h3>
+                <span class="posted-date">Posted 3 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">Hybrid</span>
+                <span class="meta-item">New Cairo City, Egypt</span>
+                <span class="meta-item">Sales</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 9 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Senior Site Engineer</h3>
+                <span class="posted-date">Posted 5 days ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">October Gardens, Giza</span>
+                <span class="meta-item">Engineering</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+
+            <!-- Job Card 10 -->
+            <div class="job-card glass-panel">
+              <div class="job-main-info">
+                <h3 class="job-title">Sales Executive</h3>
+                <span class="posted-date">Posted 1 week ago</span>
+              </div>
+              <div class="job-meta">
+                <span class="meta-item badge">On-site</span>
+                <span class="meta-item">Sheikh Zayed, Giza</span>
+                <span class="meta-item">Sales</span>
+                <span class="meta-item highlight">Full time</span>
+              </div>
+              <div class="job-action">
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div>
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- REAL ESTATE CHATBOT WIDGET -->
+    <!-- Position adjusted in CSS to center above bottom bar -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div class="chat-header">
+        <div class="chat-title-group">
+          <div class="chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="chat-info">
+            <h3>SkyBot</h3>
+            <span class="status-dot"></span> Online
+          </div>
+        </div>
+        <button class="close-chat" onclick="toggleChat()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="message bot-message">
+          Hello! 👋 I'm SkyBot. How can I assist you with your real estate
+          journey today?
+        </div>
+        <!-- Quick Option Buttons -->
+        <div class="chat-options">
+          <button onclick="sendOption('Browse Projects')">
+            <i class="fas fa-building"></i> Browse Projects
+          </button>
+          <button onclick="sendOption('Sell My Unit')">
+            <i class="fas fa-tag"></i> Sell Unit
+          </button>
+          <button onclick="sendOption('Contact Sales')">
+            <i class="fas fa-phone"></i> Contact Sales
+          </button>
+          <button onclick="sendOption('Price Range')">
+            <i class="fas fa-dollar-sign"></i> Price Range
+          </button>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Ask about price, location..."
+          onkeypress="handleChatKey(event)"
+        />
+        <button class="send-chat-btn" onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Replaces Chat Toggle) -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input
+          type="text"
+          id="bottom-bar-input"
+          placeholder="Ask SkyBot a Question..."
+          onkeypress="handleBottomBarKey(event)"
+        />
+        <button class="send-btn" onclick="sendFromBottomBar()">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

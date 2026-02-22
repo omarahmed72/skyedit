@@ -1,0 +1,1413 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Centro Mall | New Capital - SKYPIONEERS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Assuming style.css is linked as provided -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      /* --- Custom Styles for Project Details Page --- */
+
+      /* Ensure variable availability if style.css isn't perfectly loaded in this context */
+      :root {
+        --accent-gold: #c5a059;
+        --glass-bg: rgba(255, 255, 255, 0.1);
+        --glass-border: rgba(255, 255, 255, 0.2);
+        --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        --text-color: #171a20;
+        --text-muted: #5c5e62;
+      }
+
+      body {
+        background-color: #f5f5f5; /* Light background base */
+      }
+
+      [data-theme="dark"] body {
+        background-color: #0b0829;
+      }
+
+      /* --- Hero Slider Section --- */
+      .project-hero {
+        position: relative;
+        /* height: 85vh; */
+        width: 80%;
+        margin: 5rem auto;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .project-hero .carousel {
+        width: 100vw;
+        height: 90vh;
+        margin-top: -50px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .project-hero .carousel .list .item {
+        width: 200px;
+        height: 300px;
+        position: absolute;
+        top: 75%;
+        transform: translate(0, -50%);
+        left: 57%;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        background-position: 50% 50%;
+        background-size: cover;
+        /* z-index: 100; */
+        display: inline-block;
+        transition: 0.5s;
+      }
+
+      .project-hero .carousel .list .item:nth-child(1),
+      .project-hero .carousel .list .item:nth-child(2) {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .project-hero .carousel .list .item:nth-child(3) {
+        left: 57%;
+      }
+      .project-hero .carousel .list .item:nth-child(4) {
+        left: calc(57% + 220px);
+      }
+      .project-hero .carousel .list .item:nth-child(5) {
+        left: calc(57% + 440px);
+      }
+      .project-hero .carousel .list .item:nth-child(6) {
+        left: calc(50% + 660px);
+      }
+      .project-hero .carousel .list .item:nth-child(n + 7) {
+        left: calc(50% + 880px);
+        opacity: 0;
+      }
+
+      /* arrows */
+      .project-hero .arrows {
+        position: absolute;
+        top: 84%;
+        right: 55%;
+        z-index: 100;
+        width: 300px;
+        max-width: 30%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .project-hero .arrows button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* border: none; */
+        border: 1px solid #fff;
+        /* background-color: var(--accent-gold); */
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .project-hero .arrows button:hover {
+        background-color: #0b0829;
+      }
+      .slider-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 0;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Slider Navigation */
+      .slider-nav {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-dot.active {
+        background: var(--accent-gold);
+        transform: scale(1.2);
+      }
+
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 20;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .slider-arrow:hover {
+        background: var(--accent-gold);
+        border-color: var(--accent-gold);
+      }
+
+      .prev-arrow {
+        left: 30px;
+      }
+      .next-arrow {
+        right: 30px;
+      }
+
+      /* Floating Contact Form */
+      .floating-form-container {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        transform: translateY(-40%); /* Adjust to center vertically */
+        z-index: 30;
+        width: 380px;
+        max-width: 90%;
+      }
+
+      .floating-form {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      [data-theme="dark"] .floating-form {
+        background: rgba(11, 8, 41, 0.85);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .form-header p {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text-color);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .form-header p a {
+        color: #007bff; /* Link color */
+        text-decoration: none;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s;
+      }
+
+      [data-theme="dark"] .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .form-input:focus {
+        border-color: var(--accent-gold);
+        box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+      }
+
+      .form-submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: #2dd4bf; /* Teal color from screenshot */
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+      }
+
+      .form-submit-btn:hover {
+        background: #14b8a6;
+        transform: translateY(-2px);
+      }
+
+      /* Project Logo Overlay on Slider */
+      .project-logo-overlay {
+        position: absolute;
+        bottom: 40px;
+        left: 5%;
+        z-index: 25;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        /* background: #000; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        /* If using an image: */
+        overflow: hidden;
+      }
+
+      .project-logo-overlay img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* --- Content Layout --- */
+      .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 60px 20px;
+        position: relative;
+      }
+
+      /* Section Header Style */
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .header-bar {
+        width: 4px;
+        height: 25px;
+        background: var(--text-muted);
+        border-radius: 2px;
+      }
+
+      .section-title {
+        font-size: 28px;
+        font-weight: 300;
+        color: var(--text-color);
+        margin: 0;
+      }
+
+      .section-title span {
+        font-weight: 700;
+      }
+
+      .district-label {
+        font-size: 14px;
+        color: var(--accent-gold); /* Teal color */
+        margin-left: 15px;
+        font-weight: 500;
+      }
+
+      .zoom-btn {
+        margin-left: auto;
+        background: var(--accent-gold);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .zoom-btn:hover {
+        background: var(--text-muted);
+      }
+
+      .project-description {
+        font-size: 15px;
+        line-height: 1.8;
+        color: var(--text-muted);
+        margin-bottom: 60px;
+        max-width: 900px;
+      }
+
+      .project-description strong {
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      /* Map Section */
+      .map-container-glass {
+        width: 100%;
+        height: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .map-img-placeholder {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* filter: grayscale(100%) opacity(0.7); */
+      }
+
+      .map-pin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pin-dot {
+        width: 40px;
+        height: 40px;
+        background: #171a20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        border: 2px solid white;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .pin-label {
+        margin-top: 10px;
+        background: #2dd4bf;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* Developer Section */
+      .developer-section {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        margin-bottom: 80px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .dev-logo-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        /* background: #800080;  */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        flex-shrink: 0;
+        font-size: 12px;
+        line-height: 1.2;
+        padding: 10px;
+        border: 4px solid #fff;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .dev-text {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      .read-more {
+        color: var(--text-color);
+        text-decoration: underline;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      /* Related Projects Grid */
+      .related-projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .project-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      [data-theme="dark"] .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-image {
+        height: 180px;
+        width: 100%;
+        object-fit: cover;
+        position: relative;
+      }
+
+      .status-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+      }
+
+      .status-badge.off-plan {
+        background: #333;
+      }
+      .status-badge.on-hold {
+        background: #f59e0b;
+      }
+      .status-badge.discount {
+        background: #6366f1;
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 5px;
+      }
+
+      .card-location {
+        font-size: 12px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 15px;
+      }
+
+      .card-price {
+        font-size: 14px;
+        color: #0047ab;
+        font-weight: 700;
+        text-align: right;
+      }
+
+      [data-theme="dark"] .card-price {
+        color: #60a5fa;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 992px) {
+        .floating-form-container {
+          position: relative;
+          top: auto;
+          right: auto;
+          transform: none;
+          width: 100%;
+          max-width: 600px;
+          margin: -50px auto 40px; /* Pull up to overlap slightly */
+        }
+
+        .project-hero {
+          height: 60vh;
+        }
+
+        .section-header {
+          flex-wrap: wrap;
+        }
+
+        .zoom-btn {
+          margin-left: 0;
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar (Reused from existing code) -->
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo white.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+      <div class="nav-center hidden lg:flex">
+        <div class="nav-item"><a href="index.html">Home</a></div>
+        <div class="nav-item"><a href="explore.html">Explore</a></div>
+        <div class="nav-item has-menu">Projects</div>
+        <div class="nav-item"><a href="about.html">About</a></div>
+        <div class="nav-item"><a href="contact.html">Contact</a></div>
+      </div>
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div id="pro-details-page" class="page-section">
+      <section class="pro-details-section-container">
+        <!-- Reusing Explore Background for consistent feel -->
+        <div class="explore-full-bg">
+          <video
+            class="explore-video-bg"
+            autoplay
+            loop
+            muted
+            playsinline
+            webkit-playsinline
+          >
+            <source src="video sky.mp4" type="video/mp4" />
+          </video>
+          <!-- Use blended overlay instead of solid dark -->
+          <div class="explore-video-overlay"></div>
+        </div>
+        <!-- Hero Section with Slider -->
+        <section class="project-hero">
+          <div class="carousel">
+            <div class="list">
+              <!-- Slide 1 -->
+              <div
+                class="item"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop&quot;);
+                "
+              ></div>
+              <!-- Slide 2 -->
+              <div
+                class="item"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1974&auto=format&fit=crop&quot;);
+                "
+              ></div>
+              <!-- Slide 3 -->
+              <div
+                class="item"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=1887&auto=format&fit=crop&quot;);
+                "
+              ></div>
+              <!-- Slide 4 -->
+              <div
+                class="item"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1996&auto=format&fit=crop&quot;);
+                "
+              ></div>
+              <!-- Slide 5 -->
+              <div
+                class="item"
+                style="
+                  background-image: url(&quot;https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1996&auto=format&fit=crop&quot;);
+                "
+              ></div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="arrows">
+              <button class="prev">
+                <i class="fa-solid fa-angle-left"></i>
+              </button>
+              <button class="next">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+
+            <!-- Project Logo Overlay -->
+            <div class="project-logo-overlay">
+              <img
+                src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                alt="Logo"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- Content Section -->
+        <div class="content-wrapper">
+          <!-- Title & Description -->
+          <div class="section-header">
+            <div class="header-bar"></div>
+            <h1 class="section-title">
+              El Centro Mall | <span>New Capital</span>
+            </h1>
+            <span class="district-label"
+              >District: New Administrative Capital</span
+            >
+            <a href="#" class="zoom-btn">Request a Zoom Meeting</a>
+          </div>
+
+          <div class="project-description">
+            <p>
+              <strong>El Centro Mall New Capital</strong> is a landmark
+              mixed-use development by
+              <strong>Empire State Developments</strong>, strategically located
+              in the heart of Downtown New Administrative Capital on plot
+              MU5-31, with direct views over the Central Park and close
+              proximity to the Government, Financial, and Business districts.
+              The project features a modern architectural design with expansive
+              open views and dedicated large portion of its land to green
+              spaces, creating a balanced and attractive environment. Comprising
+              a ground floor and fourteen upper floors, the mall includes a
+              well-organized mix of commercial retail spaces, medical clinics,
+              administrative offices, and hotel units.
+            </p>
+          </div>
+
+          <!-- Location Section -->
+          <div class="section-header">
+            <div class="header-bar"></div>
+            <h2 class="section-title" style="font-size: 22px">
+              El Centro Mall | New Capital Location
+            </h2>
+          </div>
+
+          <!-- Map Section -->
+
+          <div class="map-container">
+            <div class="map-overlay-text">Our Location</div>
+            <!-- 
+                        استبدل الرابط داخل src بالرابط الخاص بشركتك من خرائط جوجل 
+                        Replace the src link below with your company's Embed Map link from Google Maps 
+                    -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.60389552708!2d31.554095849999996!3d30.0596185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145818956877477b%3A0x6b777a9223390cce!2sNew%20Cairo%201%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
+              class="map-iframe"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+
+          <!-- Developer Section -->
+          <div class="section-header">
+            <div class="header-bar"></div>
+            <h2 class="section-title" style="font-size: 22px">
+              Project Developer
+            </h2>
+          </div>
+
+          <div class="developer-section">
+            <div class="dev-logo-circle">
+              <!-- Empire<br />State<br />Developments -->
+              <img src="imgs/cropped-circle-image-2-copy.webp" alt="" />
+            </div>
+            <div class="dev-text">
+              <p>
+                Empire Group brings over 33 years of diverse industry
+                experience. Our journey began in the furniture sector with the
+                establishment of "Empire Furniture," a wood manufacturing
+                facility founded in 2001. Since then, we have continued...
+                <span class="read-more">Read more</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- You May Also Like -->
+          <div class="section-header">
+            <div class="header-bar"></div>
+            <h2 class="section-title" style="font-size: 22px">
+              You May Also Like
+            </h2>
+          </div>
+
+          <div class="property-grid">
+            <!-- Property Card 1 -->
+            <a href="newsletter-details.html" class="developer-card">
+              <div
+                class="date"
+                style="
+                  position: absolute;
+                  top: 20px;
+                  left: 20px;
+                  font-size: 12px;
+                  padding: 10px 15px;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                  text-align: center;
+                  z-index: 10;
+                  backdrop-filter: blur(4px);
+                  border: 1px solid rgba(255, 255, 255, 0.6);
+                  min-width: 50px;
+                "
+              >
+                <p>Coming Soon</p>
+              </div>
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0"
+              >
+                <img src="imgs/newsletter-1.webp" class="prop-img" />
+              </div>
+              <div class="developer-details">
+                <!-- <h1 class="developer-title">Sarai Apartment</h1> -->
+                <div
+                  class="pro-title"
+                  style="gap: 10px; display: flex; align-items: start"
+                >
+                  <img
+                    style="width: 50px; height: 50px"
+                    src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                    alt=""
+                  />
+                  <div
+                    class=""
+                    style="
+                      gap: 10px;
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: start;
+                    "
+                  >
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 21px;
+                        font-weight: 600;
+                        text-align: start;
+                        width: 100%;
+                      "
+                    >
+                      El Centro Business Complex
+                    </h2>
+
+                    <div class="attributes">
+                      <span
+                        class="d-flex align-items-center w-100 location text-nowrap1"
+                        style="
+                          display: flex;
+                          gap: 10px;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        ><img
+                          class="ico mr-1"
+                          src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg"
+                          alt="New Administrative Capital"
+                        />
+                        New Administrative Capital
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="developer-description">
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Eveniet vitae laudantium optio amet repellendus corrupti
+                    </p>
+                  </div> -->
+
+                <div
+                  class="prop-price"
+                  style="
+                    text-align: end;
+                    font-size: 15px;
+                    font-weight: lighter;
+                    margin-top: 10px;
+                  "
+                >
+                  Starting from <br />
+                  <span style="font-weight: 600; font-size: 18px"
+                    >7,375,464 EGP</span
+                  >
+                </div>
+
+                <!-- <div class="prop-tag" style="text-align: end">news</div> -->
+              </div>
+            </a>
+            <!-- Property Card 1 -->
+            <a href="newsletter-details.html" class="developer-card">
+              <div
+                class="date"
+                style="
+                  position: absolute;
+                  top: 20px;
+                  left: 20px;
+                  font-size: 12px;
+                  padding: 10px 15px;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                  text-align: center;
+                  z-index: 10;
+                  backdrop-filter: blur(4px);
+                  border: 1px solid rgba(255, 255, 255, 0.6);
+                  min-width: 50px;
+                "
+              >
+                <p>Coming Soon</p>
+              </div>
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0"
+              >
+                <img src="imgs/newsletter-1.webp" class="prop-img" />
+              </div>
+              <div class="developer-details">
+                <!-- <h1 class="developer-title">Sarai Apartment</h1> -->
+                <div
+                  class="pro-title"
+                  style="gap: 10px; display: flex; align-items: start"
+                >
+                  <img
+                    style="width: 50px; height: 50px"
+                    src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                    alt=""
+                  />
+                  <div
+                    class=""
+                    style="
+                      gap: 10px;
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: start;
+                    "
+                  >
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 21px;
+                        font-weight: 600;
+                        text-align: start;
+                        width: 100%;
+                      "
+                    >
+                      El Centro Business Complex
+                    </h2>
+
+                    <div class="attributes">
+                      <span
+                        class="d-flex align-items-center w-100 location text-nowrap1"
+                        style="
+                          display: flex;
+                          gap: 10px;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        ><img
+                          class="ico mr-1"
+                          src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg"
+                          alt="New Administrative Capital"
+                        />
+                        New Administrative Capital
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="developer-description">
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Eveniet vitae laudantium optio amet repellendus corrupti
+                    </p>
+                  </div> -->
+
+                <div
+                  class="prop-price"
+                  style="
+                    text-align: end;
+                    font-size: 15px;
+                    font-weight: lighter;
+                    margin-top: 10px;
+                  "
+                >
+                  Starting from <br />
+                  <span style="font-weight: 600; font-size: 18px"
+                    >7,375,464 EGP</span
+                  >
+                </div>
+
+                <!-- <div class="prop-tag" style="text-align: end">news</div> -->
+              </div>
+            </a>
+            <!-- Property Card 1 -->
+            <a href="newsletter-details.html" class="developer-card">
+              <div
+                class="date"
+                style="
+                  position: absolute;
+                  top: 20px;
+                  left: 20px;
+                  font-size: 12px;
+                  padding: 10px 15px;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                  text-align: center;
+                  z-index: 10;
+                  backdrop-filter: blur(4px);
+                  border: 1px solid rgba(255, 255, 255, 0.6);
+                  min-width: 50px;
+                "
+              >
+                <p>Coming Soon</p>
+              </div>
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0"
+              >
+                <img src="imgs/newsletter-1.webp" class="prop-img" />
+              </div>
+              <div class="developer-details">
+                <!-- <h1 class="developer-title">Sarai Apartment</h1> -->
+                <div
+                  class="pro-title"
+                  style="gap: 10px; display: flex; align-items: start"
+                >
+                  <img
+                    style="width: 50px; height: 50px"
+                    src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                    alt=""
+                  />
+                  <div
+                    class=""
+                    style="
+                      gap: 10px;
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: start;
+                    "
+                  >
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 21px;
+                        font-weight: 600;
+                        text-align: start;
+                        width: 100%;
+                      "
+                    >
+                      El Centro Business Complex
+                    </h2>
+
+                    <div class="attributes">
+                      <span
+                        class="d-flex align-items-center w-100 location text-nowrap1"
+                        style="
+                          display: flex;
+                          gap: 10px;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        ><img
+                          class="ico mr-1"
+                          src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg"
+                          alt="New Administrative Capital"
+                        />
+                        New Administrative Capital
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="developer-description">
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Eveniet vitae laudantium optio amet repellendus corrupti
+                    </p>
+                  </div> -->
+
+                <div
+                  class="prop-price"
+                  style="
+                    text-align: end;
+                    font-size: 15px;
+                    font-weight: lighter;
+                    margin-top: 10px;
+                  "
+                >
+                  Starting from <br />
+                  <span style="font-weight: 600; font-size: 18px"
+                    >7,375,464 EGP</span
+                  >
+                </div>
+
+                <!-- <div class="prop-tag" style="text-align: end">news</div> -->
+              </div>
+            </a>
+            <!-- Property Card 1 -->
+            <a href="newsletter-details.html" class="developer-card">
+              <div
+                class="date"
+                style="
+                  position: absolute;
+                  top: 20px;
+                  left: 20px;
+                  font-size: 12px;
+                  padding: 10px 15px;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                  text-align: center;
+                  z-index: 10;
+                  backdrop-filter: blur(4px);
+                  border: 1px solid rgba(255, 255, 255, 0.6);
+                  min-width: 50px;
+                "
+              >
+                <p>Coming Soon</p>
+              </div>
+              <div
+                class="developer-img-container"
+                style="width: 100%; padding: 0"
+              >
+                <img src="imgs/newsletter-1.webp" class="prop-img" />
+              </div>
+              <div class="developer-details">
+                <!-- <h1 class="developer-title">Sarai Apartment</h1> -->
+                <div
+                  class="pro-title"
+                  style="gap: 10px; display: flex; align-items: start"
+                >
+                  <img
+                    style="width: 50px; height: 50px"
+                    src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
+                    alt=""
+                  />
+                  <div
+                    class=""
+                    style="
+                      gap: 10px;
+                      width: 100%;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: start;
+                    "
+                  >
+                    <h2
+                      class="title"
+                      style="
+                        font-size: 21px;
+                        font-weight: 600;
+                        text-align: start;
+                        width: 100%;
+                      "
+                    >
+                      El Centro Business Complex
+                    </h2>
+
+                    <div class="attributes">
+                      <span
+                        class="d-flex align-items-center w-100 location text-nowrap1"
+                        style="
+                          display: flex;
+                          gap: 10px;
+                          align-items: center;
+                          width: 100%;
+                        "
+                        ><img
+                          class="ico mr-1"
+                          src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg"
+                          alt="New Administrative Capital"
+                        />
+                        New Administrative Capital
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="developer-description">
+                    <p>
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Eveniet vitae laudantium optio amet repellendus corrupti
+                    </p>
+                  </div> -->
+
+                <div
+                  class="prop-price"
+                  style="
+                    text-align: end;
+                    font-size: 15px;
+                    font-weight: lighter;
+                    margin-top: 10px;
+                  "
+                >
+                  Starting from <br />
+                  <span style="font-weight: 600; font-size: 18px"
+                    >7,375,464 EGP</span
+                  >
+                </div>
+
+                <!-- <div class="prop-tag" style="text-align: end">news</div> -->
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer (Reused) -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- Chat Bar -->
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input type="text" placeholder="Ask a Question" />
+        <button class="send-btn"><i class="fa-solid fa-arrow-up"></i></button>
+      </div>
+    </div>
+
+    <!-- Main JS (Assuming it exists for navbar logic) -->
+    <!-- <script src="main.js"></script> -->
+
+    <!-- Slider & Page Script -->
+    <script>
+      // --- Slider Functionality ---
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".nav-dot");
+      const totalSlides = slides.length;
+      let slideInterval;
+
+      function showSlide(index) {
+        // Remove active class from current
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+
+        // Update index
+        currentSlide = index;
+        if (currentSlide >= totalSlides) currentSlide = 0;
+        if (currentSlide < 0) currentSlide = totalSlides - 1;
+
+        // Add active class to new
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+        resetTimer();
+      }
+
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+        resetTimer();
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        resetTimer();
+      }
+
+      function startAutoPlay() {
+        slideInterval = setInterval(() => {
+          showSlide(currentSlide + 1);
+        }, 5000); // Change slide every 5 seconds
+      }
+
+      function resetTimer() {
+        clearInterval(slideInterval);
+        startAutoPlay();
+      }
+
+      // --- Theme Logic (Replicating minimal logic from main.js for this page to work standalone) ---
+      const themeIcon = document.getElementById("theme-icon");
+      const body = document.body;
+
+      function toggleTheme() {
+        const isDark = body.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          body.removeAttribute("data-theme");
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+          localStorage.setItem("theme", "light");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check saved theme
+        if (localStorage.getItem("theme") === "dark") {
+          body.setAttribute("data-theme", "dark");
+          if (themeIcon) {
+            themeIcon.classList.remove("fa-moon");
+            themeIcon.classList.add("fa-sun");
+          }
+        }
+        // Start Slider
+        startAutoPlay();
+      });
+
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        // Implement mobile menu toggle logic if needed, matching main.js
+        alert(
+          "Mobile menu toggle functionality would be imported from main.js",
+        );
+      }
+    </script>
+    <script>
+      /* منطق الـ Carousel المأخوذ من blogs.html */
+      document.addEventListener("DOMContentLoaded", () => {
+        const nextBtn = document.querySelector(".next");
+        const prevBtn = document.querySelector(".prev");
+        const carousel = document.querySelector(".carousel");
+        const list = document.querySelector(".list");
+        const runningTime = document.getElementById("timeBar");
+
+        let timeRunning = 3000;
+        let timeAutoNext = 3000;
+        let runTimeOut;
+        let runNextAuto;
+
+        const resetTimeAnimation = () => {
+          runningTime.style.animation = "none";
+          void runningTime.offsetWidth; // Trigger reflow
+          runningTime.style.animation = "runningTime 7s linear 1 forwards";
+        };
+
+        const showSlider = (type) => {
+          const items = document.querySelectorAll(".carousel .list .item");
+
+          if (type === "next") {
+            list.appendChild(items[0]);
+            carousel.classList.add("next");
+          } else {
+            list.prepend(items[items.length - 1]);
+            carousel.classList.add("prev");
+          }
+
+          clearTimeout(runTimeOut);
+          runTimeOut = setTimeout(() => {
+            carousel.classList.remove("next");
+            carousel.classList.remove("prev");
+          }, timeRunning);
+
+          clearTimeout(runNextAuto);
+          runNextAuto = setTimeout(() => {
+            nextBtn.click();
+          }, timeAutoNext);
+
+          resetTimeAnimation();
+        };
+
+        nextBtn.onclick = () => showSlider("next");
+        prevBtn.onclick = () => showSlider("prev");
+
+        // البداية التلقائية
+        runNextAuto = setTimeout(() => {
+          nextBtn.click();
+        }, timeAutoNext);
+        resetTimeAnimation();
+
+        // منطق تبديل القالب (Theme)
+        const themeIcon = document.getElementById("theme-icon");
+        const body = document.body;
+
+        window.toggleTheme = () => {
+          const isDark = body.getAttribute("data-theme") === "dark";
+          if (isDark) {
+            body.removeAttribute("data-theme");
+            themeIcon.classList.replace("fa-sun", "fa-moon");
+            localStorage.setItem("theme", "light");
+          } else {
+            body.setAttribute("data-theme", "dark");
+            themeIcon.classList.replace("fa-moon", "fa-sun");
+            localStorage.setItem("theme", "dark");
+          }
+        };
+
+        if (localStorage.getItem("theme") === "dark") {
+          body.setAttribute("data-theme", "dark");
+          themeIcon.classList.replace("fa-moon", "fa-sun");
+        }
+      });
+    </script>
+  </body>
+</html>

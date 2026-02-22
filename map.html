@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Egypt Real Estate Map - Ultimate 56 Projects</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Alexandria:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style2.css" />
+  </head>
+  <body class="ui-hidden">
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Residential</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Commercial</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Upcoming</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <div id="mapcontainer" style="position: relative; z-index: 1">
+      <div id="ui-wrapper">
+        <div class="top-bar">
+          <div class="search-row-wrapper">
+            <div class="search-box glass-panel">
+              <i
+                class="fa-solid fa-magnifying-glass"
+                style="color: #f77f00"
+              ></i>
+              <input
+                type="text"
+                placeholder="Search Egypt (Capital, Tagamoa, Zayed...)"
+              />
+            </div>
+
+            <button
+              class="list-toggle-btn glass-panel"
+              onclick="toggleSidebar()"
+              title="Projects List"
+            >
+              <i class="fa-solid fa-list-ul"></i>
+            </button>
+
+            <button
+              class="filter-toggle-btn glass-panel"
+              onclick="toggleFilterMenu()"
+              title="Filters"
+            >
+              <i class="fa-solid fa-sliders"></i>
+            </button>
+          </div>
+
+          <div class="filters-row" id="filtersMenu">
+            <div class="mobile-filter-header">
+              <h3>Filter by Region</h3>
+              <i
+                class="fa-solid fa-xmark close-filter-btn"
+                onclick="toggleFilterMenu()"
+              ></i>
+            </div>
+            <button
+              class="filter-chip glass-panel active"
+              onclick="filterBy('all', 28.5, 30.5, 6.5, this)"
+            >
+              All
+            </button>
+            <button
+              class="filter-chip glass-panel"
+              onclick="filterBy('nac', 30.01, 31.74, 12, this)"
+            >
+              New Capital
+            </button>
+            <button
+              class="filter-chip glass-panel"
+              onclick="filterBy('new_cairo', 30.03, 31.47, 12, this)"
+            >
+              New Cairo
+            </button>
+            <button
+              class="filter-chip glass-panel"
+              onclick="filterBy('zayed', 30.05, 30.95, 13, this)"
+            >
+              Sheikh Zayed
+            </button>
+            <button
+              class="filter-chip glass-panel"
+              onclick="filterBy('north_coast', 31.0, 28.6, 9, this)"
+            >
+              North Coast
+            </button>
+          </div>
+        </div>
+
+        <div class="sidebar-container" id="sidebarContainer">
+          <div class="sidebar glass-panel">
+            <div class="sidebar-header">
+              <div style="display: flex; align-items: center; gap: 10px">
+                <h3 style="margin: 0; font-size: 1.2rem">Explore Projects</h3>
+                <span
+                  id="project-count"
+                  class="filter-chip"
+                  style="
+                    background: #f77f00;
+                    color: white;
+                    padding: 2px 12px;
+                    border: none;
+                  "
+                  >0</span
+                >
+              </div>
+              <div class="close-sidebar-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+            <div class="sidebar-content" id="projects-list"></div>
+          </div>
+        </div>
+
+        <button
+          class="bottom-btn glass-panel"
+          onclick="map.flyTo([28.5, 31.0], 6.5)"
+        >
+          <i class="fa-solid fa-earth-africa"></i> View Full Map
+        </button>
+      </div>
+
+      <div
+        class="close-master-plan"
+        id="closeMasterBtn"
+        onclick="exitMasterPlan()"
+      >
+        <i class="fa-solid fa-xmark"></i> Close Master Plan
+      </div>
+
+      <div id="map"></div>
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        // تأخير بسيط قدره 1 ثانية لإعطاء الأولوية لرسم واجهة الموقع (النافبار وغيرها)
+        setTimeout(() => {
+          // تحميل ملفات CSS الخاصة بالخريطة
+          const leafletCss = document.createElement("link");
+          leafletCss.rel = "stylesheet";
+          leafletCss.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+          document.head.appendChild(leafletCss);
+
+          // تحميل سكربت الخريطة
+          const leafletScript = document.createElement("script");
+          leafletScript.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+
+          // بعد الانتهاء من تحميل المكتبة، قم بتحميل ملف map.js الخاص بنا
+          leafletScript.onload = () => {
+            const mapScript = document.createElement("script");
+            mapScript.src = "map.js";
+            document.body.appendChild(mapScript);
+          };
+
+          document.body.appendChild(leafletScript);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

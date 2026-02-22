@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKYPIONEERS - Real Estate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
+    </div>
+
+    <!-- Tesla Style Liquid Navbar with Mega Menu -->
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <!-- Home Link -->
+        <!-- <div class="nav-item">
+          <a href="index.html">Home</a>
+        </div> -->
+
+        <!-- Explore Link -->
+        <!-- <div class="nav-item">
+          <a href="explore.html">Explore</a>
+        </div> -->
+
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Link triggers Page Switch -->
+        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="nav-item">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="nav-item">
+          <a href="developers.html">Developers</a>
+        </div>
+        <div class="nav-item">
+          <a href="calculator.html">Calculator</a>
+        </div> -->
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Residential</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Commercial</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="projects.html">Upcoming</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <!-- HELP PAGE VIEW WRAPPER -->
+    <div id="help-page" class="page-section">
+      <div class="explore-full-bg">
+        <!-- <video
+          class="explore-video-bg"
+          autoplay
+          loop
+          muted
+          playsinline
+          webkit-playsinline
+        >
+          <source src="video sky.mp4" type="video/mp4" />
+        </video> -->
+        <!-- Use blended overlay instead of solid dark -->
+        <div class="explore-video-overlay"></div>
+      </div>
+
+      <main class="pt-20">
+        <section class="help-hero">
+          <div class="help-hero-content">
+            <h1>Hello, how can we help?</h1>
+            <div class="search-container">
+              <!-- <span
+                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                ><i class="fa-solid fa-magnifying-glass"></i
+              ></span> -->
+              <input
+                class="search-input"
+                placeholder="Ask a question..."
+                type="text"
+              />
+              <button class="search-input-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <p>Or choose a category to quickly find the help you need</p>
+          </div>
+        </section>
+        <section class="help-categories">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="help-card p-8 border-2 border-slate-900 dark:border-slate-50 text-center transition-all cursor-pointer group bg-white dark:bg-slate-900 shadow-md"
+            >
+              <span
+                class="material-icons-outlined text-4xl mb-4 text-slate-400 group-hover:text-primary dark:group-hover:text-white"
+                ><i class="fa-solid fa-rocket"></i
+              ></span>
+              <h3 class="font-medium mb-2">Getting Started</h3>
+            </div>
+            <div
+              class="help-card p-8 border-2 border-slate-900 dark:border-slate-50 text-center transition-all cursor-pointer group bg-white dark:bg-slate-900 shadow-md"
+            >
+              <span
+                class="material-icons-outlined text-4xl mb-4 text-slate-400 group-hover:text-primary dark:group-hover:text-white"
+                ><i class="fa-solid fa-credit-card"></i
+              ></span>
+              <h3 class="font-medium mb-2">Pricing &amp; Plans</h3>
+            </div>
+            <div
+              class="help-card p-8 border border-slate-100 dark:border-slate-800 text-center hover:border-slate-300 dark:hover:border-slate-600 transition-all cursor-pointer group bg-white dark:bg-slate-900 shadow-sm"
+            >
+              <span
+                class="material-icons-outlined text-4xl mb-4 text-slate-400 group-hover:text-primary dark:group-hover:text-white"
+                ><i class="fa-solid fa-store"></i
+              ></span>
+              <h3 class="font-medium mb-2">Sales Questions</h3>
+            </div>
+            <div
+              class="help-card p-8 border border-slate-100 dark:border-slate-800 text-center hover:border-slate-300 dark:hover:border-slate-600 transition-all cursor-pointer group bg-white dark:bg-slate-900 shadow-sm"
+            >
+              <span
+                class="material-icons-outlined text-4xl mb-4 text-slate-400 group-hover:text-primary dark:group-hover:text-white"
+                ><i class="fa-solid fa-book"></i
+              ></span>
+              <h3 class="font-medium mb-2">Usage Guides</h3>
+            </div>
+          </div>
+        </section>
+        <section class="help-faq contact-glass-wrapper relative mx-auto py-20">
+          <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+              <h2 class="text-3xl font-display mb-4">Pricing Plans</h2>
+              <p class="max-w-md mx-auto">
+                Detailed information about our flexible pricing structures and
+                investment opportunities at SkyPioneers.
+              </p>
+            </div>
+            <div class="accordion space-y-4">
+              <!-- <div
+                class="help-faq-card border-b border-slate-100 dark:border-slate-800 last:border-0"
+              >
+                <button
+                  class="w-full py-6 flex items-center justify-between text-left group"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >Purchasing process</span
+                  >
+                  <span class="material-icons-outlined text-slate-400"
+                    ><i class="fa-solid fa-plus"></i
+                  ></span>
+                </button>
+                <div
+                  class="accordion-content pb-8 space-y-4 leading-relaxed"
+                >
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.
+                  </p>
+                  <p>
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into your
+                    mouth.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="help-faq-card border-b border-slate-100 dark:border-slate-800 last:border-0"
+              >
+                <button
+                  class="w-full py-6 flex items-center justify-between text-left group"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How secure are your payment information?</span
+                  >
+                  <span class="material-icons-outlined text-slate-400"
+                    ><i class="fa-solid fa-minus"></i
+                  ></span>
+                </button>
+                <div
+                  class="accordion-content pb-8 space-y-4 leading-relaxed"
+                >
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.
+                  </p>
+                  <p>
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into your
+                    mouth.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="help-faq-card border-b border-slate-100 dark:border-slate-800 last:border-0"
+              >
+                <button
+                  class="w-full py-6 flex items-center justify-between text-left group"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How to apply for a Prepaid Card?</span
+                  >
+                  <span class="material-icons-outlined text-slate-400"
+                    ><i class="fa-solid fa-plus"></i
+                  ></span>
+                </button>
+                <div
+                  class="accordion-content pb-8 space-y-4 leading-relaxed"
+                >
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.
+                  </p>
+                  <p>
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into your
+                    mouth.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="help-faq-card border-b border-slate-100 dark:border-slate-800 last:border-0"
+              >
+                <button
+                  class="w-full py-6 flex items-center justify-between text-left group"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How secure is my data in App?</span
+                  >
+                  <span class="material-icons-outlined text-slate-400"
+                    ><i class="fa-solid fa-plus"></i
+                  ></span>
+                </button>
+                <div
+                  class="accordion-content pb-8 space-y-4 leading-relaxed"
+                >
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.
+                  </p>
+                  <p>
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into your
+                    mouth.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="help-faq-card border-b border-slate-100 dark:border-slate-800 last:border-0"
+              >
+                <button
+                  class="w-full py-6 flex items-center justify-between text-left group"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How do I know if I have latest version?</span
+                  >
+                  <span class="material-icons-outlined text-slate-400"
+                    ><i class="fa-solid fa-plus"></i
+                  ></span>
+                </button>
+                <div
+                  class="accordion-content pb-8 space-y-4 leading-relaxed"
+                >
+                  <p>
+                    Far far away, behind the word mountains, far from the
+                    countries Vokalia and Consonantia, there live the blind
+                    texts. Separated they live in Bookmarksgrove right at the
+                    coast of the Semantics, a large language ocean.
+                  </p>
+                  <p>
+                    A small river named Duden flows by their place and supplies
+                    it with the necessary regelialia. It is a paradisematic
+                    country, in which roasted parts of sentences fly into your
+                    mouth.
+                  </p>
+                </div>
+              </div> -->
+
+              <!-- Accordion Item 1 -->
+              <div class="border-b border-slate-200">
+                <button
+                  onclick="toggleAccordion(1)"
+                  class="w-full flex justify-between items-center py-5 text-slate-800"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >Purchasing process</span
+                  >
+                  <span
+                    id="icon-1"
+                    class="text-slate-800 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="content-1"
+                  class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                >
+                  <div class="accordion-content pb-5 text-sm text-slate-500">
+                    <p>
+                      Far far away, behind the word mountains, far from the
+                      countries Vokalia and Consonantia, there live the blind
+                      texts. Separated they live in Bookmarksgrove right at the
+                      coast of the Semantics, a large language ocean.
+                    </p>
+                    <br />
+                    <p>
+                      A small river named Duden flows by their place and
+                      supplies it with the necessary regelialia. It is a
+                      paradisematic country, in which roasted parts of sentences
+                      fly into your mouth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion Item 2 -->
+              <div class="border-b border-slate-200">
+                <button
+                  onclick="toggleAccordion(2)"
+                  class="w-full flex justify-between items-center py-5 text-slate-800"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How secure are your payment information?</span
+                  >
+                  <span
+                    id="icon-2"
+                    class="text-slate-800 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="content-2"
+                  class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                >
+                  <div class="accordion-content pb-5 text-sm text-slate-500">
+                    <p>
+                      Far far away, behind the word mountains, far from the
+                      countries Vokalia and Consonantia, there live the blind
+                      texts. Separated they live in Bookmarksgrove right at the
+                      coast of the Semantics, a large language ocean.
+                    </p>
+                    <br />
+                    <p>
+                      A small river named Duden flows by their place and
+                      supplies it with the necessary regelialia. It is a
+                      paradisematic country, in which roasted parts of sentences
+                      fly into your mouth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion Item 3 -->
+              <div class="border-b border-slate-200">
+                <button
+                  onclick="toggleAccordion(3)"
+                  class="w-full flex justify-between items-center py-5 text-slate-800"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How to apply for a Prepaid Card?</span
+                  >
+                  <span
+                    id="icon-3"
+                    class="text-slate-800 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="content-3"
+                  class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                >
+                  <div class="pb-5 text-sm text-slate-500 accordion-content">
+                    <p>
+                      Far far away, behind the word mountains, far from the
+                      countries Vokalia and Consonantia, there live the blind
+                      texts. Separated they live in Bookmarksgrove right at the
+                      coast of the Semantics, a large language ocean.
+                    </p>
+                    <br />
+                    <p>
+                      A small river named Duden flows by their place and
+                      supplies it with the necessary regelialia. It is a
+                      paradisematic country, in which roasted parts of sentences
+                      fly into your mouth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accordion Item 4 -->
+              <div class="border-b border-slate-200">
+                <button
+                  onclick="toggleAccordion(4)"
+                  class="w-full flex justify-between items-center py-5 text-slate-800"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How secure is my data in App?</span
+                  >
+                  <span
+                    id="icon-4"
+                    class="text-slate-800 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="content-4"
+                  class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                >
+                  <div class="accordion-content pb-5 text-sm text-slate-500">
+                    <p>
+                      Far far away, behind the word mountains, far from the
+                      countries Vokalia and Consonantia, there live the blind
+                      texts. Separated they live in Bookmarksgrove right at the
+                      coast of the Semantics, a large language ocean.
+                    </p>
+                    <br />
+                    <p>
+                      A small river named Duden flows by their place and
+                      supplies it with the necessary regelialia. It is a
+                      paradisematic country, in which roasted parts of sentences
+                      fly into your mouth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion Item 5 -->
+              <div class="border-b border-slate-200">
+                <button
+                  onclick="toggleAccordion(5)"
+                  class="w-full flex justify-between items-center py-5 text-slate-800"
+                >
+                  <span class="accordion-title font-medium transition-colors"
+                    >How do I know if I have latest version?</span
+                  >
+                  <span
+                    id="icon-5"
+                    class="text-slate-800 transition-transform duration-300"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      fill="currentColor"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+                <div
+                  id="content-5"
+                  class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out"
+                >
+                  <div class="accordion-content pb-5 text-sm text-slate-500">
+                    <p>
+                      Far far away, behind the word mountains, far from the
+                      countries Vokalia and Consonantia, there live the blind
+                      texts. Separated they live in Bookmarksgrove right at the
+                      coast of the Semantics, a large language ocean.
+                    </p>
+                    <br />
+                    <p>
+                      A small river named Duden flows by their place and
+                      supplies it with the necessary regelialia. It is a
+                      paradisematic country, in which roasted parts of sentences
+                      fly into your mouth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="help-contact relative py-24">
+          <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-display mb-4">
+              You still have a question?
+            </h2>
+            <p class="text-color-p mb-12">
+              If you cannot find answer to your question in our FAQ, you can
+              always contact us. We will answer you shortly!
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div
+                class="p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col items-center"
+                style="
+                  background: var(--card-bg);
+                  backdrop-filter: blur(30px);
+                  -webkit-backdrop-filter: blur(30px);
+                  border: 1px solid var(--card-border);
+                  margin: auto;
+                "
+              >
+                <span
+                  class="material-icons-outlined text-slate-400 mb-4 text-3xl"
+                  ><i class="fa-solid fa-phone"></i
+                ></span>
+                <a
+                  class="text-xl font-medium text-slate-900 dark:text-white hover:text-secondary transition-colors mb-2"
+                  href="tel:+856093649"
+                  style="font-size: 26px"
+                  >+(856X) 093-6-49X</a
+                >
+                <p class="text-slate-500 text-sm">
+                  We are always happy to help.
+                </p>
+              </div>
+              <div
+                class="p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col items-center"
+                style="
+                  background: var(--card-bg);
+                  backdrop-filter: blur(30px);
+                  -webkit-backdrop-filter: blur(30px);
+                  border: 1px solid var(--card-border);
+                  margin: auto;
+                "
+              >
+                <span
+                  class="material-icons-outlined text-slate-400 mb-4 text-3xl"
+                  ><i class="fa-solid fa-envelope"></i
+                ></span>
+                <a
+                  class="text-xl font-medium text-slate-900 dark:text-white hover:text-secondary transition-colors mb-2"
+                  href="mailto:support@skypioneers.com"
+                  style="font-size: 18px"
+                  >support@skypioneers.com</a
+                >
+                <p class="text-slate-500 text-sm">
+                  The best way to get answer faster.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div>
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- REAL ESTATE CHATBOT WIDGET -->
+    <!-- Position adjusted in CSS to center above bottom bar -->
+    <div id="chatbot-widget" class="chatbot-widget">
+      <div class="chat-header">
+        <div class="chat-title-group">
+          <div class="chat-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="chat-info">
+            <h3>SkyBot</h3>
+            <span class="status-dot"></span> Online
+          </div>
+        </div>
+        <button class="close-chat" onclick="toggleChat()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="message bot-message">
+          Hello! 👋 I'm SkyBot. How can I assist you with your real estate
+          journey today?
+        </div>
+        <!-- Quick Option Buttons -->
+        <div class="chat-options">
+          <button onclick="sendOption('Browse Projects')">
+            <i class="fas fa-building"></i> Browse Projects
+          </button>
+          <button onclick="sendOption('Sell My Unit')">
+            <i class="fas fa-tag"></i> Sell Unit
+          </button>
+          <button onclick="sendOption('Contact Sales')">
+            <i class="fas fa-phone"></i> Contact Sales
+          </button>
+          <button onclick="sendOption('Price Range')">
+            <i class="fas fa-dollar-sign"></i> Price Range
+          </button>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Ask about price, location..."
+          onkeypress="handleChatKey(event)"
+        />
+        <button class="send-chat-btn" onclick="sendMessage()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Replaces Chat Toggle) -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <div class="tesla-bottom-bar">
+      <div class="tesla-chat-input">
+        <i class="fa-regular fa-comment-dots chat-icon"></i>
+        <input
+          type="text"
+          id="bottom-bar-input"
+          placeholder="Ask SkyBot a Question..."
+          onkeypress="handleBottomBarKey(event)"
+        />
+        <button class="send-btn" onclick="sendFromBottomBar()">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
