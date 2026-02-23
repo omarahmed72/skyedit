@@ -258,7 +258,7 @@
     <div id="explore-page" class="page-section">
       <!-- Full Page Background Video for Explore -->
       <div class="explore-full-bg">
-        <!-- <video
+        <video
           class="explore-video-bg"
           autoplay
           loop
@@ -267,7 +267,7 @@
           webkit-playsinline
         >
           <source src="video sky.mp4" type="video/mp4" />
-        </video> -->
+        </video>
         <div class="explore-video-overlay"></div>
       </div>
 
@@ -276,8 +276,20 @@
         <h1 class="explore-title">Explore</h1>
 
         <div class="explore-container">
+          <div class="mobile-filter-toggle w-full">
+            <button onclick="toggleMobileFilters()" class="filter-btn-mobile">
+              <i class="fas fa-filter"></i> Filters
+            </button>
+          </div>
           <!-- Sidebar with Glass Gradient -->
-          <aside class="sidebar">
+          <aside class="sidebar" id="filters-sidebar">
+            <div class="mobile-filter-header">
+              <h3>Filters</h3>
+              <button onclick="toggleMobileFilters()">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+
             <div class="filter-group">
               <h4 class="filter-title">Filters</h4>
               <input
@@ -620,5 +632,19 @@
     </div>
 
     <script src="main.js"></script>
+    <script>
+      // Toggle Mobile Filters Sidebar
+      function toggleMobileFilters() {
+        const sidebar = document.getElementById("filters-sidebar");
+        sidebar.classList.toggle("active");
+
+        // Prevent body scroll when filter sidebar is open on mobile
+        if (sidebar.classList.contains("active")) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+      }
+    </script>
   </body>
 </html>
