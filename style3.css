@@ -3359,20 +3359,25 @@ footer {
 }
 
 /* ==========================================
-   iOS Safari Jitter Fix (100% Safe for Design)
+   SUPER SMOOTH iOS FIX (Apple-like Feel)
    ========================================== */
 .carousel .list .item {
-  /* يمنع الرعشة في الآيفون دون التأثير على التصميم أو المقاسات */
+  /* تفعيل الـ 3D Hardware Acceleration بقوة */
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
   -webkit-backface-visibility: hidden !important;
   backface-visibility: hidden !important;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  /* يخبر المتصفح بالاستعداد للحركة لعدم حدوث دروب في الفريمات */
-  will-change: transform, left, opacity;
+  will-change: transform, opacity;
+
+  /* السر هنا: منحنى الحركة الخاص بأبل لنعومة فائقة */
+  -webkit-transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
+  transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-/* تطبيق نفس العزل على الصورة داخل الكارت لمنع اهتزازها */
+/* منع أي تقطيع في الصور أثناء تحرك الكارت */
 .carousel .list .item img {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }

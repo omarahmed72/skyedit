@@ -151,15 +151,23 @@ if (nextBtn && prevBtn && carousel) {
   function showSlider(type) {
     let sliderItems = document.querySelectorAll(".carousel .list .item");
 
-    // إصلاح الآيفون (Safari): استخدام setTimeout لفصل حسابات المتصفح وتجنب اللاج
-    setTimeout(() => {
+    // الخدعة الاحترافية: استخدام Double requestAnimationFrame
+    // الفريم الأول: لترتيب العناصر في الـ DOM بهدوء
+    window.requestAnimationFrame(() => {
       if (type === "next") {
         list.appendChild(sliderItems[0]);
-        carousel.classList.add("next");
       } else {
         list.prepend(sliderItems[sliderItems.length - 1]);
-        carousel.classList.add("prev");
       }
+
+      // الفريم الثاني: تشغيل الأنيميشن بعد ما المتصفح حسب أماكن الكروت الجديدة
+      window.requestAnimationFrame(() => {
+        if (type === "next") {
+          carousel.classList.add("next");
+        } else {
+          carousel.classList.add("prev");
+        }
+      });
 
       clearTimeout(runTimeOut);
       runTimeOut = setTimeout(() => {
@@ -173,7 +181,7 @@ if (nextBtn && prevBtn && carousel) {
       }, timeAutoNext);
 
       resettimeAnimation();
-    }, 0); // هذه الصفر مللي ثانية هي السر الذي يمنع التقطيع في نظام iOS
+    });
   }
 
   // function showSlider(type) {
