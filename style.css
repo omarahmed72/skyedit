@@ -2867,7 +2867,8 @@ a {
     width: 115px;
     height: 160px;
     position: absolute;
-    top: 83%;
+    /* top: 83%; */
+    top: 80%;
     transform: translate(0, -50%);
     /* left: 70%; */
     border-radius: 20px;
