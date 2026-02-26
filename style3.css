@@ -3321,7 +3321,6 @@ footer {
   contain: paint layout;
 }
 
-
 /* ==========================================
    SLIDER & MOBILE PERFORMANCE FIXES
    ========================================== */
@@ -3338,18 +3337,42 @@ footer {
 
 /* التخلص من تأثير الـ Blur الثقيل على شاشات الموبايل والتابلت */
 @media (max-width: 991px) {
-    .glass-card, 
-    .carousel .item.glass-card {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        /* استبدال الزجاج بلون أبيض شبه شفاف وأنيق */
-        background-color: rgba(255, 255, 255, 0.95) !important; 
-        /* تخفيف الظلال لأنها تسبب بطء في التمرير */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; 
-    }
-    
-    [data-theme="dark"] .glass-card,
-    [data-theme="dark"] .carousel .item.glass-card {
-        background-color: rgba(30, 41, 59, 0.95) !important; /* لون بديل للوضع الليلي */
-    }
+  .glass-card,
+  .carousel .item.glass-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* استبدال الزجاج بلون أبيض شبه شفاف وأنيق */
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    /* تخفيف الظلال لأنها تسبب بطء في التمرير */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  [data-theme="dark"] .glass-card,
+  [data-theme="dark"] .carousel .item.glass-card {
+    background-color: rgba(
+      30,
+      41,
+      59,
+      0.95
+    ) !important; /* لون بديل للوضع الليلي */
+  }
+}
+
+/* ==========================================
+   iOS Safari Jitter Fix (100% Safe for Design)
+   ========================================== */
+.carousel .list .item {
+  /* يمنع الرعشة في الآيفون دون التأثير على التصميم أو المقاسات */
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  /* يخبر المتصفح بالاستعداد للحركة لعدم حدوث دروب في الفريمات */
+  will-change: transform, left, opacity;
+}
+
+/* تطبيق نفس العزل على الصورة داخل الكارت لمنع اهتزازها */
+.carousel .list .item img {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
