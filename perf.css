@@ -1,0 +1,57 @@
+/* ===================================================================
+   perf.css — mobile/tablet performance overrides
+   هدف الملف: تقليل الـ jank على الموبايل/التابلت بتعطيل الـ blur / shadows
+   وتقليل تأثيرات الخلفية الثقيلة (خصوصاً الفيديوهات).
+   =================================================================== */
+
+@media (max-width: 1024px), (prefers-reduced-motion: reduce) {
+  /* Disable expensive glass blur on low-end/mobile */
+  :root,
+  [data-theme="dark"] {
+    --glass-blur: none;
+    --glass-shadow: none;
+    --card-shadow: none;
+  }
+
+  /* Broadly neutralize backdrop-filter without destroying layout */
+  .glass-panel,
+  .glass-card,
+  .tesla-nav,
+  .mega-menu-container,
+  .mobile-menu-overlay,
+  .sidebar-container,
+  .filters-menu,
+  .tesla-bottom-bar,
+  .chatbot-container,
+  [class*="glass"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide heavy background videos on mobile/tablet (JS will set a poster bg) */
+  .hero-bg-video,
+  .concept-bg-video {
+    display: none !important;
+  }
+
+  /* Make sure hero sections still look good without the video element */
+  .hero-section,
+  .concept-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Respect reduced-motion: remove most animations/transitions */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

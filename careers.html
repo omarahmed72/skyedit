@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SKYPIONEERS - Careers</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.generated.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -15,6 +15,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="style3.css" />
+    <link rel="stylesheet" href="perf.css" />
   </head>
   <body>
     <!-- Sound Hint -->
@@ -81,7 +82,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -140,7 +141,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -600,6 +601,6 @@
       </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </body>
 </html>

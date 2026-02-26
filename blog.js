@@ -1,36 +1,3 @@
-// --- Page Switching Logic ---
-// function switchPage(pageId) {
-//   const pages = [
-//     "home",
-//     "about",
-//     "explore",
-//     "blogs",
-//     "contact",
-//     "calculator",
-//     "sell",
-//     "login",
-//     "signup",
-//   ];
-
-//   // Scroll to top
-//   window.scrollTo({ top: 0, behavior: "smooth" });
-
-//   pages.forEach((id) => {
-//     const el = document.getElementById(id);
-//     if (id === pageId + "-page") {
-//       el.classList.remove("hidden");
-//       // Force play video when page becomes visible
-//       const vid = el.querySelector("video");
-//       if (vid) {
-//         vid.play().catch((e) => console.log("Autoplay prevented:", e));
-//       }
-//     } else {
-//       el.classList.add("hidden");
-//     }
-//   });
-//   if (pageId === "about") resetAndRunStats();
-// }
-
 /* --- Stats Counter Logic --- */
 let hasCounteds = false;
 function resetAndRunStats() {
@@ -40,6 +7,16 @@ function resetAndRunStats() {
   runStats();
 }
 resetAndRunStats();
+
+// --- Performance: detect mobile/tablet/low-power modes ---
+function shouldDisableHeavyEffects() {
+  const mqSmall = window.matchMedia("(max-width: 1024px)").matches;
+  const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const saveData = !!(navigator.connection && navigator.connection.saveData);
+  const effectiveType = navigator.connection && navigator.connection.effectiveType;
+  const slow = !!(effectiveType && /2g/.test(effectiveType));
+  return mqSmall || mqReduce || saveData || slow;
+}
 
 function runStats() {
   if (hasCounteds) return;
@@ -70,33 +47,44 @@ function toggleMobileMenu() {
   const menu = document.getElementById("mobile-menu");
   menu.classList.toggle("active");
 
-  // Show/Hide sublinks for projects in mobile just for visual effect
   const sublinks = document.querySelectorAll(".mobile-nav-sublink");
   sublinks.forEach((link) => {
     link.style.display = menu.classList.contains("active") ? "block" : "none";
   });
 }
 
-// --- Navbar Hide on Scroll ---
+// Performance FIX: Throttled Scroll Listener using requestAnimationFrame
 let lastScrollTop = 0;
 const navbar = document.getElementById("navbar");
+let isScrolling = false;
 
-window.addEventListener("scroll", function () {
-  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > lastScrollTop && scrollTop > 100) {
-    navbar.classList.add("nav-hidden");
-  } else {
-    navbar.classList.remove("nav-hidden");
-  }
-  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-});
+if (navbar) {
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!isScrolling) {
+        window.requestAnimationFrame(function () {
+          let scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+          if (scrollTop > lastScrollTop && scrollTop > 100) {
+            navbar.classList.add("nav-hidden");
+          } else {
+            navbar.classList.remove("nav-hidden");
+          }
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+          isScrolling = false;
+        });
+        isScrolling = true;
+      }
+    },
+    { passive: true },
+  );
+}
 
-// --- Theme Switching & Video Fix ---
 // --- Theme Switching & Video Fix ---
 const themeIcon = document.getElementById("theme-icon");
 const navLogo = document.getElementById("nav-logo");
 
-// Initialize from localStorage
 let savedTheme = localStorage.getItem("theme");
 let isDarkMode = savedTheme === "dark";
 
@@ -118,7 +106,6 @@ function applyTheme() {
   }
 }
 
-// Apply immediately on load
 applyTheme();
 
 function toggleTheme() {
@@ -139,129 +126,137 @@ function toggleTheme() {
 }
 
 // --- Gallery Logic (Cylinder) ---
-const baseItems = [
-  {
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
-    title: "Aerial View",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
-    title: "Grand Lobby",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
-    title: "Rear Facade",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-    title: "Left Wing",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
-    title: "Night Mode",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
-    title: "Main Hall",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
-    title: "Detailing",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
-    title: "Entrance",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    title: "Living Space",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
-    title: "Garden",
-  },
-];
-
-const galleryItems = [...baseItems, ...baseItems];
-
 const track = document.getElementById("cylinder-track");
 let selectedIndex = 0;
-const cellCount = galleryItems.length;
-const cellWidth = 320;
-const gap = 30;
-const radius = Math.round(
-  (cellWidth + gap) / (2 * Math.tan(Math.PI / cellCount)),
-);
-const theta = 360 / cellCount;
 
-function initGallery() {
-  if (!track) return;
-  galleryItems.forEach((item, i) => {
-    const card = document.createElement("div");
-    card.className = "glass-card";
-    const angle = theta * i;
-    card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+if (track) {
+  const baseItems = [
+    {
+      img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+      title: "Aerial View",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
+      title: "Grand Lobby",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
+      title: "Rear Facade",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+      title: "Left Wing",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop",
+      title: "Night Mode",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop",
+      title: "Main Hall",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?q=80&w=800&auto=format&fit=crop",
+      title: "Detailing",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop",
+      title: "Entrance",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+      title: "Living Space",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
+      title: "Garden",
+    },
+  ];
 
-    card.innerHTML = `
-                    <img src="${item.img}" class="card-img" alt="${item.title}">
-                    <div class="relative z-10 w-full">
-                        <div class="card-title">${item.title} ${i + 1}</div>
-                        <div style="width: 30px; height: 2px; background: var(--accent-gold); box-shadow: 0 0 5px rgba(197, 160, 89, 0.5);"></div>
-                    </div>
-                `;
-    card.onclick = () => {
-      const currentMod = ((selectedIndex % cellCount) + cellCount) % cellCount;
-      let diff = i - currentMod;
-      if (diff > cellCount / 2) diff -= cellCount;
-      if (diff < -cellCount / 2) diff += cellCount;
-      rotateCylinder(diff);
-    };
-    track.appendChild(card);
-  });
-  updateCylinder();
-}
-
-function rotateCylinder(direction) {
-  selectedIndex += direction;
-  updateCylinder();
-}
-
-function updateCylinder() {
-  if (!track) return;
-  const angle = theta * selectedIndex * -1;
-  track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
-  const cards = document.querySelectorAll(".glass-card");
-  const activeIndex = ((selectedIndex % cellCount) + cellCount) % cellCount;
-  cards.forEach((card, i) => {
-    if (i === activeIndex) {
-      card.classList.add("active");
-      card.style.opacity = "1";
-    } else {
-      card.classList.remove("active");
-      card.style.opacity = "0.6";
-    }
-  });
-}
-
-initGallery();
-
-const section = document.querySelector(".gallery-section");
-if (section) {
-  let startX = 0;
-  section.addEventListener(
-    "touchstart",
-    (e) => (startX = e.changedTouches[0].screenX),
+  const galleryItems = [...baseItems, ...baseItems];
+  const cellCount = galleryItems.length;
+  const cellWidth = 320;
+  const gap = 30;
+  const radius = Math.round(
+    (cellWidth + gap) / (2 * Math.tan(Math.PI / cellCount)),
   );
-  section.addEventListener("touchend", (e) => {
-    const endX = e.changedTouches[0].screenX;
-    if (endX < startX - 50) rotateCylinder(1);
-    if (endX > startX + 50) rotateCylinder(-1);
-  });
+  const theta = 360 / cellCount;
+
+  function initGallery() {
+    galleryItems.forEach((item, i) => {
+      const card = document.createElement("div");
+      card.className = "glass-card";
+      const angle = theta * i;
+      card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+
+      card.innerHTML = `
+                      <img src="${item.img}" class="card-img" alt="${item.title}" loading="lazy" decoding="async">
+                      <div class="relative z-10 w-full">
+                          <div class="card-title">${item.title} ${i + 1}</div>
+                          <div style="width: 30px; height: 2px; background: var(--accent-gold); box-shadow: 0 0 5px rgba(197, 160, 89, 0.5);"></div>
+                      </div>
+                  `;
+      card.onclick = () => {
+        const currentMod =
+          ((selectedIndex % cellCount) + cellCount) % cellCount;
+        let diff = i - currentMod;
+        if (diff > cellCount / 2) diff -= cellCount;
+        if (diff < -cellCount / 2) diff += cellCount;
+        rotateCylinder(diff);
+      };
+      track.appendChild(card);
+    });
+    updateCylinder();
+  }
+
+  window.rotateCylinder = function (direction) {
+    selectedIndex += direction;
+    updateCylinder();
+  };
+
+  function updateCylinder() {
+    const angle = theta * selectedIndex * -1;
+    track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
+    const cards = document.querySelectorAll(".glass-card");
+    const activeIndex = ((selectedIndex % cellCount) + cellCount) % cellCount;
+    cards.forEach((card, i) => {
+      if (i === activeIndex) {
+        card.classList.add("active");
+        card.style.opacity = "1";
+      } else {
+        card.classList.remove("active");
+        card.style.opacity = "0.6";
+      }
+    });
+  }
+
+  initGallery();
+
+  const section = document.querySelector(".gallery-section");
+  if (section) {
+    let startX = 0;
+    section.addEventListener(
+      "touchstart",
+      (e) => (startX = e.changedTouches[0].screenX),
+      { passive: true },
+    );
+    section.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].screenX;
+      if (endX < startX - 50) rotateCylinder(1);
+      if (endX > startX + 50) rotateCylinder(-1);
+    });
+  }
 }
 
-// --- Audio Logic ---
+// Performance FIX: Cleaned and Optimized Audio Logic
 function enableAudio() {
+  if (shouldDisableHeavyEffects()) {
+    const hint = document.getElementById("sound-hint");
+    if (hint) hint.classList.remove("visible");
+    return;
+  }
   const videos = document.querySelectorAll("video");
+  if (videos.length === 0) return; // Fast exit
   videos.forEach((v) => {
     v.muted = false;
     v.volume = 0.5;
@@ -270,8 +265,6 @@ function enableAudio() {
     if (playPromise !== undefined) {
       playPromise.catch((error) => {
         console.warn("Unmuted playback failed, reverting to muted:", error);
-        // Fallback: If unmuted play fails (common on mobile without direct interaction),
-        // revert to muted to ensure visual playback continues.
         v.muted = true;
         v.play();
       });
@@ -279,23 +272,23 @@ function enableAudio() {
   });
   const hint = document.getElementById("sound-hint");
   if (hint) hint.classList.remove("visible");
-  document.removeEventListener("click", enableAudio);
-  document.removeEventListener("touchstart", enableAudio);
 }
-document.addEventListener("click", enableAudio);
-document.addEventListener("touchstart", enableAudio);
 
-// --- Video Watchdog (Keeps background videos playing) ---
+// Added `{ once: true, passive: true }` to prevent lag on every future click
+document.addEventListener("click", enableAudio, { once: true, passive: true });
+document.addEventListener("touchstart", enableAudio, {
+  once: true,
+  passive: true,
+});
+
 document.querySelectorAll("video").forEach((video) => {
-  video.addEventListener("pause", (e) => {
-    // If the video is on the currently visible page and not hidden
+  video.addEventListener("pause", () => {
+    if (shouldDisableHeavyEffects()) return;
     if (!video.closest(".hidden") && document.visibilityState === "visible") {
-      console.log("Video paused unexpectedly, resuming...");
       video.play().catch(() => {});
     }
   });
 });
-
 // --- Stats Counter Animation ---
 const statsSection = document.getElementById("stats-section");
 let hasCounted = false;
@@ -321,29 +314,20 @@ const startCounters = () => {
   });
 };
 
-const statsObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !hasCounted) {
-        startCounters();
-        hasCounted = true;
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.5 },
-);
-
 if (statsSection) {
+  const statsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasCounted) {
+          startCounters();
+          hasCounted = true;
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
   statsObserver.observe(statsSection);
-}
-
-async function safePlay(video) {
-  try {
-    await video.play();
-  } catch (e) {
-    console.log("Auto-play prevented");
-  }
 }
 
 /* --- Custom Select Logic --- */
@@ -461,11 +445,9 @@ function selectPill(element, groupName) {
   const group = document.getElementById(groupName + "-pills");
   const pills = group.getElementsByClassName("pill-option");
 
-  // Remove active from all in group
   for (let pill of pills) {
     pill.classList.remove("active");
   }
-  // Add active to clicked
   element.classList.add("active");
 }
 
@@ -502,15 +484,12 @@ function submitListing() {
     btn.disabled = false;
     showToast("Ad submitted successfully! Under review.", "success");
 
-    // Admin notification simulation
     setTimeout(() => {
       showToast("New Ad Submission Received (Admin)", "admin");
-      console.log("New Ad Data:", "User: Ahmed, Type: Apartment, Price: 4.5M");
     }, 2000);
 
     document.getElementById("sell-form").reset();
     document.getElementById("preview-container").innerHTML = "";
-    // Reset pills
     document
       .querySelectorAll(".pill-option")
       .forEach((p) => p.classList.remove("active"));
@@ -529,119 +508,75 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
-function rotateCylinder(direction) {
-  selectedIndex += direction;
-  updateCylinder();
-}
-
-function updateCylinder() {
-  if (!track) return;
-  const angle = theta * selectedIndex * -1;
-  track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
-  const cards = document.querySelectorAll(".gallery-card");
-  const activeIndex = ((selectedIndex % cellCount) + cellCount) % cellCount;
-  cards.forEach((card, i) => {
-    if (i === activeIndex) {
-      card.classList.add("active");
-      card.style.opacity = "1";
-    } else {
-      card.classList.remove("active");
-      card.style.opacity = "0.6";
-    }
-  });
-}
-initGallery();
-
-/* --- Audio Logic --- */
-function enableAudio() {
-  const videos = document.querySelectorAll("video");
-  videos.forEach((v) => {
-    v.muted = false;
-    v.volume = 0.5;
-    safePlay(v);
-  });
-  const hint = document.getElementById("sound-hint");
-  if (hint) hint.classList.remove("visible");
-  document.removeEventListener("click", enableAudio);
-  document.removeEventListener("touchstart", enableAudio);
-}
-
-/* --- Blog Logic --- */
-document.addEventListener("click", enableAudio);
-document.addEventListener("touchstart", enableAudio);
-
+/* --- Blog Carousel Logic --- */
 var nextBtn = document.querySelector(".next"),
   prevBtn = document.querySelector(".prev"),
   carousel = document.querySelector(".carousel"),
   list = document.querySelector(".list"),
-  item = document.querySelectorAll(".item"),
   runningTime = document.querySelector(".timeRunning");
 
-let timeRunning = 3000;
-let timeAutoNext = 7000;
+if (nextBtn && prevBtn && carousel) {
+  let timeRunning = 3000;
+  let timeAutoNext = 7000;
 
-nextBtn.onclick = function () {
-  showSlider("next");
-};
-prevBtn.onclick = function () {
-  showSlider("prev");
-};
-let runTimeOut;
-let runNextAuto = setTimeout(() => {
-  nextBtn.click();
-}, timeAutoNext);
-
-function resettimeAnimation() {
-  runningTime.style.animation = "none";
-  runningTime.offsetHeight; /* trigger reflow */
-  runningTime.style.animation = null;
-  runningTime.style.animation = "runningTime 7s linear 1 forwards";
-}
-
-function showSlider(type) {
-  let sliderItems = document.querySelectorAll(".carousel .list .item");
-
-  if (type === "next") {
-    list.appendChild(sliderItems[0]);
-    carousel.classList.add("next");
-  } else {
-    list.prepend(sliderItems[sliderItems.length - 1]);
-    carousel.classList.add("prev");
-  }
-  clearTimeout(runTimeOut);
-  runTimeOut = setTimeout(() => {
-    carousel.classList.remove("next");
-    carousel.classList.remove("prev");
-  }, timeRunning);
-  clearTimeout(runNextAuto);
-  runNextAuto = setTimeout(() => {
+  nextBtn.onclick = function () {
+    showSlider("next");
+  };
+  prevBtn.onclick = function () {
+    showSlider("prev");
+  };
+  let runTimeOut;
+  let runNextAuto = setTimeout(() => {
     nextBtn.click();
   }, timeAutoNext);
+
+  function resettimeAnimation() {
+    runningTime.style.animation = "none";
+    runningTime.offsetHeight; /* trigger reflow */
+    runningTime.style.animation = null;
+    runningTime.style.animation = "runningTime 7s linear 1 forwards";
+  }
+
+  function showSlider(type) {
+    let sliderItems = document.querySelectorAll(".carousel .list .item");
+
+    if (type === "next") {
+      list.appendChild(sliderItems[0]);
+      carousel.classList.add("next");
+    } else {
+      list.prepend(sliderItems[sliderItems.length - 1]);
+      carousel.classList.add("prev");
+    }
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
+      carousel.classList.remove("next");
+      carousel.classList.remove("prev");
+    }, timeRunning);
+    clearTimeout(runNextAuto);
+    runNextAuto = setTimeout(() => {
+      nextBtn.click();
+    }, timeAutoNext);
+    resettimeAnimation();
+  }
+
   resettimeAnimation();
 }
-
-// Start the initial animation
-resettimeAnimation();
 
 function toggleAccordion(index) {
   const content = document.getElementById(`content-${index}`);
   const icon = document.getElementById(`icon-${index}`);
 
-  // SVG for Minus icon
   const minusSVG = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
         <path d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z" />
       </svg>
     `;
-
-  // SVG for Plus icon
   const plusSVG = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
         <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
       </svg>
     `;
 
-  // Toggle the content's max-height for smooth opening and closing
   if (content.style.maxHeight && content.style.maxHeight !== "0px") {
     content.style.maxHeight = "0";
     icon.innerHTML = plusSVG;

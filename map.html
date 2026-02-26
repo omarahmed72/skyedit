@@ -13,13 +13,14 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.generated.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=Alexandria:wght@400;700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="perf.css" />
   </head>
   <body class="ui-hidden">
     <nav class="tesla-nav" id="navbar">
@@ -70,7 +71,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -126,7 +127,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -270,47 +271,48 @@
               <i class="fa-solid fa-sliders"></i>
             </button>
           </div>
+        </div>
 
-          <div class="filters-row" id="filtersMenu">
-            <div class="mobile-filter-header">
-              <h3>Filter by Region</h3>
-              <i
-                class="fa-solid fa-xmark close-filter-btn"
-                onclick="toggleFilterMenu()"
-              ></i>
-            </div>
-            <button
-              class="filter-chip glass-panel active"
-              onclick="filterBy('all', 28.5, 30.5, 6.5, this)"
-            >
-              All
-            </button>
-            <button
-              class="filter-chip glass-panel"
-              onclick="filterBy('nac', 30.01, 31.74, 12, this)"
-            >
-              New Capital
-            </button>
-            <button
-              class="filter-chip glass-panel"
-              onclick="filterBy('new_cairo', 30.03, 31.47, 12, this)"
-            >
-              New Cairo
-            </button>
-            <button
-              class="filter-chip glass-panel"
-              onclick="filterBy('zayed', 30.05, 30.95, 13, this)"
-            >
-              Sheikh Zayed
-            </button>
-            <button
-              class="filter-chip glass-panel"
-              onclick="filterBy('north_coast', 31.0, 28.6, 9, this)"
-            >
-              North Coast
+        <!-- تم نقل قائمة الفلاتر خارج الـ top-bar لتجنب مشاكل الـ fixed positioning -->
+        <aside class="filters-sidebar" id="filtersMenu">
+          <div class="mobile-filter-header">
+            <h3>Filters</h3>
+            <button onclick="toggleFilterMenu()">
+              <i class="fas fa-times"></i>
             </button>
           </div>
-        </div>
+
+          <button
+            class="filter-chip glass-panel active"
+            onclick="filterBy('all', 28.5, 30.5, 6.5, this)"
+          >
+            All
+          </button>
+          <button
+            class="filter-chip glass-panel"
+            onclick="filterBy('nac', 30.01, 31.74, 12, this)"
+          >
+            New Capital
+          </button>
+          <button
+            class="filter-chip glass-panel"
+            onclick="filterBy('new_cairo', 30.03, 31.47, 12, this)"
+          >
+            New Cairo
+          </button>
+          <button
+            class="filter-chip glass-panel"
+            onclick="filterBy('zayed', 30.05, 30.95, 13, this)"
+          >
+            Sheikh Zayed
+          </button>
+          <button
+            class="filter-chip glass-panel"
+            onclick="filterBy('north_coast', 31.0, 28.6, 9, this)"
+          >
+            North Coast
+          </button>
+        </aside>
 
         <div class="sidebar-container" id="sidebarContainer">
           <div class="sidebar glass-panel">
@@ -356,30 +358,14 @@
       <div id="map"></div>
     </div>
 
-    <script>
-      window.addEventListener("load", () => {
-        // تأخير بسيط قدره 1 ثانية لإعطاء الأولوية لرسم واجهة الموقع (النافبار وغيرها)
-        setTimeout(() => {
-          // تحميل ملفات CSS الخاصة بالخريطة
-          const leafletCss = document.createElement("link");
-          leafletCss.rel = "stylesheet";
-          leafletCss.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-          document.head.appendChild(leafletCss);
-
-          // تحميل سكربت الخريطة
-          const leafletScript = document.createElement("script");
-          leafletScript.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-
-          // بعد الانتهاء من تحميل المكتبة، قم بتحميل ملف map.js الخاص بنا
-          leafletScript.onload = () => {
-            const mapScript = document.createElement("script");
-            mapScript.src = "map.js";
-            document.body.appendChild(mapScript);
-          };
-
-          document.body.appendChild(leafletScript);
-        }, 1000);
-      });
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+    <script src="map.js" defer></script>
   </body>
 </html>

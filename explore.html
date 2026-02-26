@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SKYPIONEERS - Real Estate</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.generated.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -15,6 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style3.css" />
+    <link rel="stylesheet" href="perf.css" />
   </head>
   <body>
     <div id="sound-hint" class="sound-indicator visible">
@@ -80,7 +81,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -139,7 +140,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -423,7 +424,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">NEW CAIRO</div>
@@ -442,7 +443,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">NORTH COAST</div>
@@ -461,7 +462,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1600596542815-6ad4c7213aa5?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">SHEIKH ZAYED</div>
@@ -480,7 +481,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">NEW CAIRO</div>
@@ -499,7 +500,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">NEW CAPITAL</div>
@@ -518,7 +519,7 @@
                   <img
                     src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"
                     class="prop-img"
-                  />
+                  / loading="lazy" decoding="async">
                 </div>
                 <div class="prop-details">
                   <div class="prop-tag">EL MOKATTAM</div>
@@ -631,7 +632,7 @@
       </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
     <script>
       // Toggle Mobile Filters Sidebar
       function toggleMobileFilters() {

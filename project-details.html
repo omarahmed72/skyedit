@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Centro Mall | New Capital - SKYPIONEERS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.generated.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -27,7 +27,7 @@
         --glass-border: rgba(255, 255, 255, 0.2);
         --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         --text-color: #171a20;
-        --text-muted: #5c5e62;
+        --text-muted: #c2c6cf;
       }
 
       body {
@@ -335,6 +335,29 @@
           height: 250px;
           top: 65%;
         }
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(51% + 220px);
+        }
+      }
+
+      @media (max-width: 500px) {
+        .project-hero .carousel .list .item {
+          width: 100px;
+          height: 150px;
+          top: 65%;
+        }
+        .project-hero .carousel .list .item:nth-child(3) {
+          left: 50%;
+        }
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(18% + 220px);
+        }
+      }
+
+      @media (max-width: 400px) {
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(14% + 220px);
+        }
       }
 
       .project-logo-overlay img {
@@ -368,7 +391,7 @@
       .section-title {
         font-size: 28px;
         font-weight: 300;
-        color: var(--text-color);
+        color: var(--title-color);
         margin: 0;
       }
 
@@ -410,7 +433,7 @@
       }
 
       .project-description strong {
-        color: var(--text-color);
+        color: var(--title-color);
         font-weight: 600;
       }
 
@@ -620,6 +643,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="perf.css" />
   </head>
   <body>
     <!-- Tesla Style Liquid Navbar with Mega Menu -->
@@ -681,7 +705,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -740,7 +764,7 @@
                     height: 120px;
                     object-fit: cover;
                   "
-                />
+                / loading="lazy" decoding="async">
                 <a
                   href="#"
                   style="
@@ -1532,7 +1556,7 @@
     </div>
 
     <!-- Main JS (Assuming it exists for navbar logic) -->
-    <!-- <script src="main.js"></script> -->
+    <!-- <script src="main.js" defer></script> -->
 
     <!-- Slider & Page Script -->
     <!-- <script>
@@ -1625,7 +1649,7 @@
         );
       }
     </script> -->
-    <script>
+     <script>
       /* منطق الـ Carousel المأخوذ من blogs.html */
       document.addEventListener("DOMContentLoaded", () => {
         const nextBtn = document.querySelector(".next");
@@ -1691,7 +1715,7 @@
           themeIcon.classList.replace("fa-moon", "fa-sun");
         }
       });
-    </script>
-    <script src="main.js"></script>
+    </script> 
+    <script src="main.js" defer></script>
   </body>
 </html>
