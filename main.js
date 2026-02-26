@@ -77,31 +77,20 @@ function toggleMobileMenu() {
   });
 }
 
-// --- Navbar Hide on Scroll (rAF + passive to avoid scroll jank) ---
+// --- Navbar Hide on Scroll ---
 let lastScrollTop = 0;
 const navbar = document.getElementById("navbar");
-let isScrolling = false;
 
-if (navbar) {
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (isScrolling) return;
-      isScrolling = true;
-      window.requestAnimationFrame(() => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-          navbar.classList.add("nav-hidden");
-        } else {
-          navbar.classList.remove("nav-hidden");
-        }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        isScrolling = false;
-      });
-    },
-    { passive: true },
-  );
-}
+window.addEventListener("scroll", function () {
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop && scrollTop > 100) {
+    navbar.classList.add("nav-hidden");
+  } else {
+    navbar.classList.remove("nav-hidden");
+  }
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
+
 // --- Theme Switching & Video Fix ---
 // --- Theme Switching & Video Fix ---
 const themeIcon = document.getElementById("theme-icon");
@@ -131,83 +120,6 @@ function applyTheme() {
 
 // Apply immediately on load
 applyTheme();
-
-// --- Performance: detect mobile/tablet/low-power modes ---
-function shouldDisableHeavyEffects() {
-  const mqSmall = window.matchMedia("(max-width: 1024px)").matches;
-  const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const saveData = !!(navigator.connection && navigator.connection.saveData);
-  const effectiveType = navigator.connection && navigator.connection.effectiveType;
-  const slow = !!(effectiveType && /2g/.test(effectiveType));
-  return mqSmall || mqReduce || saveData || slow;
-}
-
-// --- Performance: avoid heavy background video decoding on mobile/tablet ---
-function optimizeBackgroundVideos() {
-  const disable = shouldDisableHeavyEffects();
-
-  const bgVideos = document.querySelectorAll(
-    "video.hero-bg-video, video.concept-bg-video",
-  );
-
-  bgVideos.forEach((v) => {
-    const section =
-      v.closest(".hero-section, .concept-section") || v.parentElement;
-    const poster = v.getAttribute("poster");
-
-    if (disable) {
-      // Use the poster as a static background instead of decoding the video.
-      if (poster && section) section.style.backgroundImage = `url('${poster}')`;
-      try {
-        v.pause();
-      } catch {}
-
-      v.removeAttribute("autoplay");
-      v.removeAttribute("loop");
-      v.preload = "none";
-
-      // Unload sources to prevent any network/decoding work.
-      v.querySelectorAll("source").forEach((s) => s.removeAttribute("src"));
-      v.load();
-      return;
-    }
-
-    // Desktop: don't decode the concept video until it's near the viewport.
-    if (v.id === "concept-video") {
-      v.preload = "none";
-      v.removeAttribute("autoplay");
-
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              safePlay(v);
-            } else {
-              v.pause();
-            }
-          });
-        },
-        { rootMargin: "200px 0px" },
-      );
-
-      io.observe(v);
-    }
-  });
-
-  // Keepalive only on desktop, and only for the hero video (not the concept one).
-  if (!disable) {
-    document.querySelectorAll("video").forEach((video) => {
-      video.addEventListener("pause", () => {
-        if (shouldDisableHeavyEffects()) return;
-        if (document.visibilityState !== "visible") return;
-        if (video.id === "concept-video") return; // allow it to pause when offscreen
-        if (!video.closest(".hidden")) safePlay(video);
-      });
-    });
-  }
-}
-
-document.addEventListener("DOMContentLoaded", optimizeBackgroundVideos);
 
 function toggleTheme() {
   isDarkMode = !isDarkMode;
@@ -294,7 +206,7 @@ function initSlider() {
     slide.className = "slide-item";
     slide.innerHTML = `
       <div class="slide-card">
-        <img src="${item.img}" class="slide-img" alt="${item.title}" loading="lazy" decoding="async">
+        <img src="${item.img}" class="slide-img" alt="${item.title}">
         <div class="slide-content">
           <div class="slide-title">${item.title}</div>
           <div class="slide-bar"></div>
@@ -388,12 +300,6 @@ initSlider();
 
 // --- Audio Logic ---
 function enableAudio() {
-  // On mobile/tablet we disable background videos for performance.
-  if (shouldDisableHeavyEffects()) {
-    const hint = document.getElementById("sound-hint");
-    if (hint) hint.classList.remove("visible");
-    return;
-  }
   const videos = document.querySelectorAll("video");
   videos.forEach((v) => {
     v.muted = false;
@@ -405,8 +311,20 @@ function enableAudio() {
   document.removeEventListener("click", enableAudio);
   document.removeEventListener("touchstart", enableAudio);
 }
-document.addEventListener("click", enableAudio, { once: true, passive: true });
-document.addEventListener("touchstart", enableAudio, { once: true, passive: true });
+document.addEventListener("click", enableAudio);
+document.addEventListener("touchstart", enableAudio);
+
+// --- Video Watchdog (Keeps background videos playing) ---
+document.querySelectorAll("video").forEach((video) => {
+  video.addEventListener("pause", (e) => {
+    // If the video is on the currently visible page and not hidden
+    if (!video.closest(".hidden") && document.visibilityState === "visible") {
+      console.log("Video paused unexpectedly, resuming...");
+      video.play().catch(() => {});
+    }
+  });
+});
+
 // --- Stats Counter Animation ---
 const statsSection = document.getElementById("stats-section");
 let hasCounted = false;
@@ -665,12 +583,6 @@ initGallery();
 
 /* --- Audio Logic --- */
 function enableAudio() {
-  // On mobile/tablet we disable background videos for performance.
-  if (shouldDisableHeavyEffects()) {
-    const hint = document.getElementById("sound-hint");
-    if (hint) hint.classList.remove("visible");
-    return;
-  }
   const videos = document.querySelectorAll("video");
   videos.forEach((v) => {
     v.muted = false;
@@ -684,8 +596,9 @@ function enableAudio() {
 }
 
 /* --- Blog Logic --- */
-document.addEventListener("click", enableAudio, { once: true, passive: true });
-document.addEventListener("touchstart", enableAudio, { once: true, passive: true });
+document.addEventListener("click", enableAudio);
+document.addEventListener("touchstart", enableAudio);
+
 var nextBtn = document.querySelector(".next"),
   prevBtn = document.querySelector(".prev"),
   carousel = document.querySelector(".carousel"),

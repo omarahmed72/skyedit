@@ -155,7 +155,7 @@ window.addEventListener("load", () => {
       light:
         "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
       dark: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-      satellite: "https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+      satellite: "http://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
     };
 
     var streetLayer = L.tileLayer(tiles.light, { maxZoom: 19 });
@@ -164,13 +164,13 @@ window.addEventListener("load", () => {
       subdomains: ["mt0", "mt1", "mt2", "mt3"],
     });
 
-    var map = (window.map = L.map("map", {
+    var map = L.map("map", {
       zoomControl: false,
       layers: [streetLayer],
       center: [15, 10],
       zoom: 2.5,
       attributionControl: false,
-    }));
+    });
 
     L.control.zoom({ position: "bottomleft" }).addTo(map);
     var markersLayer = L.layerGroup().addTo(map);

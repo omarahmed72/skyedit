@@ -3320,3 +3320,36 @@ footer {
   contain-intrinsic-size: 300px 400px;
   contain: paint layout;
 }
+
+
+/* ==========================================
+   SLIDER & MOBILE PERFORMANCE FIXES
+   ========================================== */
+/* إجبار كارت الشاشة (GPU) على معالجة الـ Slider لمنع الاهتزاز */
+
+/* .carousel .list .item,
+.carousel .list {
+    will-change: transform, opacity, left;
+    transform: translateZ(0); 
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    perspective: 1000px;
+} */
+
+/* التخلص من تأثير الـ Blur الثقيل على شاشات الموبايل والتابلت */
+@media (max-width: 991px) {
+    .glass-card, 
+    .carousel .item.glass-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        /* استبدال الزجاج بلون أبيض شبه شفاف وأنيق */
+        background-color: rgba(255, 255, 255, 0.95) !important; 
+        /* تخفيف الظلال لأنها تسبب بطء في التمرير */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important; 
+    }
+    
+    [data-theme="dark"] .glass-card,
+    [data-theme="dark"] .carousel .item.glass-card {
+        background-color: rgba(30, 41, 59, 0.95) !important; /* لون بديل للوضع الليلي */
+    }
+}
