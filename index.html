@@ -15,8 +15,47 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="style3.css" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-ZBB1EMF1R9"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-ZBB1EMF1R9");
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KBTJJBRP");
+    </script>
+    <!-- End Google Tag Manager -->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KBTJJBRP"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="sound-hint" class="sound-indicator visible">
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
@@ -145,10 +184,10 @@
           <a href="blogs.html">Blogs</a>
         </div>
         <div class="nav-item">
-          <a href="contact.html">Contact</a>
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
-          <a href="newsletter.html">Newsletter</a>
+          <a href="contact.html">Contact</a>
         </div>
         <div class="nav-item">
           <a href="careers.html">Careers</a>
@@ -156,6 +195,22 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input
+              type="text"
+              id="global-search-input"
+              placeholder="Search..."
+              autocomplete="off"
+            />
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div
+            class="nav-search-results hidden"
+            id="global-search-results"
+          ></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -198,20 +253,20 @@
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
@@ -219,7 +274,7 @@
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="calculator.html">Calculator</a>
-      </div>
+      </div> -->
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="blogs.html">Blogs</a>
       </div>
@@ -289,6 +344,169 @@
         <div class="slider-dots" id="slider-dots"></div>
       </section>
 
+      <!-- STATISTICS SECTION UPDATED WITH LIVE CHART -->
+      <section
+        class="statistics-section"
+        style="
+          padding: 40px 20px;
+          max-width: 1600px;
+          margin: 0 auto;
+          transition: transform 0.3s;
+        "
+      >
+        <h2
+          class="gallery-title"
+          style="
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--text-color);
+          "
+        >
+          Market Statistics
+        </h2>
+
+        <!-- Stats Row -->
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4 md:gap-6">
+          <!-- Stat 1 (Total Revenue with Link) -->
+          <!-- <a
+            href="https://aqarmap.com.eg/en/neighborhood/egypt/index/"
+            target="_blank"
+            style="text-decoration: none; display: block"
+            class="hover:opacity-90 transition"
+            title="Egypt Real Estate Market Statistics"
+          >
+            <div class="dash-card flex flex-col justify-between min-h-[220px]">
+              <div class="flex justify-between items-start">
+                <div
+                  class="flex items-center gap-2 text-[var(--text-muted)] text-xs font-semibold uppercase"
+                >
+                  <i class="fas fa-wallet"></i> Total Revenue
+                </div>
+                <i
+                  class="fas fa-ellipsis-h text-[var(--text-muted)] cursor-pointer"
+                ></i>
+              </div>
+              <div style="margin-top: auto">
+                <div class="text-4xl font-bold text-[var(--text-color)]">
+                  $783,156
+                </div>
+                <div class="text-sm text-green-500 mt-2 font-bold">
+                  +28%
+                  <span class="text-[var(--text-muted)] font-normal"
+                    >from last week</span
+                  >
+                </div>
+              </div>
+            </div>
+          </a> -->
+
+          <!-- Stat 2 (LIVE MARKET CHART WIDGET) -->
+          <div
+            class="dash-card relative min-h-[220px] overflow-hidden"
+            style="padding: 15px"
+          >
+            <div
+              class="flex justify-between items-start mb-2 absolute top-0 left-0 w-full p-3 z-10 pointer-events-none"
+            >
+              <h4
+                class="text-xs font-bold text-[var(--text-color)] drop-shadow-md px-2 py-1 rounded backdrop-blur-sm"
+                style="
+                  background: var(--glass-bg);
+                  border: 1px solid var(--glass-border);
+                "
+              >
+                EGX Real Estate
+              </h4>
+
+              <!-- القائمة المنسدلة لاختيار السهم -->
+              <select
+                id="stockSelector"
+                onchange="updateChartSymbol(this.value)"
+                class="text-xs rounded px-2 py-1 outline-none cursor-pointer shadow-sm font-semibold transition"
+                style="
+                  pointer-events: auto;
+                  background: var(--glass-bg);
+                  color: var(--text-color);
+                  border: 1px solid var(--glass-border);
+                  backdrop-filter: blur(10px);
+                "
+              >
+                <option value="EGX:TMGH">Talaat Moustafa (TMGH)</option>
+                <option value="EGX:PHDC">Palm Hills (PHDC)</option>
+                <option value="EGX:OCDI">SODIC (OCDI)</option>
+                <option value="EGX:EMFD">Emaar Misr (EMFD)</option>
+                <option value="EGX:MNHD">Madinet Masr (MNHD)</option>
+                <option value="EGX:HELI">Heliopolis (HELI)</option>
+              </select>
+            </div>
+
+            <!-- TradingView Widget BEGIN -->
+            <div
+              class="tradingview-widget-container"
+              id="tv-widget-container"
+              style="height: 100%; width: 100%; padding-top: 25px"
+            ></div>
+
+            <script>
+              function updateChartSymbol(symbol) {
+                const container = document.getElementById(
+                  "tv-widget-container",
+                );
+                // مسح الرسم البياني القديم
+                container.innerHTML =
+                  '<div class="tradingview-widget-container__widget" style="height: 100%; width: 100%;"></div>';
+
+                // إنشاء سكربت جديد بالبيانات المحدثة
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src =
+                  "https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+                script.async = true;
+
+                // التأكد من وضع الموقع (مظلم أو فاتح) ليتماشى مع الرسم البياني
+                const isDark =
+                  document.body.getAttribute("data-theme") === "dark";
+
+                script.innerHTML = JSON.stringify({
+                  symbol: symbol,
+                  width: "100%",
+                  height: "100%",
+                  locale: "en",
+                  dateRange: "12M",
+                  colorTheme: isDark ? "dark" : "light",
+                  isTransparent: true,
+                  autosize: true,
+                  largeChartUrl: "",
+                });
+
+                container.appendChild(script);
+              }
+
+              // تحميل الرسم البياني الافتراضي عند فتح الصفحة
+              window.addEventListener("load", () => {
+                const initialSymbol =
+                  document.getElementById("stockSelector").value;
+                updateChartSymbol(initialSymbol);
+              });
+
+              // تحديث ألوان الرسم البياني تلقائياً عند تغيير الوضع (Dark/Light)
+              window.addEventListener("click", (e) => {
+                if (e.target.closest(".theme-toggle")) {
+                  setTimeout(() => {
+                    const currentSymbol =
+                      document.getElementById("stockSelector").value;
+                    updateChartSymbol(currentSymbol);
+                  }, 100);
+                }
+              });
+            </script>
+            <!-- TradingView Widget END -->
+          </div>
+        </div>
+      </section>
+
       <section class="concept-section">
         <!-- poster="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2000&auto=format&fit=crop" -->
 
@@ -338,32 +556,32 @@
           ></div>
         </div>
       </section>
-      <div class="py-5 px-5">
-        <div class="property-grid">
-          <div class="developer-card home-card">
-            <div class="developer-img-container"></div>
-            <div class="developer-details">
-              <a href="#" class="prop-price">
-                <i class="fa-solid fa-arrow-trend-up"></i>
-                Trending Now
-                <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
+    </div>
+
+    <div class="py-5 px-5">
+      <div class="property-grid max-w-[800px] mx-auto">
+        <div class="developer-card home-card">
+          <div class="developer-img-container"></div>
+          <div class="developer-details">
+            <a href="#" class="prop-price">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              Trending Now
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
-          <div class="developer-card home-card">
-            <div class="developer-img-container"></div>
-            <div class="developer-details">
-              <a href="map.html" class="prop-price">
-                <i class="fa-solid fa-location-dot"></i>
-                Map
-                <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
+        </div>
+        <div class="developer-card home-card">
+          <div class="developer-img-container"></div>
+          <div class="developer-details">
+            <a href="map.html" class="prop-price">
+              <i class="fa-solid fa-location-dot"></i>
+              Map
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
-
     <section class="app-section">
       <div class="app-card">
         <div class="app-content-left">
@@ -502,6 +720,46 @@
       </div>
     </div>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
     <script src="main.js" defer></script>
   </body>
 </html>

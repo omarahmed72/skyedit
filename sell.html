@@ -22,7 +22,6 @@
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
 
-    <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
@@ -31,16 +30,6 @@
       </div>
 
       <div class="nav-center hidden lg:flex">
-        <!-- Home Link -->
-        <!-- <div class="nav-item">
-          <a href="index.html">Home</a>
-        </div> -->
-
-        <!-- Explore Link -->
-        <!-- <div class="nav-item">
-          <a href="explore.html">Explore</a>
-        </div> -->
-
         <div class="nav-item has-menu">
           <a href="explore.html">Explore</a>
           <div class="mega-menu-container">
@@ -97,9 +86,6 @@
           </div>
         </div>
 
-        <!-- About Link triggers Page Switch -->
-        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
-
         <div class="nav-item has-menu">
           <a href="about.html">About</a>
           <div class="mega-menu-container">
@@ -155,17 +141,12 @@
             </div>
           </div>
         </div>
-        <!-- <div class="nav-item">
-          <a href="sell.html">Sell Unit</a>
-        </div>
-        <div class="nav-item">
-          <a href="developers.html">Developers</a>
-        </div>
-        <div class="nav-item">
-          <a href="calculator.html">Calculator</a>
-        </div> -->
+
         <div class="nav-item">
           <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
           <a href="contact.html">Contact</a>
@@ -176,6 +157,14 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -201,7 +190,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="mobile-menu-overlay">
       <div class="mobile-close-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-times"></i>
@@ -219,20 +207,20 @@
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
@@ -240,13 +228,17 @@
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="calculator.html">Calculator</a>
-      </div>
+      </div> -->
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="blogs.html">Blogs</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="contact.html">Contact</a>
       </div>
+
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="careers.html">Careers</a>
       </div>
@@ -258,7 +250,7 @@
     <!-- === SELL UNIT PAGE (Dubizzle Style) === -->
     <div id="sell-page" class="page-section" style="padding-top: 100px">
       <div class="explore-full-bg">
-         <video
+        <video
           class="explore-video-bg"
           autoplay
           loop
@@ -267,7 +259,7 @@
           webkit-playsinline
         >
           <source src="video sky.mp4" type="video/mp4" />
-        </video> 
+        </video>
         <!-- Use blended overlay instead of solid dark -->
         <div class="explore-video-overlay"></div>
       </div>
@@ -292,6 +284,7 @@
                 <label class="calc-label">Property Title</label>
                 <input
                   type="text"
+                  id="sell-title"
                   class="calc-input"
                   placeholder="e.g. Luxury Apartment in New Cairo"
                 />
@@ -299,7 +292,7 @@
 
               <div>
                 <label class="calc-label">Category</label>
-                <select class="calc-select">
+                <select id="sell-category" class="calc-select">
                   <option>Apartment</option>
                   <option>Villa</option>
                   <option>Townhouse</option>
@@ -312,6 +305,7 @@
                 <label class="calc-label">Price (EGP)</label>
                 <input
                   type="number"
+                  id="sell-price"
                   class="calc-input"
                   placeholder="Total Price"
                 />
@@ -321,6 +315,7 @@
                 <label class="calc-label">Area (sqm)</label>
                 <input
                   type="number"
+                  id="sell-area"
                   class="calc-input"
                   placeholder="e.g. 150"
                 />
@@ -396,6 +391,7 @@
               <div class="full-span">
                 <label class="calc-label">Description</label>
                 <textarea
+                  id="sell-desc"
                   class="calc-input"
                   rows="4"
                   placeholder="Describe the key features of your property..."
@@ -435,7 +431,7 @@
             <div class="sell-grid">
               <div>
                 <label class="calc-label">Governorate</label>
-                <select class="calc-select">
+                <select id="sell-gov" class="calc-select">
                   <option>Cairo</option>
                   <option>Giza</option>
                   <option>Alexandria</option>
@@ -443,7 +439,7 @@
               </div>
               <div>
                 <label class="calc-label">City / Area</label>
-                <select class="calc-select">
+                <select id="sell-city" class="calc-select">
                   <option>New Cairo</option>
                   <option>Maadi</option>
                   <option>Nasr City</option>
@@ -456,12 +452,18 @@
             <div class="sell-grid">
               <div>
                 <label class="calc-label">Name</label>
-                <input type="text" class="calc-input" placeholder="Your Name" />
+                <input
+                  type="text"
+                  id="sell-name"
+                  class="calc-input"
+                  placeholder="Your Name"
+                />
               </div>
               <div>
                 <label class="calc-label">Phone Number</label>
                 <input
                   type="text"
+                  id="sell-phone"
                   class="calc-input"
                   placeholder="01xxxxxxxxx"
                 />
@@ -470,6 +472,7 @@
                 <label class="calc-label">Email</label>
                 <input
                   type="email"
+                  id="sell-email"
                   class="calc-input"
                   placeholder="you@example.com"
                 />
@@ -575,6 +578,54 @@
       </div>
     </div>
 
+    <!-- Toasts for Notifications -->
+    <div id="client-toast" class="custom-toast client-toast">
+      <i class="fas fa-check-circle"></i> <span></span>
+    </div>
+    <div id="admin-toast" class="custom-toast admin-toast">
+      <i class="fas fa-bell"></i> <span></span>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
     <script src="main.js"></script>
   </body>
 </html>

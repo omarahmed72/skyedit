@@ -66,7 +66,6 @@
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
 
-    <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
@@ -186,8 +185,12 @@
             </div>
           </div>
         </div>
+
         <div class="nav-item">
           <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
           <a href="contact.html">Contact</a>
@@ -198,6 +201,14 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -223,7 +234,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="mobile-menu-overlay">
       <div class="mobile-close-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-times"></i>
@@ -241,20 +251,20 @@
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
@@ -262,13 +272,17 @@
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="calculator.html">Calculator</a>
-      </div>
+      </div> -->
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="blogs.html">Blogs</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="contact.html">Contact</a>
       </div>
+
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="careers.html">Careers</a>
       </div>
@@ -280,7 +294,7 @@
     <!-- EXPLORE PAGE VIEW WRAPPER -->
     <div id="explore-page" class="page-section">
       <!-- Full Page Background Video for Explore -->
-       <div class="explore-full-bg">
+      <div class="explore-full-bg">
         <video
           class="explore-video-bg"
           autoplay
@@ -292,7 +306,7 @@
           <source src="video sky.mp4" type="video/mp4" />
         </video>
         <div class="explore-video-overlay"></div>
-      </div> 
+      </div>
 
       <!-- Main Content Wrapper -->
       <div class="explore-content-wrapper">
@@ -309,10 +323,12 @@
           <!-- Sidebar with Glass Gradient -->
           <aside class="sidebar" id="filters-sidebar">
             <!-- Mobile Header (Hidden on Desktop) -->
-             
+
             <div class="mobile-filter-header">
               <h3>Filters</h3>
-              <button onclick="toggleMobileFilters()"><i class="fas fa-times"></i></button>
+              <button onclick="toggleMobileFilters()">
+                <i class="fas fa-times"></i>
+              </button>
             </div>
 
             <div class="filter-group">
@@ -1076,16 +1092,107 @@
 
       // Toggle Mobile Filters Sidebar
       function toggleMobileFilters() {
-        const sidebar = document.getElementById('filters-sidebar');
-        sidebar.classList.toggle('active');
-        
+        const sidebar = document.getElementById("filters-sidebar");
+        sidebar.classList.toggle("active");
+
         // Prevent body scroll when filter sidebar is open on mobile
-        if (sidebar.classList.contains('active')) {
-          document.body.style.overflow = 'hidden';
+        if (sidebar.classList.contains("active")) {
+          document.body.style.overflow = "hidden";
         } else {
-          document.body.style.overflow = '';
+          document.body.style.overflow = "";
         }
       }
+
+      // Render projects from localStorage
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedProjects = localStorage.getItem("sky_projects");
+        if (storedProjects) {
+          const projects = JSON.parse(storedProjects);
+          const grid = document.querySelector(".property-grid");
+          if (grid && projects.length > 0) {
+            grid.innerHTML = projects
+              .map((p) => {
+                const priceFormatted = p.price
+                  ? Number(p.price).toLocaleString()
+                  : "Contact for Price";
+                return `
+              <a href="project-details.html?id=${p.id}" class="developer-card">
+                <div class="save-btn" onclick="toggleSave(event, this)">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+                <div class="date" style="position: absolute; top: 20px; left: 20px; font-size: 12px; padding: 10px 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); text-align: center; z-index: 10; backdrop-filter: blur(4px); border: 1px solid rgba(255, 255, 255, 0.6); min-width: 50px;">
+                  <p>${p.status || "Active"}</p>
+                </div>
+                <div class="developer-img-container" style="width: 100%; padding: 0">
+                  <img src="${p.image || "imgs/newsletter-1.webp"}" class="prop-img" />
+                </div>
+                <div class="developer-details">
+                  <div class="pro-title" style="gap: 10px; display: flex; align-items: start">
+                    <img style="width: 50px; height: 50px" src="${p.devLogo || "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"}" alt="" />
+                    <div style="gap: 10px; width: 100%; display: flex; flex-direction: column; align-items: start;">
+                      <h2 class="title" style="font-size: 21px; font-weight: 600; text-align: start; width: 100%;">
+                        ${p.name}
+                      </h2>
+                      <div class="attributes">
+                        <span class="d-flex align-items-center w-100 location text-nowrap1" style="display: flex; gap: 10px; align-items: center; width: 100%;">
+                          <img class="ico mr-1" src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg" alt="${p.location}" />
+                          ${p.location}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="prop-price" style="text-align: end; font-size: 15px; font-weight: lighter; margin-top: 10px;">
+                    Starting from <br />
+                    <span style="font-weight: 600; font-size: 18px">${priceFormatted} EGP</span>
+                  </div>
+                </div>
+              </a>
+              `;
+              })
+              .join("");
+          }
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
     </script>
   </body>
 </html>

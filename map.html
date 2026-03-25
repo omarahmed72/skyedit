@@ -146,10 +146,10 @@
           <a href="blogs.html">Blogs</a>
         </div>
         <div class="nav-item">
-          <a href="contact.html">Contact</a>
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
-          <a href="newsletter.html">Newsletter</a>
+          <a href="contact.html">Contact</a>
         </div>
         <div class="nav-item">
           <a href="careers.html">Careers</a>
@@ -157,6 +157,22 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input
+              type="text"
+              id="global-search-input"
+              placeholder="Search..."
+              autocomplete="off"
+            />
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div
+            class="nav-search-results hidden"
+            id="global-search-results"
+          ></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -199,20 +215,20 @@
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
@@ -220,7 +236,7 @@
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="calculator.html">Calculator</a>
-      </div>
+      </div> -->
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="blogs.html">Blogs</a>
       </div>
@@ -361,10 +377,63 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+    />
     <script
       defer
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     ></script>
+    <script
+      defer
+      src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
+    ></script>
     <script src="map.js"></script>
+    <script src="main.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
   </body>
 </html>

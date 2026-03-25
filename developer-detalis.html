@@ -1,0 +1,1404 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARDIC For Real Estate Development - SKYPIONEERS</title>
+    <!-- Tailwind CSS (optional but kept for utility classes if needed) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- استدعاء ملفات التنسيق الأصلية -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+
+    <style>
+      /* --- التنسيقات المخصصة لصفحة تفاصيل المطور --- */
+      .developer-page-section {
+        padding-top: 120px;
+        padding-bottom: 80px;
+        min-height: 100vh;
+      }
+
+      .content-wrapper {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* مسار التنقل (Breadcrumbs) */
+      .breadcrumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 30px;
+        font-weight: 500;
+      }
+      .breadcrumbs a {
+        color: var(--text-color);
+        transition: color 0.3s;
+      }
+      .breadcrumbs a:hover {
+        color: var(--accent-gold);
+        text-decoration: underline;
+      }
+      .breadcrumbs i {
+        font-size: 10px;
+      }
+
+      /* بطاقة معلومات المطور الرئيسية */
+      .dev-header-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        box-shadow: var(--glass-shadow);
+        gap: 20px;
+      }
+      .dev-header-info {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        flex: 1;
+      }
+      .dev-logo-large {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 1px solid var(--card-border);
+        background: white; /* خلفية بيضاء دائماً لبروز الشعار */
+        padding: 15px;
+        object-fit: contain;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+      .dev-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .dev-title-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .dev-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--title-color);
+        margin: 0;
+      }
+      .property-badge {
+        display: inline-block;
+        padding: 4px 15px;
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-color);
+        background: rgba(128, 128, 128, 0.1);
+      }
+      .dev-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+      .dev-price-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 5px;
+      }
+      .dev-price {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--text-color);
+      }
+
+      .btn-call {
+        padding: 12px 30px;
+        border-radius: 8px;
+        border: 1px solid var(--card-border);
+        background: rgba(128, 128, 128, 0.1);
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .btn-call:hover {
+        background: var(--card-bg);
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+      }
+
+      /* قسم مناطق المطور */
+      .dev-areas-section {
+        margin-bottom: 50px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--nav-border);
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--title-color);
+        margin-bottom: 15px;
+      }
+      .pills-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .pill-option {
+        padding: 8px 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-color);
+        cursor: default;
+        transition: all 0.3s;
+      }
+      .pill-option:hover {
+        border-color: var(--accent-gold);
+      }
+
+      /* قسم المجمعات (Compounds) */
+      .compounds-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .compounds-header .section-title {
+        margin-bottom: 5px;
+        font-size: 22px;
+      }
+      .results-count {
+        font-size: 13px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .controls-group {
+        display: flex;
+        gap: 15px;
+      }
+      .control-btn {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 1px solid var(--nav-border);
+        background: var(--card-bg);
+        color: var(--text-color);
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .control-btn.primary {
+        background: #0047ab; /* لون مقارب للصورة للزر الأساسي */
+        color: white;
+        border-color: #0047ab;
+      }
+      .control-btn.primary:hover {
+        background: #003080;
+      }
+      .control-btn:hover:not(.primary) {
+        border-color: var(--accent-gold);
+      }
+
+      /* شبكة البطاقات */
+      .compounds-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 25px;
+        margin-bottom: 60px;
+      }
+
+      .compound-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .compound-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--glass-shadow);
+        border-color: var(--accent-gold);
+      }
+
+      .compound-img-wrapper {
+        position: relative;
+        height: 220px;
+        overflow: hidden;
+      }
+      .compound-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .compound-card:hover .compound-img {
+        transform: scale(1.05);
+      }
+
+      /* أيقونات البطاقة (المفضلة، المشاركة، المقارنة) */
+      .card-overlay-actions {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        gap: 10px;
+      }
+      .action-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        cursor: pointer;
+        backdrop-filter: blur(5px);
+        transition: 0.3s;
+      }
+      .action-icon:hover {
+        background: var(--accent-gold);
+      }
+      .compare-badge {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #0047ab;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .compound-card:hover .compare-badge {
+        opacity: 1;
+      }
+
+      .compound-details {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        position: relative;
+      }
+      /* التدرج اللوني الداخلي للبطاقة */
+      .compound-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: var(--card-inner-gradient);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .dev-info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        z-index: 1;
+      }
+      .small-dev-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--card-border);
+        background: white;
+        padding: 5px;
+        object-fit: contain;
+      }
+      .loc-title {
+        display: flex;
+        flex-direction: column;
+      }
+      .loc-text {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-bottom: 2px;
+      }
+      .comp-name {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+      .unit-types {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        z-index: 1;
+      }
+      .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: auto;
+        padding-top: 15px;
+        border-top: 1px solid rgba(128, 128, 128, 0.1);
+        z-index: 1;
+      }
+      .comp-price {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text-color);
+      }
+      .contact-icons {
+        display: flex;
+        gap: 10px;
+      }
+      .c-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .c-phone {
+        background: #0047ab;
+      }
+      .c-phone:hover {
+        background: #003080;
+      }
+      .c-whatsapp {
+        background: #25d366;
+      }
+      .c-whatsapp:hover {
+        background: #20b858;
+      }
+
+      /* ----------------------------------------------------
+         تنسيقات قسم النبذة عن المطور (المعدلة بشكل احترافي)
+         ---------------------------------------------------- */
+      .about-dev-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* خط علوي جمالي للبطاقة */
+      .about-dev-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--accent-gold);
+      }
+
+      .about-dev-title {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--title-color);
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .about-dev-title i {
+        color: var(--accent-gold);
+      }
+
+      .about-dev-content {
+        font-size: 15px;
+        line-height: 1.9;
+        color: var(--text-color);
+      }
+
+      .about-dev-content p {
+        margin-bottom: 18px;
+        color: var(--text-muted);
+      }
+
+      .about-dev-content strong {
+        color: var(--text-color);
+        font-weight: 700;
+      }
+
+      /* صندوق مخصص للرؤية والرسالة */
+      .vision-mission-box {
+        background: rgba(128, 128, 128, 0.05);
+        border: 1px solid var(--card-border);
+        border-left: 4px solid var(--accent-gold);
+        padding: 30px;
+        border-radius: 8px;
+        margin-top: 40px;
+      }
+
+      .about-dev-subtitle {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--title-color);
+        margin: 0 0 20px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .about-dev-subtitle i {
+        color: var(--accent-gold);
+      }
+
+      /* شبكة للقيم (بدل القائمة النقطية العادية) */
+      .about-dev-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 25px;
+        margin-bottom: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+      }
+
+      .about-dev-list li {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 12px 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--text-color);
+        transition: 0.3s;
+      }
+
+      .about-dev-list li:hover {
+        border-color: var(--accent-gold);
+        transform: translateY(-2px);
+      }
+
+      .about-dev-list li i {
+        color: var(--accent-gold);
+        font-size: 14px;
+      }
+
+      /* استجابة الشاشات الصغيرة */
+      @media (max-width: 768px) {
+        .dev-header-card {
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+        }
+        .dev-header-info {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+        .btn-call {
+          width: 100%;
+          justify-content: center;
+        }
+        .compounds-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .controls-group {
+          width: 100%;
+        }
+        .control-btn {
+          flex: 1;
+          justify-content: center;
+        }
+        .about-dev-section {
+          padding: 25px;
+        }
+        .vision-mission-box {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="calculator.html">Calculator</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="developers.html">Developers</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div> -->
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <!-- محتوى الصفحة الرئيسي -->
+    <div class="developer-page-section">
+      <div class="content-wrapper">
+        <!-- مسار التنقل -->
+        <div class="breadcrumbs">
+          <i class="fa-solid fa-house"></i>
+          <a href="index.html">Home</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span>ARDIC For Real Estate Development</span>
+        </div>
+
+        <!-- معلومات المطور الرئيسية (Header Card) -->
+        <div class="dev-header-card">
+          <div class="dev-header-info">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png"
+              alt=""
+              class="dev-logo-large"
+              onerror="
+                this.onerror = null;
+                this.src = 'https://via.placeholder.com/120?text=ARDIC';
+              "
+            />
+            <div class="dev-title-group">
+              <div class="dev-title-row">
+                <h1 class="dev-title">ARDIC For Real Estate Development</h1>
+                <span class="property-badge">Developer</span>
+              </div>
+              <div class="dev-subtitle">4 Properties Available</div>
+              <div class="dev-price-label">Prices Start From</div>
+              <div class="dev-price">5,000,000 EGP</div>
+            </div>
+          </div>
+          <button class="btn-call">
+            <i class="fa-solid fa-phone"></i> Call Us
+          </button>
+        </div>
+
+        <!-- مناطق المطور -->
+        <div class="dev-areas-section">
+          <h2 class="section-title">Developer Areas</h2>
+          <div class="pills-group">
+            <div class="pill-option">Mostakbal City</div>
+            <div class="pill-option">New Cairo</div>
+          </div>
+        </div>
+
+        <!-- المجمعات (Compounds Section) -->
+        <div class="compounds-section">
+          <div class="compounds-header">
+            <div>
+              <h2 class="section-title">
+                Compounds In ARDIC For Real Estate Development
+              </h2>
+              <div class="results-count">2 Results Available</div>
+            </div>
+            <div class="controls-group">
+              <button class="control-btn primary">
+                <i class="fa-solid fa-sliders"></i> Filter
+              </button>
+              <button class="control-btn">
+                Sort By <i class="fa-solid fa-arrow-down-up-across-line"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- شبكة المجمعات -->
+          <div class="compounds-grid">
+            <!-- الكارت الأول -->
+            <div class="compound-card">
+              <div class="compound-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=800&auto=format&fit=crop"
+                  class="compound-img"
+                  alt=""
+                />
+                <div class="card-overlay-actions">
+                  <div class="action-icon">
+                    <i class="fa-solid fa-house"></i>
+                  </div>
+                  <div class="action-icon">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </div>
+                  <div class="action-icon">
+                    <i class="fa-regular fa-heart"></i>
+                  </div>
+                </div>
+                <div class="compare-badge">Start Compare</div>
+              </div>
+              <div class="compound-details">
+                <div class="dev-info-row">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png"
+                    class="small-dev-logo"
+                    alt=""
+                    onerror="
+                      this.onerror = null;
+                      this.src = 'https://via.placeholder.com/40?text=A';
+                    "
+                  />
+                  <div class="loc-title">
+                    <span class="loc-text">New Cairo</span>
+                    <span class="comp-name">Zizinia Gardens</span>
+                  </div>
+                </div>
+                <div class="unit-types">Villa | Apartment | Duplex</div>
+                <div class="card-bottom">
+                  <div class="comp-price">7,350,000 EGP</div>
+                  <div class="contact-icons">
+                    <div class="c-icon c-phone">
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="c-icon c-whatsapp">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- الكارت الثاني -->
+            <div class="compound-card">
+              <div class="compound-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop"
+                  class="compound-img"
+                  alt=""
+                />
+                <div class="card-overlay-actions">
+                  <div class="action-icon">
+                    <i class="fa-solid fa-house"></i>
+                  </div>
+                  <div class="action-icon">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </div>
+                  <div class="action-icon">
+                    <i class="fa-regular fa-heart"></i>
+                  </div>
+                </div>
+                <div class="compare-badge">Start Compare</div>
+              </div>
+              <div class="compound-details">
+                <div class="dev-info-row">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png"
+                    class="small-dev-logo"
+                    alt=""
+                    onerror="
+                      this.onerror = null;
+                      this.src = 'https://via.placeholder.com/40?text=A';
+                    "
+                  />
+                  <div class="loc-title">
+                    <span class="loc-text">Mostakbal City</span>
+                    <span class="comp-name">Zizinia Al Mostakbal</span>
+                  </div>
+                </div>
+                <div class="unit-types">Apartment | Penthouse</div>
+                <div class="card-bottom">
+                  <div class="comp-price">5,000,000 EGP</div>
+                  <div class="contact-icons">
+                    <div class="c-icon c-phone">
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="c-icon c-whatsapp">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- قسم النبذة عن المطور (About) بتصميمه الجديد -->
+        <div class="about-dev-section">
+          <h2 class="about-dev-title">
+            <i class="fa-solid fa-building"></i> About ARDIC For Real Estate
+            Development
+          </h2>
+          <div class="about-dev-content">
+            <p>
+              Ardic Development is one of the top-rated real estate development
+              companies in Egypt. The company started in <strong>1998</strong>,
+              and since then, it has been playing a pivotal role in shaping the
+              Egyptian real estate landscape.
+            </p>
+            <p>
+              The ARDIC For Real Estate Development and Investment Company has
+              been in the market for more than <strong>25 years</strong>, during
+              which it has developed many landmark projects.
+            </p>
+            <p>
+              Ardic Development has developed more than 3 successful projects in
+              a series called <strong>"Zizinia"</strong> with variations in name
+              according to the project.
+            </p>
+            <p>
+              The company has focused its efforts on East Cairo to develop its
+              landmark projects, varying the locations between New Cairo City
+              and Mostakbal City.
+            </p>
+            <p>
+              Also, among the very well-known real estate projects by Ardic
+              Development are Zizinia Gardens in New Cairo and Zizinia Al
+              Mostakbal in Mostakbal City.
+            </p>
+
+            <div class="vision-mission-box">
+              <h3 class="about-dev-subtitle">
+                <i class="fa-solid fa-bullseye"></i> Ardic Development Vision,
+                Mission & Values
+              </h3>
+              <p>
+                Ardic Development has always been driven by an ambitious vision,
+                a strong mission statement, and a solid value proposition.
+              </p>
+              <p>
+                The company views itself as one of the leading real estate
+                developers in Egypt. Ardic Development strives to achieve such
+                an ambitious vision by offering high-quality projects to the
+                market.
+              </p>
+              <p>
+                Moreover, the company's mission is to develop communities that
+                hold value and meaning to its residents and not just mere
+                concrete buildings. This mission statement is being worked on
+                through the integration of innovation in all of its real estate
+                projects.
+              </p>
+              <p>
+                Moreover, Ardic Development is highly driven by a coherent value
+                proposition. Thanks to following a strict value system with
+                these values at its core:
+              </p>
+              <ul class="about-dev-list">
+                <li><i class="fa-solid fa-check"></i> Inspiration</li>
+                <li><i class="fa-solid fa-check"></i> Creativity</li>
+                <li><i class="fa-solid fa-check"></i> Satisfaction</li>
+                <li><i class="fa-solid fa-check"></i> Respect</li>
+                <li><i class="fa-solid fa-check"></i> Quality</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تذييل الصفحة (Footer) -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- زر الواتساب العائم -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- سكربتات التبديل للوضع الليلي والقوائم -->
+    <script>
+      // Theme toggling logic
+      const themeIcon = document.getElementById("theme-icon");
+      const body = document.body;
+
+      window.toggleTheme = () => {
+        const isDark = body.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          body.removeAttribute("data-theme");
+          if (themeIcon) themeIcon.classList.replace("fa-sun", "fa-moon");
+          localStorage.setItem("theme", "light");
+
+          const navLogo = document.getElementById("nav-logo");
+          if (navLogo) navLogo.src = "imgs/logo.png";
+        } else {
+          body.setAttribute("data-theme", "dark");
+          if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+          localStorage.setItem("theme", "dark");
+
+          const navLogo = document.getElementById("nav-logo");
+          if (navLogo) navLogo.src = "imgs/logo white.png";
+        }
+      };
+
+      // Load saved theme
+      if (localStorage.getItem("theme") === "dark") {
+        body.setAttribute("data-theme", "dark");
+        if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+        const navLogo = document.getElementById("nav-logo");
+        if (navLogo) navLogo.src = "imgs/logo white.png";
+      }
+
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("active");
+      }
+
+      // Navbar Scroll Effect
+      let lastScrollTop = 0;
+      const navbar = document.getElementById("navbar");
+
+      window.addEventListener("scroll", function () {
+        let scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.classList.add("nav-hidden");
+        } else {
+          navbar.classList.remove("nav-hidden");
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+    </script>
+
+    <!-- Dynamic Developer Data Logic -->
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const devId = urlParams.get("id");
+        if (!devId) return;
+
+        const developers =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+        const dev = developers.find((d) => d.id == devId);
+
+        if (dev) {
+          // Update Page Title
+          document.title = (dev.name || "Developer") + " - SKYPIONEERS";
+
+          // Update Breadcrumb
+          const breadcrumbs = document.querySelector(".breadcrumbs");
+          if (breadcrumbs) {
+            const spans = breadcrumbs.querySelectorAll("span");
+            if (spans.length > 0) spans[0].innerText = dev.name;
+          }
+
+          // Update Header Card
+          const logoEl = document.querySelector(".dev-logo-large");
+          if (logoEl)
+            logoEl.src =
+              dev.logo ||
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png";
+
+          const titleEl = document.querySelector(".dev-title");
+          if (titleEl) titleEl.innerText = dev.name || "Developer";
+
+          const propsEl = document.querySelector(".dev-subtitle");
+          if (propsEl)
+            propsEl.innerText =
+              (dev.propertiesCount || 0) + " Properties Available";
+
+          const priceEl = document.querySelector(".dev-price");
+          if (priceEl && dev.startPrice) priceEl.innerText = dev.startPrice;
+
+          // Update Areas
+          const areasContainer = document.querySelector(".pills-group");
+          if (areasContainer && dev.areas) {
+            const areasArr = dev.areas
+              .split(",")
+              .map((a) => a.trim())
+              .filter((a) => a);
+            areasContainer.innerHTML = areasArr
+              .map((area) => `<div class="pill-option">${area}</div>`)
+              .join("");
+          }
+
+          // Update About Section
+          const aboutTitleEl = document.querySelector(".about-dev-title");
+          // Add icon if dynamically replaced
+          if (aboutTitleEl)
+            aboutTitleEl.innerHTML =
+              `<i class="fa-solid fa-building"></i> About ` + dev.name;
+
+          const aboutContentEl = document.querySelector(".about-dev-content");
+          if (aboutContentEl && dev.about) {
+            // Check if it already has html tags or just pure text, inject as html
+            // Note: Make sure the dynamic content stored in localStorage matches the new structured HTML classes for best results.
+            aboutContentEl.innerHTML = dev.about;
+          }
+
+          // Update small logos in static sample compounds (if they exist)
+          document.querySelectorAll(".small-dev-logo").forEach((img) => {
+            if (dev.logo) img.src = dev.logo;
+          });
+        }
+      });
+    </script> -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const devId = urlParams.get("id");
+        const developers =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+        const projects = JSON.parse(localStorage.getItem("sky_projects")) || [];
+        const units = JSON.parse(localStorage.getItem("sky_units")) || [];
+        const dev = developers.find((d) => d.id == devId);
+
+        function parsePrice(priceVal) {
+          if (!priceVal) return Infinity;
+          const str = String(priceVal).toUpperCase().replace(/,/g, "").trim();
+          const numMatch = str.match(/[\d\.]+/);
+          if (!numMatch) return Infinity;
+          let num = parseFloat(numMatch[0]);
+          if (str.includes("M") || str.includes("MILLION")) num *= 1000000;
+          else if (str.includes("K") || str.includes("THOUSAND")) num *= 1000;
+          return num;
+        }
+
+        function formatPrice(num) {
+          if (num === Infinity || isNaN(num)) return "N/A";
+          if (num >= 1000000)
+            return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M EGP";
+          if (num >= 1000)
+            return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K EGP";
+          return num.toLocaleString() + " EGP";
+        }
+
+        function getDevMinPrice(devName) {
+          const devProjs = projects.filter(
+            (p) => p.developer === devName || p.devName === devName,
+          );
+          if (devProjs.length === 0) return "N/A";
+          const minPrice = Math.min(
+            ...devProjs.map((p) => parsePrice(p.price)),
+          );
+          return formatPrice(minPrice);
+        }
+
+        if (dev) {
+          // تعديل العنوان في المتصفح
+          document.title = `${dev.name} - SKYPIONEERS`;
+
+          // Update Banner Logo & Header Logo
+          const bannerLogo = document.querySelector(".banner-logo");
+          if (bannerLogo && dev.logo) bannerLogo.src = dev.logo;
+
+          const devLogoLarge = document.querySelector(".dev-logo-large");
+          if (devLogoLarge && dev.logo) devLogoLarge.src = dev.logo;
+
+          // Update Name
+          const titleEls = document.querySelectorAll(".dev-title");
+          titleEls.forEach((el) => (el.innerText = dev.name));
+
+          // Update Properties Count
+          const propCountEl = document.getElementById("dev-prop-count");
+          if (propCountEl) propCountEl.innerText = dev.propertiesCount || "0";
+
+          // --- تحديث السعر الديناميكي ---
+          // استبدل الـ ID بما يتوافق مع العنصر في تصميمك (مثل .start-price-value)
+          const priceEl =
+            document.getElementById("dev-start-price") ||
+            document.querySelector(".start-price-value");
+          if (priceEl) priceEl.innerText = getDevMinPrice(dev.name);
+
+          // Update Areas
+          const areasContainer = document.querySelector(".pills-group");
+          if (areasContainer && dev.areas) {
+            const areasArr = dev.areas
+              .split(",")
+              .map((a) => a.trim())
+              .filter((a) => a);
+            areasContainer.innerHTML = areasArr
+              .map((area) => `<div class="pill-option">${area}</div>`)
+              .join("");
+          }
+
+          // Update About Section
+          const aboutTitleEl = document.querySelector(".about-dev-title");
+          if (aboutTitleEl)
+            aboutTitleEl.innerHTML =
+              `<i class="fa-solid fa-building"></i> About ` + dev.name;
+
+          const aboutContentEl = document.querySelector(".about-dev-content");
+          if (aboutContentEl && dev.about) {
+            aboutContentEl.innerHTML = dev.about;
+          }
+
+          // --- Dynamic Compounds Section ---
+          const devProjs = projects.filter(
+            (p) => p.devName === dev.name || p.developer === dev.name,
+          );
+
+          const compSectionTitle = document.querySelector(
+            ".compounds-header .section-title",
+          );
+          if (compSectionTitle) {
+            compSectionTitle.innerText = `Compounds In ${dev.name}`;
+          }
+
+          const resultsCount = document.querySelector(
+            ".compounds-header .results-count",
+          );
+          if (resultsCount) {
+            resultsCount.innerText = `${devProjs.length} Results Available`;
+          }
+
+          const compoundsGrid = document.querySelector(".compounds-grid");
+          if (compoundsGrid) {
+            if (devProjs.length > 0) {
+              compoundsGrid.innerHTML = devProjs
+                .map((proj) => {
+                  const imgUrl =
+                    proj.image ||
+                    "https://via.placeholder.com/800x400?text=No+Image";
+
+                  // Get unique unit types for this project
+                  const projUnits = units.filter(
+                    (u) => u.project === proj.name,
+                  );
+                  const uniqueTypes = [
+                    ...new Set(projUnits.map((u) => u.type)),
+                  ];
+                  const typesStr =
+                    uniqueTypes.length > 0 ? uniqueTypes.join(" | ") : "N/A";
+                  const displayPrice = proj.price
+                    ? formatPrice(parsePrice(proj.price))
+                    : "N/A";
+
+                  return `
+                  <div class="compound-card" style="cursor: pointer;" onclick="window.location.href='project-details.html?id=${proj.id}'">
+                    <div class="compound-img-wrapper">
+                      <img src="${imgUrl}" class="compound-img" alt="${proj.name || ""}" onerror="this.onerror=null; this.src = 'https://via.placeholder.com/800?text=Image'"/>
+                      <div class="card-overlay-actions" onclick="event.stopPropagation()">
+                        <div class="action-icon"><i class="fa-solid fa-house"></i></div>
+                        <div class="action-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                        <div class="action-icon"><i class="fa-regular fa-heart"></i></div>
+                      </div>
+                      <div class="compare-badge" onclick="event.stopPropagation()">Start Compare</div>
+                    </div>
+                    <div class="compound-details">
+                      <div class="dev-info-row">
+                        <img src="${dev.logo || "https://via.placeholder.com/40?text=Logo"}" class="small-dev-logo" alt="${dev.name}" onerror="this.onerror=null; this.src = 'https://via.placeholder.com/40'"/>
+                        <div class="loc-title">
+                          <span class="loc-text">${proj.location || ""}</span>
+                          <span class="comp-name">${proj.name || ""}</span>
+                        </div>
+                      </div>
+                      <div class="unit-types">${typesStr}</div>
+                      <div class="card-bottom">
+                        <div class="comp-price">${displayPrice}</div>
+                        <div class="contact-icons" onclick="event.stopPropagation()">
+                          <div class="c-icon c-phone"><i class="fa-solid fa-phone"></i></div>
+                          <div class="c-icon c-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                })
+                .join("");
+            } else {
+              compoundsGrid.innerHTML =
+                '<p style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); font-size: 16px; padding: 40px 0;">No projects found for this developer.</p>';
+            }
+          }
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
+    <script src="main.js" defer></script>
+  </body>
+</html>

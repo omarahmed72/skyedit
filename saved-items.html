@@ -178,7 +178,6 @@
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
 
-    <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
@@ -187,16 +186,6 @@
       </div>
 
       <div class="nav-center hidden lg:flex">
-        <!-- Home Link -->
-        <!-- <div class="nav-item">
-          <a href="index.html">Home</a>
-        </div> -->
-
-        <!-- Explore Link -->
-        <!-- <div class="nav-item">
-          <a href="explore.html">Explore</a>
-        </div> -->
-
         <div class="nav-item has-menu">
           <a href="explore.html">Explore</a>
           <div class="mega-menu-container">
@@ -253,9 +242,6 @@
           </div>
         </div>
 
-        <!-- About Link triggers Page Switch -->
-        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
-
         <div class="nav-item has-menu">
           <a href="about.html">About</a>
           <div class="mega-menu-container">
@@ -311,17 +297,12 @@
             </div>
           </div>
         </div>
-        <!-- <div class="nav-item">
-          <a href="sell.html">Sell Unit</a>
-        </div>
-        <div class="nav-item">
-          <a href="developers.html">Developers</a>
-        </div>
-        <div class="nav-item">
-          <a href="calculator.html">Calculator</a>
-        </div> -->
+
         <div class="nav-item">
           <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
           <a href="contact.html">Contact</a>
@@ -332,6 +313,14 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -357,14 +346,61 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay (Same as projects.html) -->
     <div id="mobile-menu" class="mobile-menu-overlay">
       <div class="mobile-close-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-times"></i>
       </div>
-      <div class="mobile-nav-link"><a href="index.html">Home</a></div>
-      <div class="mobile-nav-link"><a href="projects.html">Projects</a></div>
-      <div class="mobile-nav-link"><a href="saved-items.html">Saved</a></div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="calculator.html">Calculator</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="developers.html">Developers</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div> -->
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -372,7 +408,7 @@
       <!-- Full Page Background (Using same video/overlay style as Explore) -->
       <div class="explore-full-bg">
         <!-- Optional: Use a static image or a different video for Saved page -->
-         <video
+        <video
           class="explore-video-bg"
           autoplay
           loop
@@ -382,7 +418,7 @@
           style="opacity: 0.6"
         >
           <source src="video sky.mp4" type="video/mp4" />
-        </video> 
+        </video>
         <div
           class="explore-video-overlay"
           style="background: var(--bg-color); opacity: 0.85"
@@ -856,6 +892,46 @@
           emptyState.style.display = "flex";
         }
       }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
     </script>
   </body>
 </html>

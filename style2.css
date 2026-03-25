@@ -460,7 +460,7 @@ a {
   position: absolute;
   top: 208px; /* 125px (top-bar top) + 65px (top-bar height) + 18px (margin) */
   left: 25px;
-  width: 600px;
+  width: 609px;
   z-index: 1000;
   display: flex;
   gap: 2px;
@@ -498,7 +498,7 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .filter-chip.active {
-  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  background: linear-gradient(135deg, #f77f00, #d62828);
   color: white;
   border: none;
   box-shadow: 0 5px 15px rgba(247, 127, 0, 0.3);
@@ -836,4 +836,239 @@ a {
   .leaflet-control-zoom {
     display: none;
   }
+}
+
+/* ========================================= */
+/* GLOBAL SEARCH FEATURE STYLES              */
+/* ========================================= */
+
+.nav-search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 15px; /* Spacing before theme toggle */
+}
+
+/* Ensure mobile header flow */
+@media (max-width: 1024px) {
+  .nav-search-wrapper {
+    margin-right: 10px;
+  }
+}
+
+#global-search-trigger {
+  font-size: 1.1rem;
+  color: var(--text-color, #ffffff);
+  cursor: pointer;
+  padding: 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#global-search-trigger:hover {
+  transform: scale(1.1);
+  color: var(--accent-gold, #cfa872);
+}
+
+.nav-search-expandable {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--glass-bg, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  z-index: 100;
+}
+
+.nav-search-expandable.active {
+  width: 250px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+  .nav-search-expandable.active {
+    width: 200px;
+  }
+}
+
+#global-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-color, #fff);
+  padding: 8px 15px;
+  font-size: 0.95rem;
+  outline: none;
+  font-family: inherit;
+  width: 100%;
+}
+
+#global-search-input::placeholder {
+  color: var(--text-muted, rgba(255, 255, 255, 0.5));
+}
+
+#global-search-close {
+  color: var(--text-muted, rgba(255, 255, 255, 0.5));
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+#global-search-close:hover {
+  color: #ff4757;
+}
+
+/* Dropdown Menu */
+.nav-search-results {
+  position: absolute;
+  top: Calc(100% + 15px);
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--card-bg, rgba(20, 20, 20, 0.95));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 101;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.nav-search-results.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.search-results-group {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--glass-border, rgba(255, 255, 255, 0.05));
+}
+
+.search-results-group:last-child {
+  border-bottom: none;
+}
+
+.search-group-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-gold, #cfa872);
+  padding: 0 15px 5px;
+  font-weight: 700;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 15px;
+  color: var(--text-color, #fff);
+  text-decoration: none;
+  transition: background 0.2s ease;
+  gap: 10px;
+}
+
+.search-result-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.search-result-item i {
+  color: var(--text-muted, rgba(255, 255, 255, 0.5));
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
+}
+
+.search-result-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.search-result-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted, rgba(255, 255, 255, 0.5));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+.search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Leaflet Marker Cluster Custom Styles --- */
+.marker-cluster {
+  background-clip: padding-box;
+  border-radius: 50%;
+}
+.marker-cluster div {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 5px;
+  text-align: center;
+  border-radius: 50%;
+  font-family: 'Cairo', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.marker-cluster-small {
+  background-color: rgba(247, 127, 0, 0.4);
+}
+.marker-cluster-small div {
+  background-color: rgba(247, 127, 0, 0.8);
+}
+.marker-cluster-medium {
+  background-color: rgba(247, 127, 0, 0.5);
+}
+.marker-cluster-medium div {
+  background-color: rgba(247, 127, 0, 0.9);
+}
+.marker-cluster-large {
+  background-color: rgba(214, 40, 40, 0.5);
+}
+.marker-cluster-large div {
+  background-color: rgba(214, 40, 40, 0.9);
+}
+
+/* Optimize image rendering and layout thrashing */
+img {
+  content-visibility: auto;
+}
+.glass-panel {
+  will-change: transform, opacity;
 }

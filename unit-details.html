@@ -1,0 +1,1269 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Townhouse Middle For Sale - SKYPIONEERS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style3.css" />
+
+    <style>
+      /* --- Custom Styles for Unit Details Page --- */
+      .unit-details-section {
+        padding-top: 120px;
+        padding-bottom: 80px;
+        min-height: 100vh;
+      }
+
+      .content-wrapper {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Breadcrumbs */
+      .breadcrumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+      .breadcrumbs a {
+        color: var(--text-color);
+        transition: color 0.3s;
+      }
+      .breadcrumbs a:hover {
+        color: var(--accent-gold);
+        text-decoration: underline;
+      }
+      .breadcrumbs i {
+        font-size: 10px;
+      }
+
+      /* --- Project Hero Slider (Adapted for Unit Details) --- */
+      .project-hero {
+        position: relative;
+        /* height: 85vh; */
+        width: 80%;
+        margin: 5rem auto;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .project-hero .carousel {
+        width: 100vw;
+        height: 90vh;
+        margin-top: -50px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .project-hero .carousel .list .item {
+        width: 200px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        left: 57%;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        background-position: 50% 50%;
+        background-size: cover;
+        /* z-index: 100; */
+        display: inline-block;
+        transition: 0.5s;
+      }
+
+      .project-hero .carousel .list .item:nth-child(1),
+      .project-hero .carousel .list .item:nth-child(2) {
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .project-hero .carousel .list .item:nth-child(3) {
+        left: 57%;
+      }
+      .project-hero .carousel .list .item:nth-child(4) {
+        left: calc(57% + 220px);
+      }
+      .project-hero .carousel .list .item:nth-child(5) {
+        left: calc(57% + 440px);
+      }
+      .project-hero .carousel .list .item:nth-child(6) {
+        left: calc(50% + 660px);
+      }
+      .project-hero .carousel .list .item:nth-child(n + 7) {
+        left: calc(50% + 880px);
+        opacity: 0;
+      }
+
+      /* arrows */
+      .project-hero .arrows {
+        position: absolute;
+        top: 84%;
+        right: 40%;
+        z-index: 100;
+        width: 300px;
+        max-width: 30%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .project-hero .arrows button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* border: none; */
+        border: 1px solid #fff;
+        /* background-color: var(--accent-gold); */
+        color: #fff;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .project-hero .arrows button:hover {
+        background-color: var(--accent-gold);
+      }
+      .slider-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 0;
+      }
+
+      .slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Slider Navigation */
+      .slider-nav {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        display: flex;
+        gap: 15px;
+      }
+
+      .nav-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-dot.active {
+        background: var(--accent-gold);
+        transform: scale(1.2);
+      }
+
+      .slider-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        z-index: 20;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .slider-arrow:hover {
+        background: var(--accent-gold);
+        border-color: var(--accent-gold);
+      }
+
+      .prev-arrow {
+        left: 30px;
+      }
+      .next-arrow {
+        right: 30px;
+      }
+
+      /* Floating Contact Form */
+      .floating-form-container {
+        position: absolute;
+        top: 50%;
+        right: 10%;
+        transform: translateY(-40%); /* Adjust to center vertically */
+        z-index: 30;
+        width: 380px;
+        max-width: 90%;
+      }
+
+      .floating-form {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      [data-theme="dark"] .floating-form {
+        background: rgba(11, 8, 41, 0.85);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .form-header p {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--text-color);
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .form-header p a {
+        color: #007bff; /* Link color */
+        text-decoration: none;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        font-size: 14px;
+        outline: none;
+        transition: all 0.3s;
+      }
+
+      [data-theme="dark"] .form-input {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .form-input:focus {
+        border-color: var(--accent-gold);
+        box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+      }
+
+      .form-submit-btn {
+        width: 100%;
+        padding: 12px;
+        background: #2dd4bf; /* Teal color from screenshot */
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+      }
+
+      .form-submit-btn:hover {
+        background: #14b8a6;
+        transform: translateY(-2px);
+      }
+
+      /* Project Logo Overlay on Slider */
+      .project-logo-overlay {
+        position: absolute;
+        bottom: 40px;
+        left: 5%;
+        z-index: 25;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        /* background: #000; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        /* If using an image: */
+        overflow: hidden;
+      }
+
+      @media (max-width: 768px) {
+        .project-logo-overlay {
+          bottom: 140px;
+          left: 5%;
+          width: 80px;
+          height: 80px;
+        }
+        .project-hero .arrows {
+          top: 80%;
+          right: 40%;
+        }
+        .project-hero .carousel .list .item {
+          width: 165px;
+          height: 250px;
+          top: 50%;
+        }
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(51% + 220px);
+        }
+      }
+
+      @media (max-width: 500px) {
+        .project-hero .carousel .list .item {
+          width: 100px;
+          height: 150px;
+          top: 65%;
+        }
+        .project-hero .carousel .list .item:nth-child(3) {
+          left: 50%;
+        }
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(18% + 220px);
+        }
+      }
+
+      @media (max-width: 400px) {
+        .project-hero .carousel .list .item:nth-child(4) {
+          left: calc(14% + 220px);
+        }
+      }
+      @media (max-width: 992px) {
+        .project-hero {
+          height: 60vh;
+        }
+      }
+      .project-logo-overlay img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Header Section */
+      .unit-header-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 25px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        box-shadow: var(--glass-shadow);
+        gap: 20px;
+      }
+      .unit-header-info {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex: 1;
+      }
+      .dev-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid var(--card-border);
+        background: white;
+        padding: 10px;
+        object-fit: contain;
+      }
+      .unit-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .unit-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--title-color);
+        margin: 0;
+        line-height: 1.3;
+      }
+      .unit-location {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
+      .property-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-color);
+        background: rgba(128, 128, 128, 0.1);
+        width: fit-content;
+        margin-top: 5px;
+      }
+      .unit-price {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--text-color);
+        margin-top: 10px;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        height: 100%;
+        margin-top: auto;
+      }
+      .btn-call {
+        padding: 12px 25px;
+        border-radius: 8px;
+        border: 1px solid var(--card-border);
+        background: rgba(128, 128, 128, 0.1);
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+      }
+      .btn-call:hover {
+        background: var(--card-bg);
+        border-color: var(--text-color);
+      }
+      .btn-whatsapp {
+        padding: 12px 25px;
+        border-radius: 8px;
+        background: #25d366;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.3s;
+        border: none;
+      }
+      .btn-whatsapp:hover {
+        background: #20b858;
+        transform: translateY(-2px);
+      }
+
+      /* Main Content Layout */
+      .unit-content-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--title-color);
+        margin-bottom: 20px;
+      }
+
+      /* Details Table */
+      .details-list {
+        display: flex;
+        flex-direction: column;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 10px 25px;
+      }
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+        font-size: 14px;
+      }
+      .detail-row:last-child {
+        border-bottom: none;
+      }
+      .detail-label {
+        color: var(--title-color);
+        font-weight: 600;
+      }
+      .detail-value {
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      /* Action Cards (Gallery, Map, etc) */
+      .action-cards-grid {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .action-card {
+        flex: 1;
+        min-width: 100px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--text-color);
+      }
+      .action-card:hover {
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+        transform: translateY(-3px);
+      }
+      .action-card i {
+        font-size: 24px;
+      }
+      .action-card span {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      /* Amenities */
+      .amenities-list {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .amenity-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--text-color);
+      }
+      .amenity-item img {
+        width: 20px;
+        filter: brightness(0) invert(var(--icon-invert, 0));
+      }
+      [data-theme="dark"] .amenity-item img {
+        filter: brightness(0) invert(1);
+      }
+
+      /* Payment Plans */
+      .payment-plan-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .payment-plan-card:hover {
+        border-color: var(--accent-gold);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+      .plan-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #0047ab;
+        background: rgba(0, 71, 171, 0.1);
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+      }
+      [data-theme="dark"] .plan-tag {
+        color: #60a5fa;
+        background: rgba(96, 165, 250, 0.2);
+      }
+      .plan-details h4 {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--text-color);
+        margin: 0 0 5px 0;
+      }
+      .plan-details p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin: 0;
+      }
+      .plan-years {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+      .plan-years i {
+        color: var(--accent-gold);
+      }
+
+      /* About Paragraph */
+      .about-text {
+        font-size: 14px;
+        line-height: 1.8;
+        color: var(--text-color);
+      }
+
+      /* Responsive Adjustments */
+
+      @media (max-width: 768px) {
+        .unit-header-card {
+          flex-direction: column;
+        }
+        .header-actions {
+          width: 100%;
+          justify-content: stretch;
+        }
+        .header-actions button {
+          flex: 1;
+          justify-content: center;
+        }
+        .payment-plan-card {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+        .plan-years {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="calculator.html">Calculator</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="developers.html">Developers</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div> -->
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="unit-details-section">
+      <div class="content-wrapper" id="dynamic-unit-wrapper">
+        <!-- Dynamic Content Injected Here -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- Whatsapp Floating Button -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Theme and General Scripts -->
+    <script>
+      // Theme toggling logic
+      const themeIcon = document.getElementById("theme-icon");
+      const body = document.body;
+
+      window.toggleTheme = () => {
+        const isDark = body.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          body.removeAttribute("data-theme");
+          if (themeIcon) themeIcon.classList.replace("fa-sun", "fa-moon");
+          localStorage.setItem("theme", "light");
+
+          // Update logo
+          const navLogo = document.getElementById("nav-logo");
+          if (navLogo) navLogo.src = "imgs/logo.png";
+        } else {
+          body.setAttribute("data-theme", "dark");
+          if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+          localStorage.setItem("theme", "dark");
+
+          // Update logo
+          const navLogo = document.getElementById("nav-logo");
+          if (navLogo) navLogo.src = "imgs/logo white.png";
+        }
+      };
+
+      // Load saved theme
+      if (localStorage.getItem("theme") === "dark") {
+        body.setAttribute("data-theme", "dark");
+        if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+        const navLogo = document.getElementById("nav-logo");
+        if (navLogo) navLogo.src = "imgs/logo white.png";
+      }
+
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("active");
+      }
+
+      // Navbar Scroll Effect
+      let lastScrollTop = 0;
+      const navbar = document.getElementById("navbar");
+
+      window.addEventListener("scroll", function () {
+        let scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          navbar.classList.add("nav-hidden");
+        } else {
+          navbar.classList.remove("nav-hidden");
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+      });
+
+      // --- Dynamic Unit Logic ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const unitId = parseInt(urlParams.get("id"));
+
+        // Default mock unit info
+        let defaultUnit = {
+          id: 1,
+          type: "Townhouse",
+          project: "Jirian - Nations Of Sky",
+          title:
+            "Townhouse Middle for sale in Jirian - Nations Of Sky with 3 bedrooms in New Zayed by Nations Of Sky",
+          location: "Jirian - Nations Of Sky, New Zayed, Egypt",
+          badge: "Property",
+          price: 22000000,
+          area: "185",
+          ref: "108611",
+          bedrooms: 3,
+          bathrooms: 4,
+          delivery: "2030",
+          saleType: "Developer Sale",
+          finishing: "Finished",
+          amenities: "Commercial Strip",
+          planYears: 8,
+          planQuarterly: "618,750 EGP",
+          planDown: "1,100,000 EGP (1/2)",
+          about:
+            "A 3 bedroom Townhouse in Jirian - Nations of Sky by Nations Of Sky. The Townhouse size is 185 m² with 4 bathrooms. This property will be ready for delivery finished by 2030-02-28.",
+          images: [
+            "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1577495508048-b635879837f1?q=80&w=1974&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1554469384-e58fac16e23a?q=80&w=1887&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1996&auto=format&fit=crop",
+          ],
+          devLogo:
+            "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp",
+        };
+
+        let unit = defaultUnit;
+        if (unitId) {
+          let units = JSON.parse(localStorage.getItem("sky_units")) || [];
+          let found = units.find((u) => u.id === unitId);
+          if (found) unit = found;
+        }
+
+        // Render content
+        const wrapper = document.getElementById("dynamic-unit-wrapper");
+
+        let sliderImages =
+          unit.images && unit.images.length > 0
+            ? unit.images
+            : defaultUnit.images;
+        let sliderHTML = sliderImages
+          .map(
+            (img) =>
+              `<div class="item" style="background-image: url('${img}');"></div>`,
+          )
+          .join("");
+
+        let amenitiesHTML = "";
+        if (unit.amenities) {
+          amenitiesHTML = unit.amenities
+            .split(",")
+            .map(
+              (a) => `
+              <div class="amenity-item">
+                <i class="fa-solid fa-check" style="font-size: 18px; color: var(--accent-gold)"></i>
+                <span>${a.trim()}</span>
+              </div>
+           `,
+            )
+            .join("");
+        }
+
+        wrapper.innerHTML = `
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+          <i class="fa-solid fa-house"></i>
+          <a href="index.html">Home</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <a href="projects.html">${unit.project || "Project"}</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span>${unit.title || unit.type || "Unit Details"}</span>
+        </div>
+
+        <!-- Project Hero Carousel -->
+        <section class="project-hero">
+          <div class="carousel">
+            <div class="list" id="project-hero-list">
+              ${sliderHTML}
+            </div>
+            <div class="arrows">
+              <button class="prev"><i class="fa-solid fa-angle-left"></i></button>
+              <button class="next"><i class="fa-solid fa-angle-right"></i></button>
+            </div>
+            <div class="project-logo-overlay">
+              <img id="project-hero-logo" src="${unit.devLogo || defaultUnit.devLogo}" alt="Logo" onerror="this.style.display='none'"/>
+            </div>
+          </div>
+        </section>
+
+        <!-- Header Info Card -->
+        <div class="unit-header-card">
+          <div class="unit-header-info">
+            <img src="${unit.devLogo || defaultUnit.devLogo}" alt="Developer Logo" class="dev-logo" onerror="this.src='imgs/cropped-circle-image-2-copy.webp'" />
+            <div class="unit-title-group">
+              <h1 class="unit-title">${unit.title || unit.type || "N/A"}</h1>
+              <div class="unit-location">${unit.location || "N/A"}</div>
+              <div class="property-badge">${unit.badge || "Property"}</div>
+              <div style="font-size: 11px; color: var(--text-muted); margin-top: 5px;">Price</div>
+              <div class="unit-price">${Number(unit.price).toLocaleString()} EGP</div>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="btn-call"><i class="fa-solid fa-phone"></i> Call Us</button>
+            <button class="btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Whatsapp</button>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="unit-content-layout">
+          <!-- Details List Table -->
+          <div class="details-section">
+            <div class="detail-row" style="border-bottom: 2px solid var(--text-color); padding-bottom: 15px; margin-bottom: 5px;">
+              <span class="detail-label" style="font-size: 18px">${unit.type || "Unit"}</span>
+              <span class="detail-value" style="font-size: 18px; color: var(--accent-gold)">${unit.area ? unit.area + " m&sup2;" : "N/A"}</span>
+            </div>
+            <div class="details-list">
+              <div class="detail-row">
+                <span class="detail-label">Reference No.</span><span class="detail-value">${unit.ref || "N/A"}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Bedrooms</span><span class="detail-value">${unit.bedrooms || "N/A"}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Bathrooms</span><span class="detail-value">${unit.bathrooms || "N/A"}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Delivery In</span><span class="detail-value">${unit.delivery || "N/A"}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Compound</span><span class="detail-value" style="color: var(--accent-gold); cursor: pointer; text-decoration: underline;">${unit.project || "N/A"}<i class="fa-solid fa-arrow-right ml-1" style="font-size: 10px"></i></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Sale Type</span><span class="detail-value">${unit.saleType || "N/A"}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Finishing</span><span class="detail-value">${unit.finishing || "N/A"}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions Grid -->
+          <div class="actions-section">
+            <h2 class="section-title">Details</h2>
+            <div class="action-cards-grid">
+              <div class="action-card"><i class="fa-solid fa-map-location-dot"></i><span>View on Map</span></div>
+              <div class="action-card"><i class="fa-solid fa-layer-group"></i><span>Floor Plan</span></div>
+              <div class="action-card"><i class="fa-solid fa-cubes"></i><span>Master Plan</span></div>
+            </div>
+          </div>
+
+          <!-- Amenities -->
+          <div class="amenities-section">
+            <h2 class="section-title">Amenities</h2>
+            <div class="amenities-list">${amenitiesHTML}</div>
+          </div>
+
+          <!-- Payment Plans -->
+          <div class="payment-section">
+            <h2 class="section-title">Payment Plans</h2>
+            <div class="payment-plan-card">
+              <div class="plan-info">
+                <div class="plan-tag"><i class="fa-solid fa-bookmark"></i> Original Plan</div>
+                <div class="plan-details">
+                  <h4>${unit.planQuarterly || "N/A"} <span style="font-size: 14px; font-weight: 500">Quarterly</span></h4>
+                  <p>${unit.planDown || "N/A"} Down Payment</p>
+                </div>
+              </div>
+              <div class="plan-years">${unit.planYears || "N/A"} Years <i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+          </div>
+
+          <!-- About Unit -->
+          <div class="about-section">
+            <h2 class="section-title">About Property</h2>
+            <p class="about-text">${unit.about || "N/A"}</p>
+          </div>
+        </div>
+        `;
+
+        // Re-initialize Slider
+        const nextBtn = document.querySelector(".project-hero .next");
+        const prevBtn = document.querySelector(".project-hero .prev");
+        const carousel = document.querySelector(".project-hero .carousel");
+        let list = document.querySelector(".project-hero .carousel .list");
+
+        let timeRunning = 2000;
+        let timeAutoNext = 4000;
+        let runTimeOut;
+        let runNextAuto;
+
+        const showSlider = (type) => {
+          const items = document.querySelectorAll(
+            ".project-hero .carousel .list .item",
+          );
+          if (items.length === 0) return;
+
+          if (type === "next") {
+            list.appendChild(items[0]);
+            carousel.classList.add("next");
+          } else {
+            list.prepend(items[items.length - 1]);
+            carousel.classList.add("prev");
+          }
+
+          clearTimeout(runTimeOut);
+          runTimeOut = setTimeout(() => {
+            if (carousel) carousel.classList.remove("next");
+            if (carousel) carousel.classList.remove("prev");
+          }, timeRunning);
+
+          clearTimeout(runNextAuto);
+          runNextAuto = setTimeout(() => {
+            if (nextBtn) nextBtn.click();
+          }, timeAutoNext);
+        };
+
+        if (nextBtn) nextBtn.onclick = () => showSlider("next");
+        if (prevBtn) prevBtn.onclick = () => showSlider("prev");
+
+        if (nextBtn) {
+          runNextAuto = setTimeout(() => {
+            nextBtn.click();
+          }, timeAutoNext);
+        }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
+    <script src="main.js" defer></script>
+  </body>
+</html>

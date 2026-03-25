@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="style3.css" />
   </head>
   <body>
-    <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
@@ -26,16 +25,6 @@
       </div>
 
       <div class="nav-center hidden lg:flex">
-        <!-- Home Link -->
-        <!-- <div class="nav-item">
-          <a href="index.html">Home</a>
-        </div> -->
-
-        <!-- Explore Link -->
-        <!-- <div class="nav-item">
-          <a href="explore.html">Explore</a>
-        </div> -->
-
         <div class="nav-item has-menu">
           <a href="explore.html">Explore</a>
           <div class="mega-menu-container">
@@ -92,9 +81,6 @@
           </div>
         </div>
 
-        <!-- About Link triggers Page Switch -->
-        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
-
         <div class="nav-item has-menu">
           <a href="about.html">About</a>
           <div class="mega-menu-container">
@@ -150,17 +136,12 @@
             </div>
           </div>
         </div>
-        <!-- <div class="nav-item">
-          <a href="sell.html">Sell Unit</a>
-        </div>
-        <div class="nav-item">
-          <a href="developers.html">Developers</a>
-        </div>
-        <div class="nav-item">
-          <a href="calculator.html">Calculator</a>
-        </div> -->
+
         <div class="nav-item">
           <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
           <a href="contact.html">Contact</a>
@@ -171,6 +152,14 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -196,7 +185,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay (Full Website Menu) -->
     <div id="mobile-menu" class="mobile-menu-overlay">
       <div class="mobile-close-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-times"></i>
@@ -208,36 +196,46 @@
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="explore.html">Explore</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
-        <a href="dashboard.html" style="color: var(--accent-gold)">Dashboard</a>
-      </div>
 
       <div class="mobile-projects-wrapper">
         <div class="mobile-projects-title">
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="developers.html">Developers</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div> -->
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
       </div>
       <div class="mobile-login-btn" onclick="toggleMobileMenu()">
         <a href="login.html">Login</a>
@@ -246,12 +244,31 @@
 
     <!-- MAIN DASHBOARD CONTENT -->
     <div
-      class="page-section pt-[100px] pb-10 px-4 min-h-screen bg-[var(--site-bg)] transition-colors duration-500"
+      class="page-section pt-[100px] pb-10 px-4 min-h-screen transition-colors duration-500"
     >
       <div class="max-w-[1600px] mx-auto dash-grid">
+        <!-- Dashboard Sidebar Overlay -->
+        <div
+          id="dash-sidebar-overlay"
+          class="fixed inset-0 bg-black/50 z-[1999] hidden lg:hidden"
+          onclick="toggleDashSidebar()"
+        ></div>
         <!-- LEFT SIDEBAR -->
-        <aside class="dash-sidebar">
-          <div class="text-center mb-6 hidden lg:block">
+        <aside class="dash-sidebar" id="dashSidebar">
+          <!-- Mobile Close Button & Header -->
+          <div
+            class="flex justify-between items-center mb-6 lg:hidden w-full px-2"
+          >
+            <h2 class="text-lg font-bold text-[var(--text-color)]">Menu</h2>
+            <button
+              onclick="toggleDashSidebar()"
+              class="w-8 h-8 rounded-full border border-[var(--nav-border)] text-[var(--text-color)] flex items-center justify-center hover:bg-red-500 hover:text-white transition"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div class="text-center mb-6">
             <img
               src="https://i.pravatar.cc/150?img=11"
               class="w-16 h-16 rounded-full mx-auto border-2 border-[var(--accent-gold)] object-cover mb-3"
@@ -262,29 +279,41 @@
             <p class="text-[var(--text-muted)] text-xs">Real Estate Agent</p>
           </div>
 
-          <a href="#" class="dash-link active">
+          <a href="#" class="dash-link active" onclick="switchTab('dashboard')">
             <i class="fas fa-th-large"></i> <span>Dashboard</span>
           </a>
-          <a href="#" class="dash-link">
-            <i class="fas fa-building"></i> <span>Properties</span>
+          <a href="#" class="dash-link" onclick="switchTab('explores')">
+            <i class="fas fa-compass"></i> <span>Explore</span>
           </a>
-          <a href="#" class="dash-link">
-            <i class="far fa-user"></i> <span>Contacts</span>
+          <a href="#" class="dash-link" onclick="switchTab('projects')">
+            <i class="fas fa-building"></i> <span>Projects</span>
           </a>
-          <a href="#" class="dash-link">
-            <i class="fas fa-list-ul"></i> <span>Listing</span>
+          <a href="#" class="dash-link" onclick="switchTab('units')">
+            <i class="fas fa-cube"></i> <span>Units</span>
           </a>
-          <a href="#" class="dash-link">
+          <a href="#" class="dash-link" onclick="switchTab('accounts')">
+            <i class="fas fa-user-shield"></i> <span>Accounts</span>
+          </a>
+          <a href="#" class="dash-link" onclick="switchTab('clients')">
             <i class="fas fa-users"></i> <span>Clients</span>
           </a>
-          <a href="#" class="dash-link">
-            <i class="fas fa-chart-line"></i> <span>Reports</span>
+          <a href="#" class="dash-link" onclick="switchTab('careers')">
+            <i class="fas fa-briefcase"></i> <span>Careers</span>
           </a>
-          <a href="#" class="dash-link">
-            <i class="fas fa-cog"></i> <span>Settings</span>
+          <a href="#" class="dash-link" onclick="switchTab('blogs')">
+            <i class="fas fa-newspaper"></i> <span>Blogs</span>
+          </a>
+          <a href="#" class="dash-link" onclick="switchTab('sell-units')">
+            <i class="fas fa-tags"></i> <span>Sell Units</span>
+          </a>
+          <a href="#" class="dash-link" onclick="switchTab('developers')">
+            <i class="fas fa-hard-hat"></i> <span>Developers</span>
+          </a>
+          <a href="#" class="dash-link" onclick="switchTab('newsletters')">
+            <i class="far fa-envelope"></i> <span>Newsletters</span>
           </a>
 
-          <div class="mt-auto pt-4 border-t border-[var(--nav-border)]">
+          <div class="mt-auto border-t border-[var(--nav-border)]">
             <a
               href="#"
               class="dash-link text-red-400 hover:bg-red-500/10 hover:text-red-500"
@@ -295,13 +324,33 @@
         </aside>
 
         <!-- CENTER MAIN CONTENT -->
-        <main class="flex flex-col gap-6">
+        <main class="flex flex-col gap-6 w-full overflow-hidden">
           <!-- Header -->
-          <div class="flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-[var(--text-color)]">
-              Good Morning Omar Faruk 👋
-            </h1>
+          <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 w-full"
+          >
+            <div class="flex items-center gap-3">
+              <!-- <button
+                class="lg:hidden w-10 h-10 shrink-0 rounded-full border border-[var(--nav-border)] text-[var(--text-color)] hover:bg-[var(--accent-gold)] hover:text-white transition flex items-center justify-center"
+                onclick="toggleDashSidebar()"
+              >
+                <i class="fas fa-bars"></i>
+              </button> -->
+              <h1
+                class="text-2xl font-bold text-[var(--text-color)]"
+                id="dashboard-title"
+              >
+                Good Morning Omar Faruk 👋
+              </h1>
+            </div>
             <div class="flex gap-3">
+              <button
+                class="lg:hidden w-10 h-10 shrink-0 rounded-full border border-[var(--nav-border)] text-[var(--text-color)] hover:bg-[var(--accent-gold)] hover:text-white transition flex items-center justify-center"
+                onclick="toggleDashSidebar()"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+
               <button
                 class="w-10 h-10 rounded-full border border-[var(--nav-border)] text-[var(--text-color)] hover:bg-[var(--accent-gold)] hover:text-white transition"
               >
@@ -315,208 +364,566 @@
             </div>
           </div>
 
-          <!-- Banner -->
-          <div
-            class="dash-card banner-gradient text-white flex items-center justify-between p-0 overflow-hidden relative min-h-[180px]"
-          >
-            <div class="p-8 z-10 max-w-[60%]">
-              <h2 class="text-2xl text-[var(--primary-color)] font-bold mb-2">
-                Enjoy a Huge Discount During This Offer.
-              </h2>
-              <p class="text-sm text-[var(--primary-color)] opacity-80 mb-4">
-                Exclusive deals for SkyPioneers partners.
-              </p>
-              <button
-                class="bg-white text-[var(--accent-gold)] px-6 py-2 rounded-full text-xs font-bold hover:scale-105 transition"
-              >
-                Explore Now
-              </button>
-            </div>
-            <!-- Abstract House/Hand Image Representation -->
+          <div id="tab-dashboard" class="tab-content flex flex-col gap-6">
+            <!-- Statistics / Numbers Section -->
             <div
-              class="absolute right-[-20px] bottom-[-40px] w-64 h-64 opacity-90"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
             >
-              <img
-                src="https://img.freepik.com/free-photo/hand-presenting-model-house-home-loan-campaign_53876-104970.jpg?w=740&t=st=1708111111~exp=1708111711~hmac=xyz"
-                class="w-full h-full object-cover rounded-full mix-blend-lighten"
-                alt="Offer"
-              />
-            </div>
-          </div>
-
-          <!-- Stats Row -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Stat 1 -->
-            <div class="dash-card flex flex-col justify-between h-[160px]">
-              <div class="flex justify-between items-start">
-                <div
-                  class="flex items-center gap-2 text-[var(--text-muted)] text-xs font-semibold uppercase"
-                >
-                  <i class="fas fa-wallet"></i> Total Revenue
-                </div>
-                <i
-                  class="fas fa-ellipsis-h text-[var(--text-muted)] cursor-pointer"
-                ></i>
-              </div>
-              <div>
-                <div class="text-3xl font-bold text-[var(--text-color)]">
-                  $783,156
-                </div>
-                <div class="text-xs text-green-500 mt-1 font-bold">
-                  +28%
-                  <span class="text-[var(--text-muted)] font-normal"
-                    >from last week</span
-                  >
-                </div>
-              </div>
-            </div>
-
-            <!-- Stat 2 (Chart Placeholder) -->
-            <div class="dash-card flex flex-col justify-between h-[160px]">
-              <div class="flex justify-between items-start mb-2">
-                <h4 class="text-xs font-bold text-[var(--text-color)]">
-                  Total Revenue
-                </h4>
-                <select
-                  class="bg-transparent border-none text-[var(--text-muted)] text-xs outline-none cursor-pointer"
-                >
-                  <option>Last 5 years</option>
-                </select>
-              </div>
-              <!-- CSS Simple Line Chart Visualization -->
-              <div class="flex items-end gap-2 h-full pb-2 px-2">
-                <div
-                  class="w-full bg-[var(--nav-border)] h-[1px] relative flex items-end justify-between"
-                >
-                  <!-- SVG Path for line -->
-                  <svg
-                    class="absolute bottom-0 left-0 w-full h-[80px]"
-                    overflow="visible"
-                  >
-                    <path
-                      d="M0,80 C20,70 40,90 60,40 C80,10 100,50 120,30 C140,10 160,20 180,0"
-                      fill="none"
-                      stroke="var(--accent-gold)"
-                      stroke-width="2"
-                    />
-                  </svg>
-                  <div
-                    class="w-2 h-2 bg-[var(--accent-gold)] rounded-full absolute"
-                    style="left: 0%; bottom: 0"
-                  ></div>
-                  <div
-                    class="w-2 h-2 bg-[var(--accent-gold)] rounded-full absolute"
-                    style="left: 33%; bottom: 50%"
-                  ></div>
-                  <div
-                    class="w-2 h-2 bg-[var(--accent-gold)] rounded-full absolute"
-                    style="left: 66%; bottom: 60%"
-                  ></div>
-                  <div
-                    class="w-2 h-2 bg-[var(--accent-gold)] rounded-full absolute"
-                    style="left: 100%; bottom: 100%"
-                  ></div>
-
-                  <!-- Tooltip -->
-                  <div
-                    class="absolute right-0 -top-8 bg-white text-black text-[10px] px-2 py-1 rounded shadow font-bold"
-                  >
-                    $525,658
-                  </div>
-                </div>
-              </div>
+              <!-- Stat Card 1 -->
               <div
-                class="flex justify-between text-[10px] text-[var(--text-muted)] mt-1"
+                class="glass-panel p-6 rounded-2xl flex items-center justify-between transition hover:-translate-y-1 hover:shadow-lg"
               >
-                <span>2019</span><span>2020</span><span>2021</span
-                ><span>2022</span>
+                <div>
+                  <p
+                    class="text-sm text-[var(--text-muted)] mb-1 font-semibold"
+                  >
+                    Total Projects
+                  </p>
+                  <h3
+                    class="text-3xl font-bold text-[var(--title-color)]"
+                    id="stat-projects"
+                  >
+                    0
+                  </h3>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center bg-blue-500/10 text-blue-500 shadow-sm border border-blue-500/20"
+                >
+                  <i class="fa-solid fa-building text-xl"></i>
+                </div>
+              </div>
+
+              <!-- Stat Card 2 -->
+              <div
+                class="glass-panel p-6 rounded-2xl flex items-center justify-between transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div>
+                  <p
+                    class="text-sm text-[var(--text-muted)] mb-1 font-semibold"
+                  >
+                    Available Units
+                  </p>
+                  <h3
+                    class="text-3xl font-bold text-[var(--title-color)]"
+                    id="stat-units"
+                  >
+                    0
+                  </h3>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center bg-emerald-500/10 text-emerald-500 shadow-sm border border-emerald-500/20"
+                >
+                  <i class="fa-solid fa-house-chimney text-xl"></i>
+                </div>
+              </div>
+
+              <!-- Stat Card 3 -->
+              <div
+                class="glass-panel p-6 rounded-2xl flex items-center justify-between transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div>
+                  <p
+                    class="text-sm text-[var(--text-muted)] mb-1 font-semibold"
+                  >
+                    Registered Clients
+                  </p>
+                  <h3
+                    class="text-3xl font-bold text-[var(--title-color)]"
+                    id="stat-clients"
+                  >
+                    0
+                  </h3>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center bg-purple-500/10 text-purple-500 shadow-sm border border-purple-500/20"
+                >
+                  <i class="fa-solid fa-users text-xl"></i>
+                </div>
+              </div>
+
+              <!-- Stat Card 4 -->
+              <div
+                class="glass-panel p-6 rounded-2xl flex items-center justify-between transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div>
+                  <p
+                    class="text-sm text-[var(--text-muted)] mb-1 font-semibold"
+                  >
+                    Total Visits
+                  </p>
+                  <h3 class="text-3xl font-bold text-[var(--title-color)]">
+                    12.5K
+                  </h3>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-full flex items-center justify-center bg-amber-500/10 text-amber-500 shadow-sm border border-amber-500/20"
+                >
+                  <i class="fa-solid fa-chart-line text-xl"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sales Report Table -->
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">Sales Report</h3>
+                <button
+                  class="text-xs text-[var(--text-muted)] hover:text-[var(--accent-gold)]"
+                >
+                  View All
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-3 font-medium">Sales by</th>
+                      <th class="py-3 font-medium hidden sm:table-cell">
+                        Email
+                      </th>
+                      <th class="py-3 font-medium">Type</th>
+                      <th class="py-3 font-medium">Price</th>
+                      <th class="py-3 font-medium text-right">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-sm text-[var(--text-color)]">
+                    <tr class="hover:bg-[var(--pill-bg)] transition">
+                      <td class="py-3 flex items-center gap-2">
+                        <img
+                          src="https://i.pravatar.cc/150?img=3"
+                          class="w-8 h-8 rounded-full object-cover"
+                        />
+                        <span class="font-medium text-xs">Esard award</span>
+                      </td>
+                      <td
+                        class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+                      >
+                        esard.award@gmail.com
+                      </td>
+                      <td class="py-3 text-xs">Sale</td>
+                      <td class="py-3 font-bold text-xs">$100,234</td>
+                      <td class="py-3 text-right">
+                        <span class="status-badge status-paid">Paid</span>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-[var(--pill-bg)] transition">
+                      <td class="py-3 flex items-center gap-2">
+                        <img
+                          src="https://i.pravatar.cc/150?img=5"
+                          class="w-8 h-8 rounded-full object-cover"
+                        />
+                        <span class="font-medium text-xs">Micale vandar</span>
+                      </td>
+                      <td
+                        class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+                      >
+                        micale@gmail.com
+                      </td>
+                      <td class="py-3 text-xs">Rent</td>
+                      <td class="py-3 font-bold text-xs">$21,000</td>
+                      <td class="py-3 text-right">
+                        <span class="status-badge status-pending">Pending</span>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-[var(--pill-bg)] transition">
+                      <td class="py-3 flex items-center gap-2">
+                        <img
+                          src="https://i.pravatar.cc/150?img=8"
+                          class="w-8 h-8 rounded-full object-cover"
+                        />
+                        <span class="font-medium text-xs">Anio ana</span>
+                      </td>
+                      <td
+                        class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+                      >
+                        anio.ana@gmail.com
+                      </td>
+                      <td class="py-3 text-xs">Rent</td>
+                      <td class="py-3 font-bold text-xs">$14,211</td>
+                      <td class="py-3 text-right">
+                        <span class="status-badge status-paid">Paid</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
 
-          <!-- Sales Report Table -->
-          <div class="dash-card">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="font-bold text-[var(--text-color)]">Sales Report</h3>
-              <button
-                class="text-xs text-[var(--text-muted)] hover:text-[var(--accent-gold)]"
-              >
-                View All
-              </button>
+          <!-- Explore Tab -->
+          <div id="tab-explores" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Explore Management
+                </h3>
+                <button
+                  onclick="openModal('exploreModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Explore
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium">Title</th>
+                      <th class="py-4 font-medium">Location</th>
+                      <th class="py-4 font-medium">Developer</th>
+                      <th class="py-4 font-medium">Start Price</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="explores-table-body"
+                  ></tbody>
+                </table>
+              </div>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse">
-                <thead>
-                  <tr
-                    class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
-                  >
-                    <th class="py-3 font-medium">Sales by</th>
-                    <th class="py-3 font-medium hidden sm:table-cell">Email</th>
-                    <th class="py-3 font-medium">Type</th>
-                    <th class="py-3 font-medium">Price</th>
-                    <th class="py-3 font-medium text-right">Status</th>
-                  </tr>
-                </thead>
-                <tbody class="text-sm text-[var(--text-color)]">
-                  <tr class="hover:bg-[var(--pill-bg)] transition">
-                    <td class="py-3 flex items-center gap-2">
-                      <img
-                        src="https://i.pravatar.cc/150?img=3"
-                        class="w-8 h-8 rounded-full object-cover"
-                      />
-                      <span class="font-medium text-xs">Esard award</span>
-                    </td>
-                    <td
-                      class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+          </div>
+
+          <!-- Projects Tab -->
+          <div id="tab-projects" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Projects Management
+                </h3>
+                <button
+                  onclick="openModal('projectModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Project
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
                     >
-                      esard.award@gmail.com
-                    </td>
-                    <td class="py-3 text-xs">Sale</td>
-                    <td class="py-3 font-bold text-xs">$100,234</td>
-                    <td class="py-3 text-right">
-                      <span class="status-badge status-paid">Paid</span>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-[var(--pill-bg)] transition">
-                    <td class="py-3 flex items-center gap-2">
-                      <img
-                        src="https://i.pravatar.cc/150?img=5"
-                        class="w-8 h-8 rounded-full object-cover"
-                      />
-                      <span class="font-medium text-xs">Micale vandar</span>
-                    </td>
-                    <td
-                      class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+                      <th class="py-4 font-medium">Project Name</th>
+                      <th class="py-4 font-medium">Location</th>
+                      <th class="py-4 font-medium">Status</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="projects-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Units Tab -->
+          <div id="tab-units" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Units Management
+                </h3>
+                <button
+                  onclick="openModal('unitModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Unit
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
                     >
-                      micale@gmail.com
-                    </td>
-                    <td class="py-3 text-xs">Rent</td>
-                    <td class="py-3 font-bold text-xs">$21,000</td>
-                    <td class="py-3 text-right">
-                      <span class="status-badge status-pending">Pending</span>
-                    </td>
-                  </tr>
-                  <tr class="hover:bg-[var(--pill-bg)] transition">
-                    <td class="py-3 flex items-center gap-2">
-                      <img
-                        src="https://i.pravatar.cc/150?img=8"
-                        class="w-8 h-8 rounded-full object-cover"
-                      />
-                      <span class="font-medium text-xs">Anio ana</span>
-                    </td>
-                    <td
-                      class="py-3 text-[var(--text-muted)] text-xs hidden sm:table-cell"
+                      <th class="py-4 font-medium">Unit Type</th>
+                      <th class="py-4 font-medium">Project</th>
+                      <th class="py-4 font-medium">Price</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="units-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accounts Tab -->
+          <div id="tab-accounts" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Accounts Management
+                </h3>
+                <button
+                  onclick="openModal('accountModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Account
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
                     >
-                      anio.ana@gmail.com
-                    </td>
-                    <td class="py-3 text-xs">Rent</td>
-                    <td class="py-3 font-bold text-xs">$14,211</td>
-                    <td class="py-3 text-right">
-                      <span class="status-badge status-paid">Paid</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                      <th class="py-4 font-medium">Name</th>
+                      <th class="py-4 font-medium">Email</th>
+                      <th class="py-4 font-medium">Role</th>
+                      <th class="py-4 font-medium">Can Edit</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="accounts-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clients Tab -->
+          <div id="tab-clients" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Clients Management
+                </h3>
+                <button
+                  onclick="openModal('clientModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Client
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium">Name</th>
+                      <th class="py-4 font-medium">Contact Email</th>
+                      <th class="py-4 font-medium">Assigned Project(s)</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="clients-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Careers Tab -->
+          <div id="tab-careers" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Careers Management
+                </h3>
+                <button
+                  type="button"
+                  onclick="openModal('careerModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Career
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium">Job Title</th>
+                      <th class="py-4 font-medium">Location</th>
+                      <th class="py-4 font-medium">Department</th>
+                      <th class="py-4 font-medium">Work Type</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="careers-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Blogs Tab -->
+          <div id="tab-blogs" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Blogs Management
+                </h3>
+                <button
+                  onclick="openModal('blogModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Blog
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium" style="width: 25%">Title</th>
+                      <th class="py-4 font-medium" style="width: 25%">
+                        Author
+                      </th>
+                      <th class="py-4 font-medium" style="width: 35%">
+                        Description
+                      </th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="blogs-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sell Units Tab -->
+          <div id="tab-sell-units" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Sell Units Management
+                </h3>
+                <a
+                  href="sell.html"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Unit Ad
+                </a>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium" style="width: 20%">User</th>
+                      <th class="py-4 font-medium" style="width: 25%">
+                        Property Title
+                      </th>
+                      <th class="py-4 font-medium" style="width: 15%">
+                        Category
+                      </th>
+                      <th class="py-4 font-medium" style="width: 15%">Price</th>
+                      <th class="py-4 font-medium" style="width: 15%">
+                        Status
+                      </th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="sell-units-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Developers Tab -->
+          <div id="tab-developers" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Developers Management
+                </h3>
+                <button
+                  onclick="openModal('developerModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Developer
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium" style="width: 25%">
+                        Developer
+                      </th>
+                      <th class="py-4 font-medium" style="width: 15%">
+                        Properties
+                      </th>
+                      <th class="py-4 font-medium" style="width: 20%">
+                        Starting Price
+                      </th>
+                      <th class="py-4 font-medium" style="width: 25%">Areas</th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="developers-table-body"
+                  ></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletters Tab -->
+          <div id="tab-newsletters" class="tab-content hidden flex-col gap-6">
+            <div class="dash-card">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-[var(--text-color)]">
+                  Newsletters Management
+                </h3>
+                <button
+                  onclick="openModal('newsletterModal')"
+                  class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-xs font-bold hover:bg-yellow-600 transition shadow-lg"
+                >
+                  + Add Newsletter
+                </button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr
+                      class="text-[var(--text-muted)] text-xs border-b border-[var(--nav-border)]"
+                    >
+                      <th class="py-4 font-medium" style="width: 25%">Title</th>
+                      <th class="py-4 font-medium" style="width: 15%">Date</th>
+                      <th class="py-4 font-medium" style="width: 35%">
+                        Description
+                      </th>
+                      <th class="py-4 font-medium text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="text-sm text-[var(--text-color)]"
+                    id="newsletters-table-body"
+                  ></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </main>
@@ -586,32 +993,35 @@
           </div>
 
           <!-- Map Widget -->
-          <div class="dash-card flex flex-col h-full min-h-[200px]">
-            <h3 class="font-bold text-[var(--text-color)] mb-4">
-              Sales by Region
-            </h3>
-            <div
-              class="flex-1 rounded-lg overflow-hidden relative border border-[var(--nav-border)]"
-            >
-              <!-- Static Map Image Placeholder -->
-              <img
-                src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-74.006,40.7128,13,0/300x300?access_token=YOUR_ACCESS_TOKEN"
-                onerror="
-                  this.src =
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1000px-World_map_blank_without_borders.svg.png'
-                "
-                class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition duration-500"
-              />
+          <a href="map.html">
+            <div class="dash-card flex flex-col h-full min-h-[200px]">
+              <h3 class="font-bold text-[var(--text-color)] mb-4">
+                Sales by Region
+              </h3>
+              <div
+                class="flex-1 rounded-lg overflow-hidden relative border border-[var(--nav-border)]"
+              >
+                <!-- Static Map Image Placeholder -->
+                <img
+                  src="https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/-74.006,40.7128,13,0/300x300?access_token=YOUR_ACCESS_TOKEN"
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1000px-World_map_blank_without_borders.svg.png';
+                  "
+                  class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition duration-500"
+                />
 
-              <!-- Fake Map Pins -->
-              <div
-                class="absolute top-1/2 left-1/3 w-3 h-3 bg-[var(--accent-gold)] rounded-full border-2 border-white animate-bounce"
-              ></div>
-              <div
-                class="absolute top-1/3 left-2/3 w-3 h-3 bg-[var(--accent-gold)] rounded-full border-2 border-white"
-              ></div>
+                <!-- Fake Map Pins -->
+                <div
+                  class="absolute top-1/2 left-1/3 w-3 h-3 bg-[var(--accent-gold)] rounded-full border-2 border-white animate-bounce"
+                ></div>
+                <div
+                  class="absolute top-1/3 left-2/3 w-3 h-3 bg-[var(--accent-gold)] rounded-full border-2 border-white"
+                ></div>
+              </div>
             </div>
-          </div>
+          </a>
         </aside>
       </div>
     </div>
@@ -702,7 +1112,2986 @@
       </div>
     </div>
 
+    <!-- Manage Entities Modals -->
+    <!-- Developer Modal -->
+    <div
+      id="developerModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="developerModalTitle"
+        >
+          Add Developer
+        </h3>
+        <form
+          id="developerForm"
+          onsubmit="window.saveDeveloper(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="developerId" />
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Developer Name</label
+            >
+            <input
+              type="text"
+              id="developerName"
+              placeholder="e.g., ARDIC For Real Estate Development"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Areas (e.g. Mostakbal City, New Cairo)</label
+            >
+            <input
+              type="text"
+              id="developerAreas"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >About Developer</label
+            >
+            <textarea
+              id="developerAbout"
+              rows="4"
+              placeholder="About the developer..."
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Developer Logo</label
+            >
+            <input
+              type="file"
+              accept="image/*"
+              id="developerLogo"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+            <input type="hidden" id="developerLogoBase64" />
+          </div>
+
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('developerModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Explore Modal -->
+    <div
+      id="exploreModal"
+      class="hidden fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-lg border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="exploreModalTitle"
+        >
+          Add Explore Item
+        </h3>
+        <form
+          id="exploreForm"
+          onsubmit="window.saveExplore(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="exploreId" />
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Title (Compound Name)</label
+              >
+              <input
+                type="text"
+                id="exploreTitle"
+                placeholder="e.g. Stei8ht"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Location</label
+              >
+              <input
+                type="text"
+                id="exploreLocation"
+                placeholder="e.g. New Cairo"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Developer Name</label
+              >
+              <select
+                id="exploreDevName"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                style="background-color: var(--bg-color)"
+              ></select>
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Type</label
+              >
+              <input
+                type="text"
+                id="exploreType"
+                placeholder="e.g. Compound"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Developer Start Price (EGP)</label
+              >
+              <input
+                type="number"
+                id="exploreDevStartPrice"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Resale Start Price (EGP)</label
+              >
+              <input
+                type="number"
+                id="exploreResaleStartPrice"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Main Image</label
+              >
+              <input
+                type="file"
+                accept="image/*"
+                id="exploreMainImage"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+              <input type="hidden" id="exploreMainImageBase64" />
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Side Images (Multiple, up to 4)</label
+              >
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                id="exploreSideImages"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                onchange="
+                  document.getElementById('exploreImagesPreview').innerText =
+                    this.files.length + ' image(s) selected'
+                "
+              />
+              <div
+                id="exploreImagesPreview"
+                class="text-xs text-[var(--accent-gold)] mt-1"
+              ></div>
+              <input type="hidden" id="exploreSideImagesBase64" value="[]" />
+            </div>
+          </div>
+
+          <div class="mt-4 mb-2 pb-2 border-b border-[var(--nav-border)]">
+            <h4 class="text-sm font-bold text-[var(--accent-gold)]">
+              Payment Plans (up to 3)
+            </h4>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 1 - Down Payment (e.g. 10%)</label
+              >
+              <input
+                type="text"
+                id="explorePlan1DP"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 1 - Years (e.g. 6 Years)</label
+              >
+              <input
+                type="text"
+                id="explorePlan1Years"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 2 - Down Payment</label
+              >
+              <input
+                type="text"
+                id="explorePlan2DP"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 2 - Years</label
+              >
+              <input
+                type="text"
+                id="explorePlan2Years"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 3 - Down Payment</label
+              >
+              <input
+                type="text"
+                id="explorePlan3DP"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan 3 - Years</label
+              >
+              <input
+                type="text"
+                id="explorePlan3Years"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-4 mt-2">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Amenities (comma-separated)</label
+              >
+              <input
+                type="text"
+                id="exploreAmenities"
+                placeholder="e.g. Commercial Strip, Gym, Pool"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >About Project</label
+              >
+              <textarea
+                id="exploreAbout"
+                rows="3"
+                placeholder="Description about the project..."
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              ></textarea>
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Major Facilities & Services</label
+              >
+              <textarea
+                id="exploreFacilities"
+                rows="3"
+                placeholder="Details about facilities and services..."
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              onclick="closeModal('exploreModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Project Modal -->
+    <div
+      id="projectModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="projectModalTitle"
+        >
+          Add Project
+        </h3>
+        <form
+          id="projectForm"
+          onsubmit="window.saveProject(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="projectId" />
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Project Name</label
+            >
+            <input
+              type="text"
+              id="projectName"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Location</label
+            >
+            <input
+              type="text"
+              id="projectLocation"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Status</label
+            >
+            <select
+              id="projectStatus"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+            >
+              <option value="Active">Active</option>
+              <option value="Upcoming">Upcoming</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Project Image</label
+            >
+            <input
+              type="file"
+              accept="image/*"
+              id="projectImage"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+            <input type="hidden" id="projectImageBase64" />
+          </div>
+          <div class="mt-4 mb-2 pb-2 border-b border-[var(--nav-border)]">
+            <h4 class="text-sm font-bold text-[var(--accent-gold)]">
+              Project Description Details
+            </h4>
+            <p class="text-xs text-[var(--text-muted)]">
+              These details will be displayed on the single project details
+              page.
+            </p>
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Developer Name</label
+            >
+            <select
+              id="projectDevName"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+            >
+              <option value="">Select a Developer</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Project Description</label
+            >
+            <textarea
+              id="projectDesc"
+              rows="4"
+              placeholder="e.g., El Centro Mall New Capital is a landmark..."
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            ></textarea>
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Map Embed Link (Google Maps iframe src)</label
+            >
+            <input
+              type="text"
+              id="projectMapLink"
+              placeholder="e.g., https://www.google.com/maps/embed?..."
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Hero Images (Multiple - Please select 4 or more)</label
+            >
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              id="projectHeroImages"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              onchange="
+                document.getElementById('heroImagesPreview').innerText =
+                  this.files.length + ' image(s) selected'
+              "
+            />
+            <div
+              id="heroImagesPreview"
+              class="text-xs text-[var(--accent-gold)] mt-1"
+            ></div>
+            <input type="hidden" id="projectHeroImagesBase64" value="[]" />
+          </div>
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('projectModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Unit Modal -->
+    <div
+      id="unitModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="unitModalTitle"
+        >
+          Add Unit
+        </h3>
+        <form
+          id="unitForm"
+          onsubmit="window.saveUnit(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="unitId" />
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Unit Type (e.g. Townhouse)</label
+              >
+              <input
+                type="text"
+                id="unitType"
+                placeholder="e.g., Townhouse"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Project (Compound)</label
+              >
+              <select
+                id="unitProject"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                style="background-color: var(--bg-color)"
+              ></select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Unit Title</label
+            >
+            <input
+              type="text"
+              id="unitTitle"
+              placeholder="e.g., Townhouse Middle for sale in Jirian..."
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Location</label
+            >
+            <input
+              type="text"
+              id="unitLocation"
+              placeholder="e.g., Jirian - Nations Of Sky, New Zayed, Egypt"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Price (EGP)</label
+              >
+              <input
+                type="number"
+                id="unitPrice"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Area (e.g. 185)</label
+              >
+              <input
+                type="text"
+                id="unitArea"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Reference No.</label
+              >
+              <input
+                type="text"
+                id="unitRef"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Bedrooms</label
+              >
+              <input
+                type="number"
+                id="unitBedrooms"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Bathrooms</label
+              >
+              <input
+                type="number"
+                id="unitBathrooms"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Delivery In</label
+              >
+              <input
+                type="text"
+                id="unitDelivery"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Sale Type</label
+              >
+              <input
+                type="text"
+                id="unitSaleType"
+                placeholder="e.g. Developer Sale"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Finishing</label
+              >
+              <input
+                type="text"
+                id="unitFinishing"
+                placeholder="e.g. Finished"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Property Badge</label
+              >
+              <input
+                type="text"
+                id="unitBadge"
+                placeholder="e.g. Property"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Amenities (Comma separated)</label
+            >
+            <input
+              type="text"
+              id="unitAmenities"
+              placeholder="e.g. Commercial Strip, Club House"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+          </div>
+
+          <div class="mt-4 mb-2 pb-2 border-b border-[var(--nav-border)]">
+            <h4 class="text-sm font-bold text-[var(--accent-gold)]">
+              Payment Plan
+            </h4>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Plan Years</label
+              >
+              <input
+                type="number"
+                id="unitPlanYears"
+                placeholder="e.g. 8"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Quarterly Payment</label
+              >
+              <input
+                type="text"
+                id="unitPlanQuarterly"
+                placeholder="e.g. 618,750 EGP"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-[var(--text-muted)] mb-1"
+                >Down Payment</label
+              >
+              <input
+                type="text"
+                id="unitPlanDown"
+                placeholder="e.g. 1,100,000 EGP (1/2)"
+                class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >About Text</label
+            >
+            <textarea
+              id="unitAbout"
+              rows="3"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Gallery Images</label
+            >
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              id="unitImages"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              onchange="
+                document.getElementById('unitImagesPreview').innerText =
+                  this.files.length + ' image(s) selected'
+              "
+            />
+            <div
+              id="unitImagesPreview"
+              class="text-xs text-[var(--accent-gold)] mt-1"
+            ></div>
+            <input type="hidden" id="unitImagesBase64" value="[]" />
+          </div>
+
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              onclick="closeModal('unitModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div
+      id="accountModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="accountModalTitle"
+        >
+          Add Account
+        </h3>
+        <form
+          id="accountForm"
+          onsubmit="window.saveAccount(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="accountId" />
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Name</label
+            >
+            <input
+              type="text"
+              id="accountName"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="accountEmail"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Role</label
+            >
+            <select
+              id="accountRole"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+            >
+              <option value="Admin">Admin</option>
+              <option value="Client">Client</option>
+              <option value="Agent">Agent</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2 mt-2">
+            <input
+              type="checkbox"
+              id="accountCanEdit"
+              class="w-4 h-4 accent-[var(--accent-gold)]"
+            />
+            <label for="accountCanEdit" class="text-sm text-[var(--text-color)]"
+              >Grant Dashboard Edit Permissions</label
+            >
+          </div>
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('accountModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Client Modal -->
+    <div
+      id="clientModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="clientModalTitle"
+        >
+          Add Client
+        </h3>
+        <form
+          id="clientForm"
+          onsubmit="window.saveClient(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="clientId" />
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Name</label
+            >
+            <input
+              type="text"
+              id="clientName"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Contact Email</label
+            >
+            <input
+              type="email"
+              id="clientEmail"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Assigned Project(s)</label
+            >
+            <input
+              type="text"
+              id="clientProjects"
+              placeholder="e.g., Redgewood Street"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('clientModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Career Modal -->
+    <div
+      id="careerModal"
+      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[var(--bg-color)] rounded-lg p-6 w-full max-w-md border border-[var(--nav-border)] shadow-xl mt-16 max-h-[85vh] overflow-y-auto"
+      >
+        <h3
+          class="text-xl font-bold text-[var(--text-color)] mb-4"
+          id="careerModalTitle"
+        >
+          Add Career
+        </h3>
+        <form
+          id="careerForm"
+          onsubmit="window.saveCareer(event)"
+          class="flex flex-col gap-4"
+        >
+          <input type="hidden" id="careerId" />
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Job Title</label
+            >
+            <input
+              type="text"
+              id="careerTitle"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Workplace Type</label
+            >
+            <select
+              id="careerWorkplace"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+              required
+            >
+              <option value="On-site">On-site</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Location</label
+            >
+            <select
+              id="careerLocation"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+              required
+            >
+              <option value="Cairo, Egypt">Cairo, Egypt</option>
+              <option value="Giza, Egypt">Giza, Egypt</option>
+              <option value="Maadi, Cairo, Egypt">Maadi, Cairo, Egypt</option>
+              <option value="New Cairo, Egypt">New Cairo, Egypt</option>
+              <option value="New Cairo City, Egypt">
+                New Cairo City, Egypt
+              </option>
+              <option value="October Gardens, Giza">
+                October Gardens, Giza
+              </option>
+              <option value="Sheikh Zayed, Giza">Sheikh Zayed, Giza</option>
+              <option value="Alexandria">Alexandria</option>
+              <option value="New Capital">New Capital</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Department</label
+            >
+            <select
+              id="careerDepartment"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+              required
+            >
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Finance">Finance</option>
+              <option value="Engineering">Engineering</option>
+              <option value="HR">HR</option>
+              <option value="Nawy Partners">Nawy Partners</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Work Type</label
+            >
+            <select
+              id="careerWorkType"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              style="background-color: var(--bg-color)"
+              required
+            >
+              <option value="Full time">Full time</option>
+              <option value="Part time">Part time</option>
+              <option value="Internship">Internship</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Description</label
+            >
+            <textarea
+              id="careerDescription"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)] h-24"
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Requirements</label
+            >
+            <textarea
+              id="careerRequirements"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)] h-24"
+              required
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('careerModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Blog Modal -->
+    <div
+      id="blogModal"
+      class="fixed inset-0 bg-black/60 z-[3000] hidden flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300"
+    >
+      <div
+        class="bg-[var(--bg-color)] border border-[var(--nav-border)] rounded-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2
+            class="text-lg font-bold text-[var(--text-color)]"
+            id="blogModalTitle"
+          >
+            Add New Blog
+          </h2>
+          <button
+            onclick="closeModal('blogModal')"
+            class="text-[var(--text-muted)] hover:text-red-500"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form onsubmit="saveBlog(event)" class="flex flex-col gap-4">
+          <input type="hidden" id="blogId" />
+          <input type="hidden" id="blogImageBase64" />
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Blog Title</label
+            >
+            <input
+              type="text"
+              id="blogTitle"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Author Name</label
+            >
+            <input
+              type="text"
+              id="blogAuthor"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Date</label
+            >
+            <input
+              type="date"
+              id="blogDate"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Description</label
+            >
+            <textarea
+              id="blogDesc"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)] h-24"
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Image Upload</label
+            >
+            <input
+              type="file"
+              id="blogImage"
+              accept="image/*"
+              class="w-full text-[var(--text-muted)] text-sm"
+            />
+          </div>
+
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('blogModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sell Unit Review Modal -->
+    <div
+      id="sellUnitModal"
+      class="hidden fixed inset-0 bg-black/60 z-[3000] flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300"
+    >
+      <div
+        class="bg-[var(--bg-color)] border border-[var(--nav-border)] rounded-xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2
+            class="text-lg font-bold text-[var(--text-color)]"
+            id="sellUnitModalTitle"
+          >
+            Review Sell Unit Ad
+          </h2>
+          <button
+            type="button"
+            onclick="closeModal('sellUnitModal')"
+            class="text-[var(--text-muted)] hover:text-red-500"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div
+          id="sellUnitModalBody"
+          class="flex flex-col gap-4 text-sm text-[var(--text-color)]"
+        >
+          <!-- Content injected dynamically -->
+        </div>
+        <div
+          class="flex flex-col sm:flex-row justify-end gap-3 mt-6 pt-4 border-t border-[var(--nav-border)]"
+          id="sellUnitModalActions"
+        >
+          <button
+            type="button"
+            onclick="closeModal('sellUnitModal')"
+            class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition rounded"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="btnRejectSellUnit"
+            class="bg-red-500 text-white px-4 py-2 rounded text-sm font-bold hover:bg-red-600 transition"
+          >
+            Reject
+          </button>
+          <button
+            type="button"
+            id="btnAgreeSellUnit"
+            class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:bg-yellow-600 transition shadow-lg"
+          >
+            Agree
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div
+      id="newsletterModal"
+      class="fixed inset-0 bg-black/60 z-[3000] hidden flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300"
+    >
+      <div
+        class="bg-[var(--bg-color)] border border-[var(--nav-border)] rounded-xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2
+            class="text-lg font-bold text-[var(--text-color)]"
+            id="newsletterModalTitle"
+          >
+            Add New Newsletter
+          </h2>
+          <button
+            onclick="closeModal('newsletterModal')"
+            class="text-[var(--text-muted)] hover:text-red-500"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <form onsubmit="saveNewsletter(event)" class="flex flex-col gap-4">
+          <input type="hidden" id="newsletterId" />
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Newsletter Title</label
+            >
+            <input
+              type="text"
+              id="newsletterTitle"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Date</label
+            >
+            <input
+              type="date"
+              id="newsletterDate"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)]"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Content</label
+            >
+            <textarea
+              id="newsletterDesc"
+              class="w-full bg-transparent border border-[var(--nav-border)] rounded px-3 py-2 text-[var(--text-color)] outline-none focus:border-[var(--accent-gold)] h-32"
+              placeholder="Use newlines to separate paragraphs..."
+              required
+            ></textarea>
+          </div>
+
+          <div>
+            <label class="block text-xs text-[var(--text-muted)] mb-1"
+              >Images (Select multiple)</label
+            >
+            <input
+              type="file"
+              id="newsletterImages"
+              accept="image/*"
+              multiple
+              class="w-full text-[var(--text-muted)] text-sm mb-1"
+              onchange="
+                document.getElementById('newsletterImagesPreview').innerText =
+                  this.files.length + ' image(s) selected'
+              "
+            />
+            <div
+              id="newsletterImagesPreview"
+              class="text-xs text-[var(--accent-gold)]"
+            ></div>
+            <input type="hidden" id="newsletterImagesBase64" value="[]" />
+          </div>
+
+          <div class="flex justify-end gap-2 mt-2">
+            <button
+              type="button"
+              onclick="closeModal('newsletterModal')"
+              class="px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--text-color)] transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-[var(--accent-gold)] text-white px-4 py-2 rounded text-sm font-bold hover:scale-105 transition"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- Scripts -->
+    <script>
+      // Helper style for tab switching
+      const style = document.createElement("style");
+      style.innerHTML = `
+           .tab-content { display: none !important; }
+           .tab-content.flex { display: flex !important; }
+       `;
+      document.head.appendChild(style);
+
+      // --- Global Navigation Functions ---
+      window.toggleMobileMenu = function () {
+        const overlay = document.getElementById("mobile-menu");
+        if (overlay) {
+          overlay.classList.toggle("active");
+        }
+      };
+
+      window.toggleTheme = function () {
+        const body = document.body;
+        const icon = document.getElementById("theme-icon");
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+          if (icon) {
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+          }
+          localStorage.setItem("theme", "light");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          if (icon) {
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+          }
+          localStorage.setItem("theme", "dark");
+        }
+      };
+
+      // Load saved theme
+      document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.setAttribute("data-theme", "dark");
+          const icon = document.getElementById("theme-icon");
+          if (icon) {
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+          }
+        }
+      });
+      // -----------------------------------
+
+      // Dashboard Sidebar Toggle
+      window.toggleDashSidebar = function () {
+        const sidebar = document.getElementById("dashSidebar");
+        const overlay = document.getElementById("dash-sidebar-overlay");
+        if (sidebar && overlay) {
+          sidebar.classList.toggle("active");
+          if (sidebar.classList.contains("active")) {
+            overlay.classList.remove("hidden");
+          } else {
+            overlay.classList.add("hidden");
+          }
+        }
+      };
+
+      // Close sidebar when tapping any element inside it on mobile/tablet
+      document.addEventListener("DOMContentLoaded", () => {
+        const dashSidebar = document.getElementById("dashSidebar");
+        if (dashSidebar) {
+          dashSidebar.addEventListener("click", (e) => {
+            if (window.innerWidth <= 1024) {
+              if (!e.target.closest("button")) {
+                const overlay = document.getElementById("dash-sidebar-overlay");
+                dashSidebar.classList.remove("active");
+                if (overlay) overlay.classList.add("hidden");
+              }
+            }
+          });
+        }
+      });
+
+      // Tab Switcher
+      window.switchTab = function (tabId) {
+        document.querySelectorAll(".tab-content").forEach((el) => {
+          el.classList.add("hidden");
+          el.classList.remove("flex");
+        });
+        const target = document.getElementById("tab-" + tabId);
+        if (target) {
+          target.classList.remove("hidden");
+          target.classList.add("flex");
+        }
+
+        document.querySelectorAll(".dash-sidebar .dash-link").forEach((el) => {
+          el.classList.remove("active");
+        });
+        const activeLink = document.querySelector(
+          `.dash-sidebar .dash-link[onclick="switchTab('${tabId}')"]`,
+        );
+        if (activeLink) activeLink.classList.add("active");
+
+        const titleMap = {
+          dashboard: "Good Morning Omar Faruk 👋",
+          projects: "Manage Projects",
+          units: "Manage Units",
+          accounts: "Manage Accounts & Permissions",
+          clients: "Manage Clients",
+          careers: "Manage Careers",
+          blogs: "Manage Blogs",
+          "sell-units": "Manage Sell Units",
+          developers: "Manage Developers",
+          newsletters: "Manage Newsletters",
+        };
+        document.getElementById("dashboard-title").innerText =
+          titleMap[tabId] || "Dashboard";
+      };
+
+      // Modal Logic
+      window.openModal = function (modalId) {
+        document.getElementById(modalId).classList.remove("hidden");
+      };
+      window.closeModal = function (modalId) {
+        document.getElementById(modalId).classList.add("hidden");
+        const form = document.querySelector(`#${modalId} form`);
+        if (form) form.reset();
+      };
+
+      // State Management (Mock DB)
+      let projects = JSON.parse(localStorage.getItem("sky_projects")) || [
+        {
+          id: 1,
+          name: "Redgewood Street",
+          location: "4578 Ridge, Westmount",
+          status: "Active",
+          price: 4560000,
+          image: "imgs/newsletter-1.webp",
+          devLogo:
+            "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp",
+        },
+        {
+          id: 2,
+          name: "Main Street",
+          location: "7864 Main St, Laurent",
+          status: "Upcoming",
+          price: 2430000,
+          image: "imgs/newsletter-1.webp",
+          devLogo:
+            "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp",
+        },
+      ];
+      if (!localStorage.getItem("sky_projects")) {
+        // localStorage.setItem("sky_projects", JSON.stringify(projects));
+        safeSaveToLocalStorage("sky_projects", projects);
+      }
+      let units = JSON.parse(localStorage.getItem("sky_units")) || [
+        {
+          id: 1,
+          type: "Townhouse",
+          project: "Jirian - Nations Of Sky",
+          title:
+            "Townhouse Middle for sale in Jirian - Nations Of Sky with 3 bedrooms in New Zayed by Nations Of Sky",
+          location: "Jirian - Nations Of Sky, New Zayed, Egypt",
+          badge: "Property",
+          price: 22000000,
+          area: "185",
+          ref: "108611",
+          bedrooms: 3,
+          bathrooms: 4,
+          delivery: "2030",
+          saleType: "Developer Sale",
+          finishing: "Finished",
+          amenities: "Commercial Strip",
+          planYears: 8,
+          planQuarterly: "618,750 EGP",
+          planDown: "1,100,000 EGP (1/2)",
+          about:
+            "A 3 bedroom Townhouse in Jirian - Nations of Sky by Nations Of Sky. The Townhouse size is 185 m² with 4 bathrooms. This property will be ready for delivery finished by 2030-02-28.",
+          images: [],
+          devLogo: "imgs/cropped-circle-image-2-copy.webp",
+        },
+      ];
+      if (!localStorage.getItem("sky_units")) {
+        localStorage.setItem("sky_units", JSON.stringify(units));
+      }
+      let accounts = [
+        {
+          id: 1,
+          name: "Omar Faruk",
+          email: "omar@skypioneers.com",
+          role: "Admin",
+          canEdit: true,
+        },
+        {
+          id: 2,
+          name: "John Doe",
+          email: "john@skypioneers.com",
+          role: "Agent",
+          canEdit: false,
+        },
+      ];
+      let clients = JSON.parse(localStorage.getItem("sky_clients")) || [
+        {
+          id: 1,
+          name: "Esard award",
+          email: "esard.award@gmail.com",
+          projects: "Redgewood Street",
+        },
+        {
+          id: 2,
+          name: "Micale vandar",
+          email: "micale@gmail.com",
+          projects: "Main Street",
+        },
+      ];
+      if (!localStorage.getItem("sky_clients")) {
+        localStorage.setItem("sky_clients", JSON.stringify(clients));
+      }
+
+      // Careers State Management
+      let careers = JSON.parse(localStorage.getItem("sky_careers")) || [
+        {
+          id: 1,
+          title: "Accounts Payable Specialist",
+          workplace: "On-site",
+          location: "Maadi, Cairo, Egypt",
+          department: "Finance",
+          workType: "Full time",
+        },
+        {
+          id: 2,
+          title: "Summer Internship Program 2026",
+          workplace: "On-site",
+          location: "New Cairo, Egypt",
+          department: "Nawy Partners",
+          workType: "Internship",
+        },
+        {
+          id: 3,
+          title: "Business Development Team Leader",
+          workplace: "Hybrid",
+          location: "New Cairo City, Egypt",
+          department: "Sales",
+          workType: "Full time",
+        },
+        {
+          id: 4,
+          title: "Senior Site Engineer",
+          workplace: "On-site",
+          location: "October Gardens, Giza",
+          department: "Engineering",
+          workType: "Full time",
+        },
+        {
+          id: 5,
+          title: "Sales Executive",
+          workplace: "On-site",
+          location: "Sheikh Zayed, Giza",
+          department: "Sales",
+          workType: "Full time",
+        },
+      ];
+      if (!localStorage.getItem("sky_careers")) {
+        localStorage.setItem("sky_careers", JSON.stringify(careers));
+      }
+
+      // Explores State Management
+      let explores = JSON.parse(localStorage.getItem("sky_explores")) || [];
+      if (!localStorage.getItem("sky_explores")) {
+        localStorage.setItem("sky_explores", JSON.stringify(explores));
+      }
+
+      // Blogs State Management
+      let blogs = JSON.parse(localStorage.getItem("sky_blogs")) || [
+        {
+          id: 1,
+          title: "The Future of Real Estate in Egypt",
+          author: "Omar Faruk",
+          date: "2024-03-01",
+          desc: "Exploring the new administrative capital and upcoming major projects reshaping the market.",
+          image: "imgs/1.avif",
+        },
+      ];
+      if (!localStorage.getItem("sky_blogs")) {
+        localStorage.setItem("sky_blogs", JSON.stringify(blogs));
+      }
+
+      // Sell Units State Management
+      let sellUnitsList =
+        JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+      if (!localStorage.getItem("sky_sell_units")) {
+        localStorage.setItem("sky_sell_units", JSON.stringify(sellUnitsList));
+      }
+
+      // Newsletters State Management
+      let newsletters = JSON.parse(localStorage.getItem("sky_newsletters")) || [
+        {
+          id: 1,
+          title:
+            "A strategic partnership between FABMISR and Coldwell Banker to provide financing solutions for premium properties in the Egyptian market.",
+          date: "2026-02-04",
+          desc: "Cairo, 4th February 2026 – First Abu Dhabi Bank Misr (FABMISR), one of the largest banks operating in Egypt, announced the signing of a joint cooperation agreement with Coldwell Banker Egypt, a leading real estate advisory and marketing firm. The agreement aims to facilitate access to mortgage financing for customers across Egypt, reinforcing the bank's position as a leading player in this vital sector.\n\nThis partnership reflects both parties' commitment to delivering a comprehensive experience for clients looking to invest in real estate. Coldwell Banker Egypt will support FABMISR's business development efforts by providing a broad base of potential clients interested in real estate financing, while ensuring the confidentiality of all accounts and information. The partnership is part of a shared vision to promote sustainable growth in the Egyptian real estate market and provide innovative solutions that meet the evolving needs of the sector.",
+          images: [
+            "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1632&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1632&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1740&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1554200876-56c2f25224fa?q=80&w=1740&auto=format&fit=crop",
+          ],
+        },
+      ];
+      if (!localStorage.getItem("sky_newsletters")) {
+        localStorage.setItem("sky_newsletters", JSON.stringify(newsletters));
+      }
+
+      // Render Functions
+      window.renderExplores = function () {
+        const tbody = document.getElementById("explores-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = explores
+          .map(
+            (e) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${e.title}</td>
+             <td class="py-3 text-[var(--text-muted)]">${e.location}</td>
+             <td class="py-3 text-[var(--text-muted)]">${e.devName}</td>
+             <td class="py-3 font-bold">${Number(e.devStartPrice).toLocaleString()} EGP</td>
+             <td class="py-3 text-right">
+               <button onclick="editExplore(${e.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteExplore(${e.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+
+        const exploreDevName = document.getElementById("exploreDevName");
+        if (exploreDevName) {
+          const devs = JSON.parse(localStorage.getItem("sky_developers")) || [];
+          exploreDevName.innerHTML =
+            `<option value="">Select a Developer</option>` +
+            devs
+              .map((d) => `<option value="${d.name}">${d.name}</option>`)
+              .join("");
+        }
+      };
+
+      window.renderProjects = function () {
+        const statEl = document.getElementById("stat-projects");
+        if (statEl) {
+          statEl.innerText = projects.length;
+        }
+        const tbody = document.getElementById("projects-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = projects
+          .map(
+            (p) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${p.name}</td>
+             <td class="py-3 text-[var(--text-muted)]">${p.location}</td>
+             <td class="py-3"><span class="status-badge bg-green-500/10 text-green-500 px-2 py-1 rounded-full text-[10px]">${p.status}</span></td>
+             <td class="py-3 text-right">
+               <button onclick="editProject(${p.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteProject(${p.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+
+        const unitProjectSelect = document.getElementById("unitProject");
+        if (unitProjectSelect) {
+          unitProjectSelect.innerHTML = projects
+            .map((p) => `<option value="${p.name}">${p.name}</option>`)
+            .join("");
+        }
+      };
+
+      window.renderUnits = function () {
+        const statEl = document.getElementById("stat-units");
+        if (statEl) {
+          statEl.innerText = units.length;
+        }
+        const tbody = document.getElementById("units-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = units
+          .map(
+            (u) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${u.type}</td>
+             <td class="py-3 text-[var(--text-muted)]">${u.project}</td>
+             <td class="py-3 font-bold">$${Number(u.price).toLocaleString()}</td>
+             <td class="py-3 text-right">
+               <a href="unit-details.html?id=${u.id}" class="text-green-500 hover:text-green-400 mr-2" title="View details"><i class="fas fa-eye"></i></a>
+               <button onclick="editUnit(${u.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteUnit(${u.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.renderAccounts = function () {
+        const tbody = document.getElementById("accounts-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = accounts
+          .map(
+            (a) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${a.name}</td>
+             <td class="py-3 text-[var(--text-muted)]">${a.email}</td>
+             <td class="py-3">
+                <span class="px-2 py-1 bg-[var(--nav-border)] text-[var(--text-color)] border border-[var(--nav-border)] rounded-full text-[10px]">${a.role}</span>
+             </td>
+             <td class="py-3">${a.canEdit ? '<i class="fas fa-check text-green-500"></i>' : '<i class="fas fa-times text-red-500"></i>'}</td>
+             <td class="py-3 text-right">
+               <button onclick="editAccount(${a.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteAccount(${a.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.renderClients = function () {
+        const tbody = document.getElementById("clients-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = clients
+          .map(
+            (c) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${c.name}</td>
+             <td class="py-3 text-[var(--text-muted)]">${c.email}</td>
+             <td class="py-3 text-xs">${c.projects}</td>
+             <td class="py-3 text-right">
+               <button onclick="editClient(${c.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteClient(${c.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.renderCareers = function () {
+        const tbody = document.getElementById("careers-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = careers
+          .map(
+            (c) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium">${c.title}</td>
+             <td class="py-3 text-[var(--text-muted)]">${c.location}</td>
+             <td class="py-3 text-[var(--text-muted)]">${c.department}</td>
+             <td class="py-3 text-xs">
+                <span class="px-2 py-1 bg-[var(--nav-border)] text-[var(--text-color)] border border-[var(--nav-border)] rounded-full">${c.workType}</span>
+             </td>
+             <td class="py-3 text-right">
+               <button onclick="editCareer(${c.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteCareer(${c.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      // CRUD Actions
+      // Helper function to read file as Base64 and optionally compress to avoid localStorage quota issues
+      // function renderFileAsBase64(file) {
+      //   return new Promise((resolve) => {
+      //     if (!file) {
+      //       resolve(null);
+      //       return;
+      //     }
+
+      //     // Only compress images. If it's a PDF or something (though not expected), return raw base64.
+      //     if (!file.type.startsWith("image/")) {
+      //       const fallbackReader = new FileReader();
+      //       fallbackReader.onload = (e) => resolve(e.target.result);
+      //       fallbackReader.readAsDataURL(file);
+      //       return;
+      //     }
+
+      //     const reader = new FileReader();
+      //     reader.onload = (e) => {
+      //       const img = new Image();
+      //       img.onload = () => {
+      //         const canvas = document.createElement("canvas");
+      //         let width = img.width;
+      //         let height = img.height;
+      //         // Max width/height 1000px to maintain decent quality but tiny file size
+      //         const MAX_SIZE = 1000;
+      //         if (width > height) {
+      //           if (width > MAX_SIZE) {
+      //             height *= MAX_SIZE / width;
+      //             width = MAX_SIZE;
+      //           }
+      //         } else {
+      //           if (height > MAX_SIZE) {
+      //             width *= MAX_SIZE / height;
+      //             height = MAX_SIZE;
+      //           }
+      //         }
+      //         canvas.width = Math.floor(width);
+      //         canvas.height = Math.floor(height);
+
+      //         const ctx = canvas.getContext("2d");
+      //         // White bg in case of transparent png -> jpeg
+      //         ctx.fillStyle = "#fff";
+      //         ctx.fillRect(0, 0, canvas.width, canvas.height);
+      //         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      //         const resultBase64 = canvas.toDataURL("image/jpeg", 0.6);
+      //         resolve(resultBase64);
+      //       };
+      //       img.onerror = () => resolve(e.target.result); // If image processing fails, fallback to original
+      //       img.src = e.target.result;
+      //     };
+      //     reader.readAsDataURL(file);
+      //   });
+      // }
+      // دوال مساعدة لضغط الصور
+      function renderFileAsBase64(file) {
+        return new Promise((resolve) => {
+          if (!file) {
+            resolve(null);
+            return;
+          }
+
+          // السماح فقط للصور بالمرور للضغط
+          if (!file.type.startsWith("image/")) {
+            const fallbackReader = new FileReader();
+            fallbackReader.onload = (e) => resolve(e.target.result);
+            fallbackReader.readAsDataURL(file);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement("canvas");
+              let width = img.width;
+              let height = img.height;
+
+              // تقليل الحجم الأقصى إلى 800 بيكسل لتوفير مساحة الـ localStorage
+              const MAX_SIZE = 800;
+
+              if (width > height) {
+                if (width > MAX_SIZE) {
+                  height *= MAX_SIZE / width;
+                  width = MAX_SIZE;
+                }
+              } else {
+                if (height > MAX_SIZE) {
+                  width *= MAX_SIZE / height;
+                  height = MAX_SIZE;
+                }
+              }
+              canvas.width = Math.floor(width);
+              canvas.height = Math.floor(height);
+
+              const ctx = canvas.getContext("2d");
+              // خلفية بيضاء لتجنب الخلفيات السوداء في صور الـ PNG الشفافة
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+              // التغيير السحري هنا: استخدام webp بدلاً من jpeg مع تقليل الجودة لـ 0.5 (ممتازة للويب)
+              const resultBase64 = canvas.toDataURL("image/webp", 0.5);
+              resolve(resultBase64);
+            };
+            img.onerror = () => resolve(e.target.result); // في حالة فشل المعالجة، نرجع الصورة الأصلية
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // دالة آمنة لحفظ البيانات في المتصفح مع تنبيه المستخدم عند امتلاء المساحة
+      function safeSaveToLocalStorage(key, data) {
+        try {
+          localStorage.setItem(key, JSON.stringify(data));
+          return true; // تم الحفظ بنجاح
+        } catch (e) {
+          // 22 للـ Firefox و QuotaExceededError للـ Chrome/Safari
+          if (e.name === "QuotaExceededError" || e.code === 22) {
+            alert(
+              "⚠️ المساحة التخزينية للمتصفح امتلأت بالكامل! يرجى مسح بعض المشاريع أو الصور القديمة لتتمكن من إضافة بيانات جديدة.",
+            );
+          } else {
+            console.error("حدث خطأ أثناء حفظ البيانات:", e);
+          }
+          return false; // فشل الحفظ
+        }
+      }
+
+      window.saveExplore = async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("exploreId").value;
+        const mainImgInput = document.getElementById("exploreMainImage");
+        const hiddenMainImg = document.getElementById(
+          "exploreMainImageBase64",
+        ).value;
+
+        let mainImgBase64 = hiddenMainImg;
+        if (mainImgInput.files && mainImgInput.files[0]) {
+          mainImgBase64 = await renderFileAsBase64(mainImgInput.files[0]);
+        }
+
+        const sideImagesInput = document.getElementById("exploreSideImages");
+        const hiddenSideImages = document.getElementById(
+          "exploreSideImagesBase64",
+        ).value;
+        let sideImagesBase64 = hiddenSideImages
+          ? JSON.parse(hiddenSideImages)
+          : [];
+        if (sideImagesInput.files && sideImagesInput.files.length > 0) {
+          sideImagesBase64 = [];
+          for (let i = 0; i < sideImagesInput.files.length; i++) {
+            const b64 = await renderFileAsBase64(sideImagesInput.files[i]);
+            if (b64) sideImagesBase64.push(b64);
+          }
+        }
+
+        const devName = document.getElementById("exploreDevName").value;
+        const currentDevs =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+        const devObj = currentDevs.find((d) => d.name === devName);
+        let devLogoBase64 =
+          devObj && devObj.logo
+            ? devObj.logo
+            : "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp";
+
+        const paymentPlans = [];
+        const p1dp = document.getElementById("explorePlan1DP").value;
+        const p1yr = document.getElementById("explorePlan1Years").value;
+        if (p1dp || p1yr) paymentPlans.push({ dp: p1dp, years: p1yr });
+
+        const p2dp = document.getElementById("explorePlan2DP").value;
+        const p2yr = document.getElementById("explorePlan2Years").value;
+        if (p2dp || p2yr) paymentPlans.push({ dp: p2dp, years: p2yr });
+
+        const p3dp = document.getElementById("explorePlan3DP").value;
+        const p3yr = document.getElementById("explorePlan3Years").value;
+        if (p3dp || p3yr) paymentPlans.push({ dp: p3dp, years: p3yr });
+
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          title: document.getElementById("exploreTitle").value,
+          location: document.getElementById("exploreLocation").value,
+          devName: devName,
+          devLogo: devLogoBase64,
+          type: document.getElementById("exploreType").value,
+          devStartPrice: document.getElementById("exploreDevStartPrice").value,
+          resaleStartPrice: document.getElementById("exploreResaleStartPrice")
+            .value,
+          mainImage:
+            mainImgBase64 ||
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop",
+          sideImages: sideImagesBase64,
+          paymentPlans: paymentPlans,
+          amenities: document.getElementById("exploreAmenities").value,
+          about: document.getElementById("exploreAbout").value,
+          facilities: document.getElementById("exploreFacilities").value,
+        };
+
+        if (id) {
+          const index = explores.findIndex((x) => x.id === parseInt(id));
+          if (index !== -1) explores[index] = obj;
+        } else {
+          explores.push(obj);
+        }
+
+        safeSaveToLocalStorage("sky_explores", explores);
+        window.renderExplores();
+        window.closeModal("exploreModal");
+      };
+
+      window.editExplore = function (id) {
+        const obj = explores.find((x) => x.id === id);
+        if (!obj) return;
+        document.getElementById("exploreId").value = obj.id;
+        document.getElementById("exploreTitle").value = obj.title || "";
+        document.getElementById("exploreLocation").value = obj.location || "";
+
+        const exploreDevName = document.getElementById("exploreDevName");
+        if (exploreDevName) {
+          const devs = JSON.parse(localStorage.getItem("sky_developers")) || [];
+          exploreDevName.innerHTML =
+            `<option value="">Select a Developer</option>` +
+            devs
+              .map((d) => `<option value="${d.name}">${d.name}</option>`)
+              .join("");
+        }
+        document.getElementById("exploreDevName").value = obj.devName || "";
+        document.getElementById("exploreType").value = obj.type || "";
+        document.getElementById("exploreDevStartPrice").value =
+          obj.devStartPrice || "";
+        document.getElementById("exploreResaleStartPrice").value =
+          obj.resaleStartPrice || "";
+
+        const plans = obj.paymentPlans || [];
+        document.getElementById("explorePlan1DP").value = plans[0]
+          ? plans[0].dp
+          : "";
+        document.getElementById("explorePlan1Years").value = plans[0]
+          ? plans[0].years
+          : "";
+        document.getElementById("explorePlan2DP").value = plans[1]
+          ? plans[1].dp
+          : "";
+        document.getElementById("explorePlan2Years").value = plans[1]
+          ? plans[1].years
+          : "";
+        document.getElementById("explorePlan3DP").value = plans[2]
+          ? plans[2].dp
+          : "";
+        document.getElementById("explorePlan3Years").value = plans[2]
+          ? plans[2].years
+          : "";
+
+        document.getElementById("exploreAmenities").value = obj.amenities || "";
+        document.getElementById("exploreAbout").value = obj.about || "";
+        if (document.getElementById("exploreFacilities"))
+          document.getElementById("exploreFacilities").value =
+            obj.facilities || "";
+
+        document.getElementById("exploreMainImage").value = "";
+        document.getElementById("exploreMainImageBase64").value =
+          obj.mainImage || "";
+        document.getElementById("exploreSideImages").value = "";
+        document.getElementById("exploreSideImagesBase64").value =
+          obj.sideImages ? JSON.stringify(obj.sideImages) : "[]";
+
+        const preview = document.getElementById("exploreImagesPreview");
+        if (preview)
+          preview.innerText = obj.sideImages
+            ? obj.sideImages.length + " image(s) saved"
+            : "";
+
+        document.getElementById("exploreModalTitle").innerText =
+          "Edit Explore Item";
+        window.openModal("exploreModal");
+      };
+
+      window.deleteExplore = function (id) {
+        if (confirm("Are you sure you want to remove this explore item?")) {
+          explores = explores.filter((x) => x.id !== id);
+          safeSaveToLocalStorage("sky_explores", explores);
+          window.renderExplores();
+        }
+      };
+
+      window.saveProject = async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("projectId").value;
+        const imgInput = document.getElementById("projectImage");
+        const hiddenImg = document.getElementById("projectImageBase64").value;
+
+        // Determine images (new upload vs existing)
+        let imgBase64 = hiddenImg;
+        if (imgInput.files && imgInput.files[0]) {
+          imgBase64 = await renderFileAsBase64(imgInput.files[0]);
+        }
+
+        const heroInput = document.getElementById("projectHeroImages");
+        const hiddenHero = document.getElementById(
+          "projectHeroImagesBase64",
+        ).value;
+        let heroImagesBase64 = hiddenHero ? JSON.parse(hiddenHero) : [];
+        if (heroInput.files && heroInput.files.length > 0) {
+          heroImagesBase64 = [];
+          for (let i = 0; i < heroInput.files.length; i++) {
+            const b64 = await renderFileAsBase64(heroInput.files[i]);
+            if (b64) heroImagesBase64.push(b64);
+          }
+        }
+
+        const pName = document.getElementById("projectName").value;
+        const pUnits = units.filter((u) => u.project === pName);
+        let minPrice = 0;
+        if (pUnits.length > 0) {
+          let m = Math.min(
+            ...pUnits.map((u) => parseFloat(u.price) || Infinity),
+          );
+          minPrice = m === Infinity ? 0 : m;
+        }
+
+        const chosenDevName = document.getElementById("projectDevName").value;
+        const currentDevs =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+        const chosenDevObj = currentDevs.find((d) => d.name === chosenDevName);
+        let logoBase64 = chosenDevObj
+          ? chosenDevObj.logo
+          : "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp";
+
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          name: pName,
+          location: document.getElementById("projectLocation").value,
+          status: document.getElementById("projectStatus").value,
+          price: minPrice,
+          image: imgBase64 || "imgs/newsletter-1.webp", // fallback
+          devLogo: logoBase64,
+          devName: chosenDevName,
+          desc: document.getElementById("projectDesc").value,
+          mapLink: document.getElementById("projectMapLink").value,
+          heroImages: heroImagesBase64,
+        };
+        if (id) {
+          const index = projects.findIndex((p) => p.id === parseInt(id));
+          if (index !== -1) projects[index] = obj;
+        } else {
+          projects.push(obj);
+        }
+        // localStorage.setItem("sky_projects", JSON.stringify(projects));
+        safeSaveToLocalStorage("sky_projects", projects);
+        window.renderProjects();
+        window.closeModal("projectModal");
+      };
+      window.editProject = function (id) {
+        const obj = projects.find((p) => p.id === id);
+        if (!obj) return;
+        document.getElementById("projectId").value = obj.id;
+        document.getElementById("projectName").value = obj.name;
+        document.getElementById("projectLocation").value = obj.location;
+        document.getElementById("projectStatus").value = obj.status;
+        document.getElementById("projectImage").value = ""; // Reset file input
+        document.getElementById("projectImageBase64").value = obj.image || "";
+        document.getElementById("projectDevName").value = obj.devName || "";
+        document.getElementById("projectDesc").value = obj.desc || "";
+        document.getElementById("projectMapLink").value = obj.mapLink || "";
+        document.getElementById("projectHeroImages").value = "";
+        const previewLabel = document.getElementById("heroImagesPreview");
+        if (previewLabel)
+          previewLabel.innerText = obj.heroImages
+            ? obj.heroImages.length + " image(s) saved"
+            : "";
+        document.getElementById("projectHeroImagesBase64").value =
+          obj.heroImages ? JSON.stringify(obj.heroImages) : "[]";
+        document.getElementById("projectModalTitle").innerText = "Edit Project";
+        window.openModal("projectModal");
+      };
+      window.deleteProject = function (id) {
+        if (confirm("Are you sure you want to remove this project?")) {
+          projects = projects.filter((p) => p.id !== id);
+          // localStorage.setItem("sky_projects", JSON.stringify(projects));
+          safeSaveToLocalStorage("sky_projects", projects);
+          window.renderProjects();
+        }
+      };
+
+      window.saveUnit = async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("unitId").value;
+
+        const uProjectName = document.getElementById("unitProject").value;
+        const projObj = projects.find((p) => p.name === uProjectName);
+        let logoBase64 =
+          "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp";
+        if (projObj) {
+          const devName = projObj.devName || projObj.developer;
+          const currentDevs =
+            JSON.parse(localStorage.getItem("sky_developers")) || [];
+          const devObj = currentDevs.find((d) => d.name === devName);
+          if (devObj && devObj.logo) {
+            logoBase64 = devObj.logo;
+          } else if (projObj.devLogo) {
+            logoBase64 = projObj.devLogo;
+          }
+        }
+
+        const imagesInput = document.getElementById("unitImages");
+        const hiddenImages = document.getElementById("unitImagesBase64").value;
+        let imagesBase64 = hiddenImages ? JSON.parse(hiddenImages) : [];
+        if (imagesInput && imagesInput.files && imagesInput.files.length > 0) {
+          imagesBase64 = [];
+          for (let i = 0; i < imagesInput.files.length; i++) {
+            const b64 = await renderFileAsBase64(imagesInput.files[i]);
+            if (b64) imagesBase64.push(b64);
+          }
+        }
+
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          type: document.getElementById("unitType").value,
+          project: document.getElementById("unitProject").value,
+          title: document.getElementById("unitTitle").value,
+          location: document.getElementById("unitLocation").value,
+          price: parseFloat(document.getElementById("unitPrice").value),
+          area: document.getElementById("unitArea").value,
+          ref: document.getElementById("unitRef").value,
+          bedrooms: document.getElementById("unitBedrooms").value,
+          bathrooms: document.getElementById("unitBathrooms").value,
+          delivery: document.getElementById("unitDelivery").value,
+          saleType: document.getElementById("unitSaleType").value,
+          finishing: document.getElementById("unitFinishing").value,
+          badge: document.getElementById("unitBadge").value,
+          amenities: document.getElementById("unitAmenities").value,
+          planYears: document.getElementById("unitPlanYears").value,
+          planQuarterly: document.getElementById("unitPlanQuarterly").value,
+          planDown: document.getElementById("unitPlanDown").value,
+          about: document.getElementById("unitAbout").value,
+          devLogo: logoBase64 || "",
+          images: imagesBase64,
+        };
+        if (id) {
+          const index = units.findIndex((u) => u.id === parseInt(id));
+          if (index !== -1) units[index] = obj;
+        } else {
+          units.push(obj);
+        }
+        localStorage.setItem("sky_units", JSON.stringify(units));
+
+        projects.forEach((p) => {
+          let pUnits = units.filter((u) => u.project === p.name);
+          if (pUnits.length > 0) {
+            let m = Math.min(
+              ...pUnits.map((u) => parseFloat(u.price) || Infinity),
+            );
+            p.price = m === Infinity ? 0 : m;
+          } else {
+            p.price = 0;
+          }
+        });
+        safeSaveToLocalStorage("sky_projects", projects);
+        window.renderProjects();
+
+        window.renderUnits();
+        window.closeModal("unitModal");
+      };
+      window.editUnit = function (id) {
+        const obj = units.find((u) => u.id === id);
+        if (!obj) return;
+        document.getElementById("unitId").value = obj.id;
+        document.getElementById("unitType").value = obj.type || "";
+        document.getElementById("unitProject").value = obj.project || "";
+        document.getElementById("unitTitle").value = obj.title || "";
+        document.getElementById("unitLocation").value = obj.location || "";
+        document.getElementById("unitPrice").value = obj.price || "";
+        document.getElementById("unitArea").value = obj.area || "";
+        document.getElementById("unitRef").value = obj.ref || "";
+        document.getElementById("unitBedrooms").value = obj.bedrooms || "";
+        document.getElementById("unitBathrooms").value = obj.bathrooms || "";
+        document.getElementById("unitDelivery").value = obj.delivery || "";
+        document.getElementById("unitSaleType").value = obj.saleType || "";
+        document.getElementById("unitFinishing").value = obj.finishing || "";
+        document.getElementById("unitBadge").value = obj.badge || "";
+        document.getElementById("unitAmenities").value = obj.amenities || "";
+        document.getElementById("unitPlanYears").value = obj.planYears || "";
+        document.getElementById("unitPlanQuarterly").value =
+          obj.planQuarterly || "";
+        document.getElementById("unitPlanDown").value = obj.planDown || "";
+        document.getElementById("unitAbout").value = obj.about || "";
+
+        // Removed unitLogo manual setting
+        document.getElementById("unitImages").value = "";
+        document.getElementById("unitImagesBase64").value = obj.images
+          ? JSON.stringify(obj.images)
+          : "[]";
+
+        const preview = document.getElementById("unitImagesPreview");
+        if (preview)
+          preview.innerText = obj.images
+            ? obj.images.length + " image(s) saved"
+            : "";
+
+        document.getElementById("unitModalTitle").innerText = "Edit Unit";
+        window.openModal("unitModal");
+      };
+      window.deleteUnit = function (id) {
+        if (confirm("Are you sure you want to remove this unit?")) {
+          units = units.filter((u) => u.id !== id);
+          localStorage.setItem("sky_units", JSON.stringify(units));
+
+          projects.forEach((p) => {
+            let pUnits = units.filter((u) => u.project === p.name);
+            if (pUnits.length > 0) {
+              let m = Math.min(
+                ...pUnits.map((u) => parseFloat(u.price) || Infinity),
+              );
+              p.price = m === Infinity ? 0 : m;
+            } else {
+              p.price = 0;
+            }
+          });
+          safeSaveToLocalStorage("sky_projects", projects);
+          window.renderProjects();
+
+          window.renderUnits();
+        }
+      };
+
+      window.saveAccount = function (e) {
+        e.preventDefault();
+        const id = document.getElementById("accountId").value;
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          name: document.getElementById("accountName").value,
+          email: document.getElementById("accountEmail").value,
+          role: document.getElementById("accountRole").value,
+          canEdit: document.getElementById("accountCanEdit").checked,
+        };
+        if (id) {
+          const index = accounts.findIndex((a) => a.id === parseInt(id));
+          if (index !== -1) accounts[index] = obj;
+        } else {
+          accounts.push(obj);
+        }
+        window.renderAccounts();
+        window.closeModal("accountModal");
+      };
+      window.editAccount = function (id) {
+        const obj = accounts.find((a) => a.id === id);
+        if (!obj) return;
+        document.getElementById("accountId").value = obj.id;
+        document.getElementById("accountName").value = obj.name;
+        document.getElementById("accountEmail").value = obj.email;
+        document.getElementById("accountRole").value = obj.role;
+        document.getElementById("accountCanEdit").checked = obj.canEdit;
+        document.getElementById("accountModalTitle").innerText = "Edit Account";
+        window.openModal("accountModal");
+      };
+      window.deleteAccount = function (id) {
+        if (confirm("Are you sure you want to remove this account?")) {
+          accounts = accounts.filter((a) => a.id !== id);
+          window.renderAccounts();
+        }
+      };
+
+      window.saveClient = function (e) {
+        e.preventDefault();
+        const id = document.getElementById("clientId").value;
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          name: document.getElementById("clientName").value,
+          email: document.getElementById("clientEmail").value,
+          projects: document.getElementById("clientProjects").value,
+        };
+        if (id) {
+          const index = clients.findIndex((c) => c.id === parseInt(id));
+          if (index !== -1) clients[index] = obj;
+        } else {
+          clients.push(obj);
+        }
+        localStorage.setItem("sky_clients", JSON.stringify(clients));
+        window.renderClients();
+        window.closeModal("clientModal");
+      };
+      window.editClient = function (id) {
+        const obj = clients.find((c) => c.id === id);
+        if (!obj) return;
+        document.getElementById("clientId").value = obj.id;
+        document.getElementById("clientName").value = obj.name;
+        document.getElementById("clientEmail").value = obj.email;
+        document.getElementById("clientProjects").value = obj.projects;
+        document.getElementById("clientModalTitle").innerText = "Edit Client";
+        window.openModal("clientModal");
+      };
+      window.deleteClient = function (id) {
+        if (confirm("Are you sure you want to remove this client?")) {
+          clients = clients.filter((c) => c.id !== id);
+          localStorage.setItem("sky_clients", JSON.stringify(clients));
+          window.renderClients();
+        }
+      };
+
+      window.saveCareer = function (e) {
+        e.preventDefault();
+        const id = document.getElementById("careerId").value;
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          title: document.getElementById("careerTitle").value,
+          workplace: document.getElementById("careerWorkplace").value,
+          location: document.getElementById("careerLocation").value,
+          department: document.getElementById("careerDepartment").value,
+          workType: document.getElementById("careerWorkType").value,
+          description: document.getElementById("careerDescription").value,
+          requirements: document.getElementById("careerRequirements").value,
+        };
+        if (id) {
+          const index = careers.findIndex((c) => c.id === parseInt(id));
+          if (index !== -1) careers[index] = obj;
+        } else {
+          careers.push(obj);
+        }
+        localStorage.setItem("sky_careers", JSON.stringify(careers));
+        window.renderCareers();
+        window.closeModal("careerModal");
+      };
+      window.editCareer = function (id) {
+        const obj = careers.find((c) => c.id === id);
+        if (!obj) return;
+        document.getElementById("careerId").value = obj.id;
+        document.getElementById("careerTitle").value = obj.title;
+        document.getElementById("careerWorkplace").value = obj.workplace;
+        document.getElementById("careerLocation").value = obj.location;
+        document.getElementById("careerDepartment").value = obj.department;
+        document.getElementById("careerWorkType").value = obj.workType;
+        document.getElementById("careerDescription").value =
+          obj.description || "";
+        document.getElementById("careerRequirements").value =
+          obj.requirements || "";
+        document.getElementById("careerModalTitle").innerText = "Edit Career";
+        window.openModal("careerModal");
+      };
+      window.deleteCareer = function (id) {
+        if (confirm("Are you sure you want to remove this career?")) {
+          careers = careers.filter((c) => c.id !== id);
+          localStorage.setItem("sky_careers", JSON.stringify(careers));
+          window.renderCareers();
+        }
+      };
+
+      window.renderBlogs = function () {
+        const tbody = document.getElementById("blogs-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = blogs
+          .map(
+            (b) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium text-xs whitespace-normal">${b.title}</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs">${b.author}<br><span class="text-[10px]">${b.date || ""}</span></td>
+             <td class="py-3 text-[var(--text-muted)] text-xs whitespace-normal line-clamp-2" style="max-width: 250px;">${b.desc}</td>
+             <td class="py-3 text-right">
+               <button onclick="editBlog(${b.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteBlog(${b.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.saveBlog = async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("blogId").value;
+        const imgInput = document.getElementById("blogImage");
+        const hiddenImg = document.getElementById("blogImageBase64").value;
+
+        let imgBase64 = hiddenImg;
+        if (imgInput.files && imgInput.files[0]) {
+          imgBase64 = await renderFileAsBase64(imgInput.files[0]);
+        }
+
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          title: document.getElementById("blogTitle").value,
+          author: document.getElementById("blogAuthor").value,
+          date: document.getElementById("blogDate").value,
+          desc: document.getElementById("blogDesc").value,
+          image: imgBase64 || "imgs/1.avif",
+        };
+        if (id) {
+          const index = blogs.findIndex((b) => b.id === parseInt(id));
+          if (index !== -1) blogs[index] = obj;
+        } else {
+          blogs.push(obj);
+        }
+        localStorage.setItem("sky_blogs", JSON.stringify(blogs));
+        window.renderBlogs();
+        window.closeModal("blogModal");
+      };
+
+      window.editBlog = function (id) {
+        const obj = blogs.find((b) => b.id === id);
+        if (!obj) return;
+        document.getElementById("blogId").value = obj.id;
+        document.getElementById("blogTitle").value = obj.title;
+        document.getElementById("blogAuthor").value = obj.author;
+        document.getElementById("blogDate").value = obj.date || "";
+        document.getElementById("blogDesc").value = obj.desc;
+        document.getElementById("blogImageBase64").value = obj.image || "";
+        document.getElementById("blogImage").value = "";
+        document.getElementById("blogModalTitle").innerText = "Edit Blog";
+        window.openModal("blogModal");
+      };
+
+      window.deleteBlog = function (id) {
+        if (confirm("Are you sure you want to delete this blog?")) {
+          blogs = blogs.filter((b) => b.id !== id);
+          localStorage.setItem("sky_blogs", JSON.stringify(blogs));
+          window.renderBlogs();
+        }
+      };
+
+      window.renderSellUnits = function () {
+        const tbody = document.getElementById("sell-units-table-body");
+        if (!tbody) return;
+        let p_sellUnits =
+          JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+        tbody.innerHTML = p_sellUnits
+          .map(
+            (su) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium text-xs whitespace-normal">${su.name || "N/A"}<br><span class="text-[10px] text-[var(--text-muted)]">${su.phone || "N/A"}</span></td>
+             <td class="py-3 text-[var(--text-muted)] text-xs">${su.title || "N/A"}</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs">${su.category || "N/A"}</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs font-bold">${su.price ? Number(su.price).toLocaleString() : "N/A"} EGP</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs">
+                 <span class="px-2 py-1 bg-[var(--nav-border)] text-[var(--text-color)] border border-[var(--nav-border)] rounded-full">${su.status || "Pending"}</span>
+             </td>
+             <td class="py-3 text-right flex gap-2 justify-end">
+               <button onclick="window.openSellUnitModal(${su.id})" class="text-blue-500 hover:text-blue-400" title="Review form"><i class="fas fa-eye"></i></button>
+               <button onclick="deleteSellUnit(${su.id})" class="text-red-500 hover:text-red-400" title="Delete"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.openSellUnitModal = function (id) {
+        const stored = JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+        const su = stored.find((s) => s.id === id);
+        if (!su) return;
+        const body = document.getElementById("sellUnitModalBody");
+        body.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><strong class="text-[var(--text-muted)]">Title:</strong><br>${su.title || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Category:</strong><br>${su.category || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Price:</strong><br>${su.price ? Number(su.price).toLocaleString() : "N/A"} EGP</div>
+            <div><strong class="text-[var(--text-muted)]">Area:</strong><br>${su.area || "N/A"} sqm</div>
+            <div><strong class="text-[var(--text-muted)]">Bedrooms:</strong><br>${su.bedrooms || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Bathrooms:</strong><br>${su.bathrooms || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Location:</strong><br>${su.gov || "N/A"} - ${su.city || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Status:</strong><br><span class="inline-block mt-1 px-2 py-1 bg-[var(--nav-border)] text-[var(--text-color)] border border-[var(--nav-border)] rounded-full text-xs font-bold">${su.status || "Pending"}</span></div>
+            <div class="md:col-span-2"><strong class="text-[var(--text-muted)]">Description:</strong> <p class="mt-1 bg-black/20 p-3 rounded text-sm">${su.desc || "No description provided."}</p></div>
+            <div class="md:col-span-2 border-t border-[var(--nav-border)] pt-4 mt-2">
+              <h4 class="text-[var(--accent-gold)] font-bold mb-2">Contact Information</h4>
+            </div>
+            <div><strong class="text-[var(--text-muted)]">Name:</strong><br>${su.name || "N/A"}</div>
+            <div><strong class="text-[var(--text-muted)]">Phone:</strong><br>${su.phone || "N/A"}</div>
+            <div class="md:col-span-2"><strong class="text-[var(--text-muted)]">Email:</strong><br>${su.email || "N/A"}</div>
+          </div>
+          <div class="mt-4 border-t border-[var(--nav-border)] pt-4">
+            <h4 class="text-[var(--accent-gold)] font-bold mb-2">Property Photo</h4>
+            <img src="${su.image || ""}" class="mt-2 w-full max-w-sm rounded-lg object-cover border border-[var(--nav-border)]" onerror="this.style.display='none'">
+          </div>
+        `;
+
+        document.getElementById("btnRejectSellUnit").onclick = () =>
+          window.updateSellUnitStatus(id, "Rejected");
+        document.getElementById("btnAgreeSellUnit").onclick = () =>
+          window.updateSellUnitStatus(id, "Approved");
+
+        if (su.status === "Approved" || su.status === "Rejected") {
+          document.getElementById("btnRejectSellUnit").style.display = "none";
+          document.getElementById("btnAgreeSellUnit").style.display = "none";
+        } else {
+          document.getElementById("btnRejectSellUnit").style.display =
+            "inline-block";
+          document.getElementById("btnAgreeSellUnit").style.display =
+            "inline-block";
+        }
+
+        if (window.openModal) {
+          window.openModal("sellUnitModal");
+        } else {
+          document.getElementById("sellUnitModal").classList.remove("hidden");
+        }
+      };
+
+      window.updateSellUnitStatus = function (id, status) {
+        let stored = JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+        const index = stored.findIndex((s) => s.id === id);
+        if (index !== -1) {
+          stored[index].status = status;
+          localStorage.setItem("sky_sell_units", JSON.stringify(stored));
+          window.renderSellUnits();
+          if (window.closeModal) {
+            window.closeModal("sellUnitModal");
+          } else {
+            document.getElementById("sellUnitModal").classList.add("hidden");
+          }
+        }
+      };
+
+      window.deleteSellUnit = function (id) {
+        if (confirm("Are you sure you want to delete this sell unit ad?")) {
+          let p_sellUnits =
+            JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+          p_sellUnits = p_sellUnits.filter((su) => su.id !== id);
+          localStorage.setItem("sky_sell_units", JSON.stringify(p_sellUnits));
+          window.renderSellUnits();
+        }
+      };
+
+      let developers = JSON.parse(localStorage.getItem("sky_developers")) || [
+        {
+          id: 1,
+          name: "ARDIC For Real Estate Development",
+          propertiesCount: 4,
+          startPrice: "5,000,000 EGP",
+          areas: "Mostakbal City, New Cairo",
+          about:
+            "<p>Ardic Development is one of the top-rated real estate development companies in Egypt.</p>",
+          logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png",
+        },
+      ];
+
+      // window.renderDevelopers = function () {
+      //   const tbody = document.getElementById("developers-table-body");
+      //   if (!tbody) return;
+      //   tbody.innerHTML = developers
+      //     .map(
+      //       (d) => `
+      //      <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+      //        <td class="py-3 flex items-center gap-2 text-xs">
+      //         <img src="${d.logo}" class="w-8 h-8 rounded-full border border-[var(--nav-border)] object-contain bg-white" onerror="this.onerror=null; this.src='https://via.placeholder.com/40?text=D'"/>
+      //          <span class="font-medium whitespace-normal">${d.name}</span>
+      //        </td>
+      //        <td class="py-3 text-[var(--text-muted)] text-xs">${d.propertiesCount || 0}</td>
+      //        <td class="py-3 text-[var(--text-muted)] text-xs font-bold">${d.startPrice || "N/A"}</td>
+      //        <td class="py-3 text-[var(--text-muted)] text-xs">${d.areas || "N/A"}</td>
+      //        <td class="py-3 text-right">
+      //          <button onclick="editDeveloper(${d.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+      //          <button onclick="deleteDeveloper(${d.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+      //        </td>
+      //      </tr>
+      //    `,
+      //     )
+      //     .join("");
+      // };
+
+      // window.saveDeveloper = async function (e) {
+      //   e.preventDefault();
+      //   const id = document.getElementById("developerId").value;
+      //   const imgInput = document.getElementById("developerLogo");
+      //   const hiddenImg = document.getElementById("developerLogoBase64").value;
+
+      //   let imgBase64 = hiddenImg;
+      //   if (imgInput && imgInput.files && imgInput.files[0]) {
+      //     // Render via standard base64 converter or rely on global renderFileAsBase64
+      //     imgBase64 = await renderFileAsBase64(imgInput.files[0]);
+      //   }
+
+      //   const obj = {
+      //     id: id ? parseInt(id) : Date.now(),
+      //     name: document.getElementById("developerName").value,
+      //     propertiesCount: document.getElementById("developerPropertiesCount")
+      //       .value,
+      //     startPrice: document.getElementById("developerStartPrice").value,
+      //     areas: document.getElementById("developerAreas").value,
+      //     about: document.getElementById("developerAbout").value,
+      //     logo:
+      //       imgBase64 ||
+      //       "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png",
+      //   };
+
+      //   if (id) {
+      //     const index = developers.findIndex((d) => d.id === parseInt(id));
+      //     if (index !== -1) developers[index] = obj;
+      //   } else {
+      //     developers.push(obj);
+      //   }
+      //   localStorage.setItem("sky_developers", JSON.stringify(developers));
+      //   window.renderDevelopers();
+      //   if (typeof window.closeModal === "function") {
+      //     window.closeModal("developerModal");
+      //   } else {
+      //     document.getElementById("developerModal").classList.add("hidden");
+      //   }
+      // };
+
+      // --- دوال مساعدة لحساب أقل سعر ديناميكياً ---
+      function parsePrice(priceVal) {
+        if (priceVal === undefined || priceVal === null || priceVal === "")
+          return Infinity;
+        const str = String(priceVal).toUpperCase().replace(/,/g, "").trim();
+        const numMatch = str.match(/[\d\.]+/);
+        if (!numMatch) return Infinity;
+        let num = parseFloat(numMatch[0]);
+        if (str.includes("M") || str.includes("MILLION")) num *= 1000000;
+        else if (str.includes("K") || str.includes("THOUSAND")) num *= 1000;
+        return num;
+      }
+
+      function formatPrice(num) {
+        if (num === Infinity || isNaN(num)) return "N/A";
+        if (num >= 1000000)
+          return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M EGP";
+        if (num >= 1000)
+          return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K EGP";
+        return num.toLocaleString() + " EGP";
+      }
+
+      function getDevMinPrice(devName) {
+        const projects = JSON.parse(localStorage.getItem("sky_projects")) || [];
+        // البحث عن المشاريع التي تنتمي لهذا المطور
+        const devProjs = projects.filter(
+          (p) => p.devName === devName || p.developer === devName,
+        );
+        if (devProjs.length === 0) return "N/A";
+        const prices = devProjs
+          .map((p) => parsePrice(p.price))
+          .filter((val) => val !== Infinity);
+        if (prices.length === 0) return "N/A";
+        const minPrice = Math.min(...prices);
+        return formatPrice(minPrice);
+      }
+
+      function getDevPropertiesCount(devName) {
+        const projects = JSON.parse(localStorage.getItem("sky_projects")) || [];
+        const units = JSON.parse(localStorage.getItem("sky_units")) || [];
+        const devProjs = projects.filter(
+          (p) => p.devName === devName || p.developer === devName,
+        );
+        const devProjNames = devProjs.map((p) => p.name);
+        if (devProjNames.length === 0) return 0;
+        const devUnits = units.filter((u) => devProjNames.includes(u.project));
+        return devUnits.length;
+      }
+      // ---------------------------------------------
+
+      // تحديث دالة عرض المطورين في لوحة التحكم
+      window.renderDevelopers = function () {
+        const tbody = document.getElementById("developers-table-body");
+        if (!tbody) return;
+        const developersList =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+        tbody.innerHTML = "";
+
+        developersList.forEach((dev) => {
+          const minPrice = getDevMinPrice(dev.name);
+          const propertiesCount = getDevPropertiesCount(dev.name);
+
+          const tr = document.createElement("tr");
+          tr.className =
+            "hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]";
+          tr.innerHTML = `
+        <td class="py-3 flex items-center gap-2 text-xs">
+          <img src="${dev.logo}" alt="logo" class="w-8 h-8 rounded-full border border-[var(--nav-border)] object-contain bg-white" onerror="this.onerror=null; this.src='https://via.placeholder.com/40?text=D'">
+          <span class="font-medium whitespace-normal">${dev.name}</span>
+        </td>
+        <td class="py-3 text-[var(--text-muted)] text-xs">${propertiesCount}</td>
+        <td class="py-3 text-[var(--text-muted)] text-xs font-bold">${minPrice}</td>
+        <td class="py-3 text-[var(--text-muted)] text-xs">${dev.areas || "N/A"}</td>
+        <td class="py-3 text-right flex gap-2 justify-end">
+          <button onclick="editDeveloper('${dev.id}')" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+          <button onclick="deleteDeveloper('${dev.id}')" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+        </td>
+      `;
+          tbody.appendChild(tr);
+        });
+
+        const projectDevNameSelect = document.getElementById("projectDevName");
+        if (projectDevNameSelect) {
+          projectDevNameSelect.innerHTML =
+            '<option value="">Select a Developer</option>' +
+            developersList
+              .map((d) => `<option value="${d.name}">${d.name}</option>`)
+              .join("");
+        }
+      };
+
+      // حفظ المطور
+      window.saveDeveloper = async function (e) {
+        if (e) e.preventDefault();
+        const id = document.getElementById("developerId").value;
+        const name = document.getElementById("developerName").value;
+        const areas = document.getElementById("developerAreas").value;
+        const about = document.getElementById("developerAbout").value;
+
+        const imgInput = document.getElementById("developerLogo");
+        const hiddenImg = document.getElementById("developerLogoBase64").value;
+        let imgBase64 = hiddenImg;
+        if (imgInput && imgInput.files && imgInput.files[0]) {
+          imgBase64 = await renderFileAsBase64(imgInput.files[0]);
+        }
+
+        const newDev = {
+          id: id ? id : Date.now().toString(),
+          name,
+          about,
+          areas,
+          logo:
+            imgBase64 ||
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Ardic_logo.png/600px-Ardic_logo.png",
+        };
+
+        // Update both global and local storage
+        let developersList =
+          JSON.parse(localStorage.getItem("sky_developers")) || [];
+
+        if (id) {
+          developersList = developersList.map((d) =>
+            String(d.id) === String(id) ? newDev : d,
+          );
+        } else {
+          developersList.push(newDev);
+        }
+
+        developers = developersList; // Update the global variable
+        localStorage.setItem("sky_developers", JSON.stringify(developersList));
+        if (typeof closeModal === "function") closeModal("developerModal");
+        window.renderDevelopers();
+      };
+
+      window.editDeveloper = function (id) {
+        const developersList =
+          JSON.parse(localStorage.getItem("sky_developers")) || developers;
+        const obj = developersList.find((d) => String(d.id) === String(id));
+        if (!obj) return;
+        document.getElementById("developerId").value = obj.id || "";
+        document.getElementById("developerName").value = obj.name || "";
+        document.getElementById("developerAreas").value = obj.areas || "";
+        document.getElementById("developerAbout").value = obj.about || "";
+        document.getElementById("developerLogoBase64").value = obj.logo || "";
+        document.getElementById("developerLogo").value = "";
+
+        let titleEl = document.getElementById("developerModalTitle");
+        if (titleEl) titleEl.innerText = "Edit Developer";
+
+        if (typeof window.openModal === "function") {
+          window.openModal("developerModal");
+        } else {
+          document.getElementById("developerModal").classList.remove("hidden");
+        }
+      };
+
+      window.deleteDeveloper = function (id) {
+        if (confirm("Are you sure you want to remove this developer?")) {
+          let developersList =
+            JSON.parse(localStorage.getItem("sky_developers")) || developers;
+          developersList = developersList.filter(
+            (d) => String(d.id) !== String(id),
+          );
+          developers = developersList;
+          localStorage.setItem(
+            "sky_developers",
+            JSON.stringify(developersList),
+          );
+          window.renderDevelopers();
+        }
+      };
+
+      // Newsletters rendering and CRUD
+      window.renderNewsletters = function () {
+        const tbody = document.getElementById("newsletters-table-body");
+        if (!tbody) return;
+        tbody.innerHTML = newsletters
+          .map(
+            (n) => `
+           <tr class="hover:bg-[var(--pill-bg)] transition border-b border-[var(--nav-border)]">
+             <td class="py-3 font-medium text-xs whitespace-normal">${n.title}</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs">${n.date || ""}</td>
+             <td class="py-3 text-[var(--text-muted)] text-xs whitespace-normal line-clamp-2" style="max-width: 250px;">${n.desc.substring(0, 100)}...</td>
+             <td class="py-3 text-right">
+               <a href="newsletter-details.html?id=${n.id}" class="text-green-500 hover:text-green-400 mr-2" title="View details"><i class="fas fa-eye"></i></a>
+               <button onclick="editNewsletter(${n.id})" class="text-blue-500 hover:text-blue-400 mr-2"><i class="fas fa-edit"></i></button>
+               <button onclick="deleteNewsletter(${n.id})" class="text-red-500 hover:text-red-400"><i class="fas fa-trash"></i></button>
+             </td>
+           </tr>
+         `,
+          )
+          .join("");
+      };
+
+      window.saveNewsletter = async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("newsletterId").value;
+        const imagesInput = document.getElementById("newsletterImages");
+        const hiddenImages = document.getElementById(
+          "newsletterImagesBase64",
+        ).value;
+        let imagesBase64 = hiddenImages ? JSON.parse(hiddenImages) : [];
+
+        if (imagesInput && imagesInput.files && imagesInput.files.length > 0) {
+          imagesBase64 = [];
+          for (let i = 0; i < imagesInput.files.length; i++) {
+            const b64 = await renderFileAsBase64(imagesInput.files[i]);
+            if (b64) imagesBase64.push(b64);
+          }
+        }
+
+        const obj = {
+          id: id ? parseInt(id) : Date.now(),
+          title: document.getElementById("newsletterTitle").value,
+          date: document.getElementById("newsletterDate").value,
+          desc: document.getElementById("newsletterDesc").value,
+          images: imagesBase64,
+        };
+
+        if (id) {
+          const index = newsletters.findIndex((n) => n.id === parseInt(id));
+          if (index !== -1) newsletters[index] = obj;
+        } else {
+          newsletters.push(obj);
+        }
+        localStorage.setItem("sky_newsletters", JSON.stringify(newsletters));
+        window.renderNewsletters();
+        window.closeModal("newsletterModal");
+      };
+
+      window.editNewsletter = function (id) {
+        const obj = newsletters.find((n) => n.id === id);
+        if (!obj) return;
+        document.getElementById("newsletterId").value = obj.id;
+        document.getElementById("newsletterTitle").value = obj.title;
+        document.getElementById("newsletterDate").value = obj.date || "";
+        document.getElementById("newsletterDesc").value = obj.desc;
+        document.getElementById("newsletterImages").value = "";
+        document.getElementById("newsletterImagesBase64").value = obj.images
+          ? JSON.stringify(obj.images)
+          : "[]";
+
+        const preview = document.getElementById("newsletterImagesPreview");
+        if (preview) {
+          preview.innerText = obj.images
+            ? obj.images.length + " image(s) saved"
+            : "";
+        }
+
+        document.getElementById("newsletterModalTitle").innerText =
+          "Edit Newsletter";
+        window.openModal("newsletterModal");
+      };
+
+      window.deleteNewsletter = function (id) {
+        if (confirm("Are you sure you want to delete this newsletter?")) {
+          newsletters = newsletters.filter((n) => n.id !== id);
+          localStorage.setItem("sky_newsletters", JSON.stringify(newsletters));
+          window.renderNewsletters();
+        }
+      };
+
+      // Initialization
+      document.addEventListener("DOMContentLoaded", () => {
+        if (typeof window.renderExplores === "function")
+          window.renderExplores();
+        window.renderProjects();
+        window.renderUnits();
+        window.renderAccounts();
+        window.renderClients();
+        window.renderCareers();
+        window.renderBlogs();
+        window.renderSellUnits();
+        if (typeof window.renderDevelopers === "function")
+          window.renderDevelopers();
+        if (typeof window.renderNewsletters === "function")
+          window.renderNewsletters();
+      });
+    </script>
     <script>
       // Theme Toggle Logic
       function toggleTheme() {
@@ -726,5 +4115,46 @@
         menu.classList.toggle("active");
       }
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
+    <script src="main.js"></script>
   </body>
 </html>

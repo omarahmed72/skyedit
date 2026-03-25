@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SKYPIONEERS - Real Estate</title>
+    <title>SKYPIONEERS - Blog Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
@@ -14,10 +14,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="style3.css" />
   </head>
   <body>
+    <!-- Sound Hint -->
     <div id="sound-hint" class="sound-indicator visible">
       <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
     </div>
@@ -247,93 +247,44 @@
       </div>
     </div>
 
-    <!-- Login Page -->
-    <div id="login-page" class="page-section">
-      <!-- Reusing Explore Background for consistent feel -->
-      <div class="explore-full-bg">
-        <video
-          class="explore-video-bg"
-          autoplay
-          loop
-          muted
-          playsinline
-          webkit-playsinline
-        >
-          <source src="video sky.mp4" type="video/mp4" />
-        </video>
-        <!-- Use blended overlay instead of solid dark -->
-        <div class="explore-video-overlay"></div>
-      </div>
+    <!-- BLOG DETAILS SECTION -->
+    <div class="blog-details-section">
+      <div class="blog-post-card">
+        <!-- Hero Image -->
+        <div class="blog-hero-wrapper">
+          <img
+            id="blog-detail-image"
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2000&auto=format&fit=crop"
+            alt="[صورة غرفة معيشة]"
+            class="blog-hero-image"
+          />
+        </div>
 
-      <div class="login-container">
-        <div class="login-glass-wrapper">
-          <!-- Title -->
-          <h1 class="login-title">Log in</h1>
-          <!-- <h2 class="contact-subtitle">We'd love to hear from you</h2> -->
+        <!-- Blog Header -->
+        <div class="blog-header">
+          <p class="blog-meta-date">
+            <span id="blog-detail-date">Loading date...</span> &bull;
+            <span id="blog-detail-author">Loading author...</span>
+          </p>
+          <h1 class="blog-main-title" id="blog-detail-title">
+            Loading title...
+          </h1>
+        </div>
 
-          <!-- Form Section -->
-          <form class="login-form" onsubmit="handleLogin(event)">
-            <div style="display: flex; flex-direction: column; gap: 20px">
-              <div>
-                <input
-                  type="email"
-                  id="login-email"
-                  class="login-input"
-                  placeholder="Email"
-                  required
-                />
-                <div
-                  id="login-email-error"
-                  style="
-                    color: red;
-                    font-size: 12px;
-                    margin-top: 5px;
-                    display: none;
-                  "
-                ></div>
-              </div>
-              <div>
-                <input
-                  type="password"
-                  id="login-password"
-                  class="login-input"
-                  placeholder="Password"
-                  required
-                />
-                <div
-                  id="login-password-error"
-                  style="
-                    color: red;
-                    font-size: 12px;
-                    margin-top: 5px;
-                    display: none;
-                  "
-                ></div>
-              </div>
-            </div>
-            <div style="display: flex; gap: 20px">
-              <input
-                type="checkbox"
-                class="login-input"
-                placeholder="Username"
-                style="width: 20px; height: 20px"
-              />
-              <label for="">Remember me</label>
-              <a href="" style="margin-left: auto">Forgot Password?</a>
-            </div>
-            <button class="send-btn">Log in</button>
-            <p>
-              Don't have an account?
-              <a href="signup.html">Sign up</a>
-            </p>
-          </form>
-
-          <!-- Socials -->
-          <div class="social-row">
-            <div class="social-box"><i class="fab fa-facebook-f"></i></div>
-            <div class="social-box"><i class="fab fa-twitter"></i></div>
-            <div class="social-box"><i class="fab fa-instagram"></i></div>
-            <div class="social-box"><i class="fab fa-linkedin-in"></i></div>
+        <!-- Blog Content Grid (1 Column) -->
+        <div class="blog-content-grid" style="display: block">
+          <div
+            class="blog-text-column"
+            id="blog-detail-desc"
+            style="
+              white-space: pre-wrap;
+              font-size: 1.15rem;
+              line-height: 1.8;
+              color: var(--text-color);
+              margin-top: 1.5rem;
+            "
+          >
+            Loading description...
           </div>
         </div>
       </div>
@@ -342,7 +293,7 @@
     <!-- Footer -->
     <footer>
       <div>&copy; 2026 SkyPioneers</div>
-      <div>
+      <div class="social-icons">
         <i class="fab fa-facebook-f mx-2"></i>
         <i class="fab fa-instagram mx-2"></i>
         <i class="fab fa-linkedin-in mx-2"></i>
@@ -350,7 +301,6 @@
     </footer>
 
     <!-- REAL ESTATE CHATBOT WIDGET -->
-    <!-- Position adjusted in CSS to center above bottom bar -->
     <div id="chatbot-widget" class="chatbot-widget">
       <div class="chat-header">
         <div class="chat-title-group">
@@ -371,7 +321,6 @@
           Hello! 👋 I'm SkyBot. How can I assist you with your real estate
           journey today?
         </div>
-        <!-- Quick Option Buttons -->
         <div class="chat-options">
           <button onclick="sendOption('Browse Projects')">
             <i class="fas fa-building"></i> Browse Projects
@@ -400,7 +349,7 @@
       </div>
     </div>
 
-    <!-- WhatsApp Floating Button (Replaces Chat Toggle) -->
+    <!-- WhatsApp Floating Button -->
     <a
       href="https://wa.me/201000000000"
       target="_blank"
@@ -410,6 +359,7 @@
       <i class="fa-brands fa-whatsapp"></i>
     </a>
 
+    <!-- Bottom Bar -->
     <div class="tesla-bottom-bar">
       <div class="tesla-chat-input">
         <i class="fa-regular fa-comment-dots chat-icon"></i>
@@ -425,57 +375,89 @@
       </div>
     </div>
 
+    <!-- Script to Load Dynamic Blog -->
     <script>
-      function handleLogin(event) {
-        event.preventDefault();
-        const email = document.getElementById("login-email").value.trim();
-        const password = document.getElementById("login-password").value;
-        const emailError = document.getElementById("login-email-error");
-        const passwordError = document.getElementById("login-password-error");
+      document.addEventListener("DOMContentLoaded", () => {
+        // Parse the blog ID from the URL
+        const params = new URLSearchParams(window.location.search);
+        const blogIdParam = params.get("id");
 
-        emailError.style.display = "none";
-        passwordError.style.display = "none";
+        if (blogIdParam) {
+          const blogId = parseInt(blogIdParam, 10);
+          const blogs = JSON.parse(localStorage.getItem("sky_blogs")) || [];
+          const blog = blogs.find((b) => b.id === blogId);
 
-        let clients = JSON.parse(localStorage.getItem("sky_clients"));
-        if (!clients) {
-          clients = [
-            {
-              id: 1,
-              name: "Esard award",
-              email: "esard.award@gmail.com",
-              projects: "Redgewood Street",
-            },
-            {
-              id: 2,
-              name: "Micale vandar",
-              email: "micale@gmail.com",
-              projects: "Main Street",
-            },
-          ];
-          localStorage.setItem("sky_clients", JSON.stringify(clients));
+          if (blog) {
+            // Update page elements
+            document.getElementById("blog-detail-image").src =
+              blog.image || "imgs/1.avif";
+            document.getElementById("blog-detail-title").innerText = blog.title;
+            document.getElementById("blog-detail-author").innerText =
+              "By " + (blog.author || "Unknown Author");
+            document.getElementById("blog-detail-date").innerText =
+              blog.date || "";
+            document.getElementById("blog-detail-desc").innerText = blog.desc;
+
+            // Update document title
+            document.title = "SKYPIONEERS - " + blog.title;
+          } else {
+            document.getElementById("blog-detail-title").innerText =
+              "Blog Not Found";
+            document.getElementById("blog-detail-desc").innerText =
+              "The blog you are looking for does not exist or has been deleted.";
+            document.getElementById("blog-detail-author").innerText = "";
+            document.getElementById("blog-detail-date").innerText = "";
+          }
+        } else {
+          // Fallback if no ID is passed (maybe keeping the static text or showing instructions)
+          document.getElementById("blog-detail-title").innerText =
+            "No Blog Selected";
+          document.getElementById("blog-detail-desc").innerText =
+            "Please select a blog from the blogs page.";
+          document.getElementById("blog-detail-author").innerText = "";
+          document.getElementById("blog-detail-date").innerText = "";
         }
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
 
-        const user = clients.find(
-          (c) => c.email.toLowerCase() === email.toLowerCase(),
-        );
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
 
-        if (!user) {
-          emailError.innerText = "This email doesn't exist or is incorrect.";
-          emailError.style.display = "block";
-          return;
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
         }
-
-        if (user.password && user.password !== password) {
-          passwordError.innerText =
-            "This password doesn't exist or is incorrect.";
-          passwordError.style.display = "block";
-          return;
-        }
-
-        // Login success
-        localStorage.setItem("sky_current_user", JSON.stringify(user));
-        window.location.href = "index.html";
-      }
+      });
     </script>
     <script src="main.js"></script>
   </body>

@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SKYPIONEERS - Career Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style3.css" />
+
+    <style>
+      /* Career Details Specific Styles integrating with existing theme variables */
+      .career-page-wrapper {
+        padding-top: 120px;
+        padding-bottom: 80px;
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        transition: background-color 0.5s ease;
+      }
+
+      .career-card {
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: var(--glass-shadow);
+        transition: all 0.5s ease;
+      }
+
+      .job-header-text {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .job-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      .job-meta {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-bottom: 5px;
+      }
+
+      /* Tabs Styling */
+      .career-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        border-bottom: 1px solid var(--nav-border);
+        margin-bottom: 40px;
+      }
+
+      .career-tab-btn {
+        background: none;
+        border: none;
+        padding: 0 10px 15px 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .career-tab-btn:hover {
+        color: var(--text-color);
+      }
+
+      .career-tab-btn.active {
+        color: var(--accent-gold);
+      }
+
+      .career-tab-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--accent-gold);
+      }
+
+      /* Tab Content Sections */
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Overview Tab Styles */
+      .overview-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .overview-section-header h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .share-link {
+        color: var(--accent-gold);
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: opacity 0.3s;
+      }
+
+      .share-link:hover {
+        opacity: 0.8;
+      }
+
+      .job-description-list {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.8;
+        margin-bottom: 40px;
+      }
+
+      .job-description-list p {
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .job-description-list ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .job-description-list li {
+        position: relative;
+        padding-left: 15px;
+        margin-bottom: 15px;
+      }
+
+      .job-description-list li::before {
+        content: "-";
+        position: absolute;
+        left: 0;
+        color: var(--text-muted);
+      }
+
+      /* Application Form Styles */
+      .autofill-box {
+        border: 1px solid var(--nav-border);
+        border-radius: 8px;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        margin-bottom: 30px;
+      }
+
+      .autofill-text h4 {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+
+      .autofill-text p {
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      .import-btn {
+        background: var(--accent-gold);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.3s;
+      }
+
+      .import-btn:hover {
+        background: #b08d4e;
+      }
+
+      .required-note {
+        color: #e74c3c;
+        font-size: 13px;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .form-section {
+        margin-bottom: 40px;
+      }
+
+      .form-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--nav-border);
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+      }
+
+      .form-section-header h2 {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--text-color);
+      }
+
+      .clear-btn {
+        color: var(--text-muted);
+        font-size: 13px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: color 0.3s;
+      }
+
+      .clear-btn:hover {
+        color: #e74c3c;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-label {
+        display: block;
+        color: var(--text-color);
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      .input-label .req {
+        color: #e74c3c;
+      }
+
+      .input-label .opt {
+        color: var(--text-muted);
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      .help-text {
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 5px;
+        display: block;
+      }
+
+      /* Reuse theme inputs but specified for career form */
+      .career-input,
+      .career-textarea,
+      .career-select {
+        width: 100%;
+        background-color: var(--input-bg);
+        border: 1px solid var(--nav-border);
+        padding: 12px 15px;
+        color: var(--text-color);
+        font-size: 14px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        outline: none;
+      }
+
+      .career-textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .career-input:focus,
+      .career-textarea:focus,
+      .career-select:focus {
+        border-color: var(--accent-gold);
+      }
+
+      .phone-input-wrapper {
+        display: flex;
+      }
+
+      .phone-code {
+        width: 100px;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      [data-theme="dark"] .phone-code {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .phone-number {
+        flex: 1;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      /* Upload boxes mapped to style3.css file-upload-box */
+      .career-upload-box {
+        border: 1px dashed var(--nav-border);
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px;
+        color: var(--text-muted);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .career-upload-box:hover {
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+        background: rgba(197, 160, 89, 0.05);
+      }
+
+      .upload-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-gold);
+        font-size: 20px;
+      }
+
+      .upload-text {
+        font-size: 14px;
+      }
+
+      .upload-text span {
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .add-btn {
+        background: transparent;
+        border: 1px solid var(--accent-gold);
+        color: var(--text-color);
+        padding: 5px 15px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .add-btn:hover {
+        background: var(--accent-gold);
+        color: white;
+      }
+
+      .profile-item-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .profile-item-row span {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      @media (max-width: 768px) {
+        .career-card {
+          padding: 20px;
+          border-radius: 0;
+          border-left: none;
+          border-right: none;
+        }
+        .autofill-box {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+        .autofill-text h4 {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sound Indicator (From Theme) -->
+    <div id="sound-hint" class="sound-indicator visible">
+      <i class="fas fa-volume-up mr-2"></i> Tap anywhere for sound
+    </div>
+
+    <nav class="tesla-nav" id="navbar">
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="imgs/logo.png" alt="Logo" id="nav-logo" />
+        </a>
+      </div>
+
+      <div class="nav-center hidden lg:flex">
+        <div class="nav-item has-menu">
+          <a href="explore.html">Explore</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>Residential</h4>
+                <ul>
+                  <li><a href="projects.html">Projects</a></li>
+                  <li><a href="sell.html">Sell Unit</a></li>
+                  <li><a href="calculator.html">Calculator</a></li>
+                  <li><a href="developers.html">Developers</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Commercial</h4>
+                <ul>
+                  <li><a href="#">Tech Hub Plaza</a></li>
+                  <li><a href="#">Innovation Center</a></li>
+                  <li><a href="#">Executive Suites</a></li>
+                  <li><a href="#">Global Trade Tower</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Upcoming</h4>
+                <ul>
+                  <li><a href="#">The Vertex</a></li>
+                  <li><a href="#">Eco District</a></li>
+                  <li><a href="#">Ocean Front</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item has-menu">
+          <a href="about.html">About</a>
+          <div class="mega-menu-container">
+            <div class="mega-content">
+              <div class="mega-col">
+                <h4>About Us</h4>
+                <ul>
+                  <li><a href="#">Our Story</a></li>
+                  <li><a href="#">Our Team</a></li>
+                  <li><a href="#">Our Vision</a></li>
+                  <li><a href="#">Our Mission</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Our Work</h4>
+                <ul>
+                  <li><a href="#">Marketing Insights</a></li>
+                  <li><a href="#">Blog</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Sky News & Events</h4>
+                <ul>
+                  <li><a href="#">Sky News</a></li>
+                  <li><a href="#">Events</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4>Featured</h4>
+                <img
+                  src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=400&auto=format&fit=crop"
+                  style="
+                    width: 100%;
+                    border-radius: 8px;
+                    height: 120px;
+                    object-fit: cover;
+                  "
+                />
+                <a
+                  href="#"
+                  style="
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 12px;
+                    color: var(--text-muted);
+                  "
+                  >View Masterplan -></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
+        </div>
+        <div class="nav-item">
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-item">
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
+        <div class="theme-toggle" onclick="" title="Help Center">
+          <a href="help.html">
+            <i class="fa-regular fa-circle-question"></i>
+          </a>
+        </div>
+        <div class="theme-toggle" onclick="" title="Saved Items">
+          <a href="saved-items.html">
+            <i class="fa-solid fa-bookmark"></i>
+          </a>
+        </div>
+
+        <div class="theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </div>
+        <div class="hidden lg:flex theme-toggle">
+          <a href="login.html">
+            <i class="fa-solid fa-user"></i>
+          </a>
+        </div>
+        <div class="nav-item lg:hidden" onclick="toggleMobileMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+      <div class="mobile-close-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="explore.html">Explore</a>
+      </div>
+
+      <div class="mobile-projects-wrapper">
+        <div class="mobile-projects-title">
+          <a href="projects.html">Projects</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="sell.html">Sell Unit</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="calculator.html">Calculator</a>
+        </div>
+        <div class="mobile-nav-sublink" style="display: block">
+          <a href="developers.html">Developers</a>
+        </div>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="about.html">About</a>
+      </div>
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="sell.html">Sell Unit</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="developers.html">Developers</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="calculator.html">Calculator</a>
+      </div> -->
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="careers.html">Careers</a>
+      </div>
+      <div class="mobile-login-btn" onclick="toggleMobileMenu()">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="career-page-wrapper px-4">
+      <div class="career-card">
+        <!-- Job Header -->
+        <div class="job-header-text">
+          <h1 class="job-title" id="detail-title">
+            Business Development Consultant (Nawy Partners)
+          </h1>
+          <p class="job-meta" id="detail-meta">
+            On-site &middot; Nawy Partners &middot; Full time
+          </p>
+          <p class="job-meta" id="detail-location">
+            New Cairo City, Cairo Governorate, Egypt
+          </p>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="career-tabs">
+          <button
+            class="career-tab-btn active"
+            onclick="switchCareerTab('overview')"
+          >
+            Overview
+          </button>
+          <button
+            class="career-tab-btn"
+            onclick="switchCareerTab('application')"
+          >
+            Application
+          </button>
+        </div>
+
+        <!-- TAB: OVERVIEW -->
+        <div id="overview-tab" class="tab-content active">
+          <div class="overview-section-header">
+            <h3>Description</h3>
+            <div class="share-link">
+              Share this job <i class="fas fa-share-alt"></i>
+            </div>
+          </div>
+
+          <div class="job-description-list">
+            <div id="detail-description" style="white-space: pre-line">
+              <p>Business Development Job Responsibilities:</p>
+              <ul>
+                <li>
+                  Identify new and potential partnerships to grow Nawy Partners
+                  business line, and engage in networking opportunities.
+                </li>
+                <li>
+                  Develop client relationships and strengthen industry
+                  partnerships.
+                </li>
+                <li>
+                  Negotiate and close business deals that promote sustained
+                  revenue.
+                </li>
+                <li>
+                  Ability to analyze market trends and competitor behavior.
+                </li>
+                <li>
+                  Ability to advise on possible joint ventures, mergers, and
+                  acquisition.
+                </li>
+              </ul>
+            </div>
+
+            <h3
+              style="
+                font-size: 20px;
+                font-weight: 600;
+                color: var(--text-color);
+                margin: 30px 0 15px 0;
+              "
+            >
+              Requirements
+            </h3>
+            <div id="detail-requirements" style="white-space: pre-line">
+              <ul>
+                <li>Bachelor's Degree in any field.</li>
+                <li>
+                  2 + years of Sales Experience. B2B Experience or E-commerce
+                  background is preferred.
+                </li>
+                <li>Real Estate experience is a plus.</li>
+                <li>Strong Stakeholder Management and Communication Skills</li>
+                <li>Negotiation and Influencing Skills.</li>
+              </ul>
+            </div>
+          </div>
+
+          <button class="submit-btn" onclick="switchCareerTab('application')">
+            Apply for this job
+          </button>
+        </div>
+
+        <!-- TAB: APPLICATION -->
+        <div id="application-tab" class="tab-content">
+          <!-- Autofill Application Box -->
+          <div class="autofill-box">
+            <div class="autofill-text">
+              <h4>
+                <i class="fas fa-bolt" style="color: var(--accent-gold)"></i>
+                Autofill Application
+              </h4>
+              <p>
+                Save time by importing your resume in one of the following
+                formats: .pdf, .doc, .docx, .odt, or .rtf.
+              </p>
+            </div>
+            <button class="import-btn">
+              Import resume from <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+          </div>
+
+          <span class="required-note">* Required fields</span>
+
+          <form
+            action="#"
+            onsubmit="
+              event.preventDefault();
+              alert('Application Submitted Successfully!');
+            "
+          >
+            <!-- Section: Personal Information -->
+            <div class="form-section">
+              <div class="form-section-header">
+                <h2>Personal information</h2>
+                <button type="button" class="clear-btn">
+                  <i class="fas fa-trash-alt"></i> Clear
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="input-group">
+                  <label class="input-label"
+                    ><span class="req">*</span> First name</label
+                  >
+                  <input type="text" class="career-input" required />
+                </div>
+                <div class="input-group">
+                  <label class="input-label"
+                    ><span class="req">*</span> Last name</label
+                  >
+                  <input type="text" class="career-input" required />
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  ><span class="req">*</span> Email</label
+                >
+                <input type="email" class="career-input" required />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Headline <span class="opt">(Optional)</span></label
+                >
+                <input type="text" class="career-input" />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Phone <span class="opt">(Optional)</span></label
+                >
+                <div class="phone-input-wrapper">
+                  <select class="career-select phone-code">
+                    <option>🇪🇬 +20</option>
+                    <option>🇦🇪 +971</option>
+                    <option>🇸🇦 +966</option>
+                  </select>
+                  <input type="tel" class="career-input phone-number" />
+                </div>
+                <span class="help-text"
+                  >The hiring team may use this number to contact you about this
+                  job.</span
+                >
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Address <span class="opt">(Optional)</span>
+                  <i class="far fa-question-circle text-gray-400"></i
+                ></label>
+                <input type="text" class="career-input" value="Tanta, Egypt" />
+                <span class="help-text"
+                  >Include your city, region, and country, so that employers can
+                  easily manage your application.</span
+                >
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Photo <span class="opt">(Optional)</span>
+                  <i class="far fa-question-circle text-gray-400"></i
+                ></label>
+                <div class="career-upload-box">
+                  <div class="upload-icon"><i class="far fa-user"></i></div>
+                  <div class="upload-text">
+                    <span>Choose file</span> or drag and drop here
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Profile -->
+            <div class="form-section">
+              <div class="form-section-header">
+                <h2>Profile</h2>
+                <button type="button" class="clear-btn">
+                  <i class="fas fa-trash-alt"></i> Clear
+                </button>
+              </div>
+
+              <div class="profile-item-row">
+                <span
+                  >Education
+                  <span class="opt text-xs text-gray-500 font-normal"
+                    >(Optional)</span
+                  ></span
+                >
+                <button type="button" class="add-btn">+ Add</button>
+              </div>
+
+              <div class="profile-item-row" style="margin-bottom: 30px">
+                <span
+                  >Experience
+                  <span class="opt text-xs text-gray-500 font-normal"
+                    >(Optional)</span
+                  ></span
+                >
+                <button type="button" class="add-btn">+ Add</button>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Summary <span class="opt">(Optional)</span></label
+                >
+                <textarea class="career-textarea"></textarea>
+              </div>
+            </div>
+
+            <!-- Section: Resume (Uploads) -->
+            <div class="form-section">
+              <div class="input-group">
+                <label class="input-label"
+                  >Resume <span class="opt">(Optional)</span>
+                  <i class="far fa-question-circle text-gray-400"></i
+                ></label>
+                <div class="career-upload-box">
+                  <div class="upload-icon"><i class="fas fa-upload"></i></div>
+                  <div class="upload-text">
+                    <span>Choose file</span> or drag and drop here
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mt-6">
+                <label class="input-label"
+                  ><span class="req">*</span> Upload Your CV
+                  <i class="far fa-question-circle text-gray-400"></i
+                ></label>
+                <div class="career-upload-box">
+                  <div class="upload-icon"><i class="fas fa-upload"></i></div>
+                  <div class="upload-text">
+                    <span>Choose file</span> or drag and drop here
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Section: Details -->
+            <div class="form-section">
+              <div class="form-section-header">
+                <h2>Details</h2>
+                <button type="button" class="clear-btn">
+                  <i class="fas fa-trash-alt"></i> Clear
+                </button>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Cover letter <span class="opt">(Optional)</span></label
+                >
+                <textarea class="career-textarea"></textarea>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >University Name <span class="opt">(Optional)</span></label
+                >
+                <input type="text" class="career-input" />
+              </div>
+
+              <div class="input-group">
+                <label class="input-label"
+                  >Name of Current Employer
+                  <span class="opt">(Optional)</span></label
+                >
+                <input type="text" class="career-input" />
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn" style="border-radius: 8px">
+              Submit application
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div>&copy; 2026 SkyPioneers</div>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f mx-2"></i>
+        <i class="fab fa-instagram mx-2"></i>
+        <i class="fab fa-linkedin-in mx-2"></i>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a
+      href="https://wa.me/201000000000"
+      target="_blank"
+      class="whatsapp-float"
+      title="Chat on WhatsApp"
+    >
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get("id");
+        if (jobId) {
+          const allCareers =
+            JSON.parse(localStorage.getItem("sky_careers")) || [];
+          const career = allCareers.find((c) => c.id == jobId);
+          if (career) {
+            document.getElementById("detail-title").innerText = career.title;
+            document.getElementById("detail-meta").innerHTML =
+              `${career.workplace} &middot; ${career.department} &middot; ${career.workType}`;
+            document.getElementById("detail-location").innerText =
+              career.location;
+
+            if (career.description) {
+              document.getElementById("detail-description").innerText =
+                career.description;
+            }
+            if (career.requirements) {
+              document.getElementById("detail-requirements").innerText =
+                career.requirements;
+            }
+          }
+        }
+      });
+
+      // Helper style for tab switching Logic
+      function switchCareerTab(tabId) {
+        // Remove active class from all buttons and contents
+        document.querySelectorAll(".career-tab-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
+        });
+
+        // Add active class to clicked button and corresponding content
+        if (tabId === "overview") {
+          document
+            .querySelectorAll(".career-tab-btn")[0]
+            .classList.add("active");
+        } else {
+          document
+            .querySelectorAll(".career-tab-btn")[1]
+            .classList.add("active");
+        }
+
+        document.getElementById(tabId + "-tab").classList.add("active");
+      }
+
+      // Basic Theme Toggle Fallback (If main.js is not loaded properly)
+      function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute("data-theme");
+        const icon = document.getElementById("theme-icon");
+
+        if (currentTheme === "dark") {
+          body.removeAttribute("data-theme");
+          if (icon) {
+            icon.classList.remove("fa-sun");
+            icon.classList.add("fa-moon");
+          }
+        } else {
+          body.setAttribute("data-theme", "dark");
+          if (icon) {
+            icon.classList.remove("fa-moon");
+            icon.classList.add("fa-sun");
+          }
+        }
+      }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
+    <script src="main.js"></script>
+  </body>
+</html>

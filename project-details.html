@@ -62,7 +62,7 @@
         width: 200px;
         height: 300px;
         position: absolute;
-        top: 75%;
+        top: 50%;
         transform: translate(0, -50%);
         left: 57%;
         border-radius: 20px;
@@ -333,7 +333,7 @@
         .project-hero .carousel .list .item {
           width: 165px;
           height: 250px;
-          top: 65%;
+          top: 50%;
         }
         .project-hero .carousel .list .item:nth-child(4) {
           left: calc(51% + 220px);
@@ -645,7 +645,6 @@
     </style>
   </head>
   <body>
-    <!-- Tesla Style Liquid Navbar with Mega Menu -->
     <nav class="tesla-nav" id="navbar">
       <div class="nav-logo">
         <a href="index.html">
@@ -654,16 +653,6 @@
       </div>
 
       <div class="nav-center hidden lg:flex">
-        <!-- Home Link -->
-        <!-- <div class="nav-item">
-          <a href="index.html">Home</a>
-        </div> -->
-
-        <!-- Explore Link -->
-        <!-- <div class="nav-item">
-          <a href="explore.html">Explore</a>
-        </div> -->
-
         <div class="nav-item has-menu">
           <a href="explore.html">Explore</a>
           <div class="mega-menu-container">
@@ -720,9 +709,6 @@
           </div>
         </div>
 
-        <!-- About Link triggers Page Switch -->
-        <!-- <div class="nav-item" onclick="switchPage('about')">About</div> -->
-
         <div class="nav-item has-menu">
           <a href="about.html">About</a>
           <div class="mega-menu-container">
@@ -778,17 +764,12 @@
             </div>
           </div>
         </div>
-        <!-- <div class="nav-item">
-          <a href="sell.html">Sell Unit</a>
-        </div>
-        <div class="nav-item">
-          <a href="developers.html">Developers</a>
-        </div>
-        <div class="nav-item">
-          <a href="calculator.html">Calculator</a>
-        </div> -->
+
         <div class="nav-item">
           <a href="blogs.html">Blogs</a>
+        </div>
+        <div class="nav-item">
+          <a href="newsletter.html">Newsletter</a>
         </div>
         <div class="nav-item">
           <a href="contact.html">Contact</a>
@@ -799,6 +780,14 @@
       </div>
 
       <div class="nav-right">
+        <div class="nav-search-wrapper" id="global-search-wrapper">
+          <i class="fas fa-search" id="global-search-trigger"></i>
+          <div class="nav-search-expandable" id="global-search-expandable">
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
+            <i class="fas fa-times" id="global-search-close"></i>
+          </div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
+        </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
             <i class="fa-regular fa-circle-question"></i>
@@ -824,7 +813,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="mobile-menu-overlay">
       <div class="mobile-close-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-times"></i>
@@ -842,20 +830,20 @@
           <a href="projects.html">Projects</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Residential</a>
+          <a href="sell.html">Sell Unit</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Commercial</a>
+          <a href="calculator.html">Calculator</a>
         </div>
         <div class="mobile-nav-sublink" style="display: block">
-          <a href="projects.html">Upcoming</a>
+          <a href="developers.html">Developers</a>
         </div>
       </div>
 
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="about.html">About</a>
       </div>
-      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+      <!-- <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="sell.html">Sell Unit</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
@@ -863,13 +851,17 @@
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="calculator.html">Calculator</a>
-      </div>
+      </div> -->
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="blogs.html">Blogs</a>
       </div>
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
+        <a href="newsletter.html">Newsletter</a>
+      </div>
+      <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="contact.html">Contact</a>
       </div>
+
       <div class="mobile-nav-link" onclick="toggleMobileMenu()">
         <a href="careers.html">Careers</a>
       </div>
@@ -898,7 +890,7 @@
         <!-- Hero Section with Slider -->
         <section class="project-hero">
           <div class="carousel">
-            <div class="list">
+            <div class="list" id="project-hero-list">
               <!-- Slide 1 -->
               <div
                 class="item"
@@ -949,6 +941,7 @@
             <!-- Project Logo Overlay -->
             <div class="project-logo-overlay">
               <img
+                id="project-hero-logo"
                 src="https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp"
                 alt="Logo"
               />
@@ -961,16 +954,21 @@
           <!-- Title & Description -->
           <div class="section-header">
             <div class="header-bar"></div>
-            <h1 class="section-title">
+            <h1 class="section-title" id="project-title">
               El Centro Mall | <span>New Capital</span>
             </h1>
-            <span class="district-label"
+            <span class="district-label" id="project-district"
               >District: New Administrative Capital</span
             >
+            <span
+              class="district-label"
+              id="project-price"
+              style="color: #0047ab; font-weight: 700; margin-left: 15px"
+            ></span>
             <a href="#" class="zoom-btn">Request a Zoom Meeting</a>
           </div>
 
-          <div class="project-description">
+          <div class="project-description" id="project-description-container">
             <p>
               <strong>El Centro Mall New Capital</strong> is a landmark
               mixed-use development by
@@ -1004,6 +1002,7 @@
                         Replace the src link below with your company's Embed Map link from Google Maps 
                     -->
             <iframe
+              id="project-map-iframe"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110502.60389552708!2d31.554095849999996!3d30.0596185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145818956877477b%3A0x6b777a9223390cce!2sNew%20Cairo%201%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1700000000000!5m2!1sen!2seg"
               class="map-iframe"
               allowfullscreen=""
@@ -1024,9 +1023,13 @@
           <div class="developer-section">
             <div class="dev-logo-circle">
               <!-- Empire<br />State<br />Developments -->
-              <img src="imgs/cropped-circle-image-2-copy.webp" alt="" />
+              <img
+                id="project-dev-logo"
+                src="imgs/cropped-circle-image-2-copy.webp"
+                alt=""
+              />
             </div>
-            <div class="dev-text">
+            <div class="dev-text" id="project-dev-text">
               <p>
                 Empire Group brings over 33 years of diverse industry
                 experience. Our journey began in the furniture sector with the
@@ -1045,7 +1048,7 @@
             </h2>
           </div>
 
-          <div class="property-grid">
+          <div class="property-grid" id="project-units-grid">
             <!-- Property Card 1 -->
             <a href="newsletter-details.html" class="developer-card">
               <div
@@ -1648,13 +1651,13 @@
         );
       }
     </script> -->
-     <script>
+    <script>
       /* منطق الـ Carousel المأخوذ من blogs.html */
       document.addEventListener("DOMContentLoaded", () => {
         const nextBtn = document.querySelector(".next");
         const prevBtn = document.querySelector(".prev");
         const carousel = document.querySelector(".carousel");
-        const list = document.querySelector(".list");
+        let list = document.querySelector(".list");
 
         let timeRunning = 2000;
         let timeAutoNext = 4000;
@@ -1663,6 +1666,7 @@
 
         const showSlider = (type) => {
           const items = document.querySelectorAll(".carousel .list .item");
+          if (items.length === 0) return;
 
           if (type === "next") {
             list.appendChild(items[0]);
@@ -1674,23 +1678,25 @@
 
           clearTimeout(runTimeOut);
           runTimeOut = setTimeout(() => {
-            carousel.classList.remove("next");
-            carousel.classList.remove("prev");
+            if (carousel) carousel.classList.remove("next");
+            if (carousel) carousel.classList.remove("prev");
           }, timeRunning);
 
           clearTimeout(runNextAuto);
           runNextAuto = setTimeout(() => {
-            nextBtn.click();
+            if (nextBtn) nextBtn.click();
           }, timeAutoNext);
         };
 
-        nextBtn.onclick = () => showSlider("next");
-        prevBtn.onclick = () => showSlider("prev");
+        if (nextBtn) nextBtn.onclick = () => showSlider("next");
+        if (prevBtn) prevBtn.onclick = () => showSlider("prev");
 
         // البداية التلقائية
-        runNextAuto = setTimeout(() => {
-          nextBtn.click();
-        }, timeAutoNext);
+        if (nextBtn) {
+          runNextAuto = setTimeout(() => {
+            nextBtn.click();
+          }, timeAutoNext);
+        }
 
         // منطق تبديل القالب (Theme)
         const themeIcon = document.getElementById("theme-icon");
@@ -1700,21 +1706,226 @@
           const isDark = body.getAttribute("data-theme") === "dark";
           if (isDark) {
             body.removeAttribute("data-theme");
-            themeIcon.classList.replace("fa-sun", "fa-moon");
+            if (themeIcon) themeIcon.classList.replace("fa-sun", "fa-moon");
             localStorage.setItem("theme", "light");
           } else {
             body.setAttribute("data-theme", "dark");
-            themeIcon.classList.replace("fa-moon", "fa-sun");
+            if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
             localStorage.setItem("theme", "dark");
           }
         };
 
         if (localStorage.getItem("theme") === "dark") {
           body.setAttribute("data-theme", "dark");
-          themeIcon.classList.replace("fa-moon", "fa-sun");
+          if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+        }
+
+        // Dynamic Project Loader
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get("id");
+        if (projectId) {
+          const projects = JSON.parse(
+            localStorage.getItem("sky_projects") || "[]",
+          );
+          const project = projects.find((p) => p.id == projectId);
+          if (project) {
+            // Populate text fields
+            const titleEl = document.getElementById("project-title");
+            if (titleEl) titleEl.innerHTML = `${project.name}`;
+
+            const distEl = document.getElementById("project-district");
+            if (distEl) distEl.innerText = `Location: ${project.location}`;
+
+            const priceFormatted = project.price
+              ? Number(project.price).toLocaleString()
+              : "Contact for Price";
+            const priceEl = document.getElementById("project-price");
+            if (priceEl)
+              priceEl.innerText = `Starting from: ${priceFormatted} EGP`;
+
+            if (project.desc) {
+              const descEl = document.getElementById(
+                "project-description-container",
+              );
+              if (descEl)
+                descEl.innerHTML = `<p>${project.desc.replace(/\n/g, "<br>")}</p>`;
+            }
+
+            if (project.mapLink) {
+              const mapEl = document.getElementById("project-map-iframe");
+              if (mapEl) mapEl.src = project.mapLink;
+            }
+
+            if (project.devLogo) {
+              const devLogoMain = document.getElementById("project-dev-logo");
+              const heroLogo = document.getElementById("project-hero-logo");
+              if (devLogoMain) devLogoMain.src = project.devLogo;
+              if (heroLogo) heroLogo.src = project.devLogo;
+            }
+
+            if (project.devName) {
+              const developers = JSON.parse(
+                localStorage.getItem("sky_developers") || "[]",
+              );
+              const devObj = developers.find((d) => d.name === project.devName);
+              if (devObj && devObj.about) {
+                const devTextContainer =
+                  document.getElementById("project-dev-text");
+                if (devTextContainer) {
+                  // devObj.about may already contain HTML, or might be plain text.
+                  // developer-details.html just does .innerHTML = dev.about.
+                  devTextContainer.innerHTML = devObj.about;
+                }
+              } else if (project.devDesc) {
+                const devTextContainer =
+                  document.getElementById("project-dev-text");
+                if (devTextContainer)
+                  devTextContainer.innerHTML = `<p>${project.devDesc.replace(/\n/g, "<br>")}</p>`;
+              }
+            } else if (project.devDesc) {
+              const devTextContainer =
+                document.getElementById("project-dev-text");
+              if (devTextContainer)
+                devTextContainer.innerHTML = `<p>${project.devDesc.replace(/\n/g, "<br>")}</p>`;
+            }
+
+            // Populate Hero Images safely without breaking the slider DOM structure
+            const heroList = document.getElementById("project-hero-list");
+            if (heroList) {
+              heroList.innerHTML = ""; // Clear statically defined items
+
+              let imagesToLoad =
+                project.heroImages && project.heroImages.length > 0
+                  ? project.heroImages
+                  : project.image
+                    ? [project.image]
+                    : [];
+
+              // Ensure we have at least 4 items for the carousel to look good, by repeating if necessary
+              if (imagesToLoad.length > 0 && imagesToLoad.length < 4) {
+                const originalLength = imagesToLoad.length;
+                while (imagesToLoad.length < 4) {
+                  imagesToLoad.push(
+                    imagesToLoad[imagesToLoad.length % originalLength],
+                  );
+                }
+              }
+
+              imagesToLoad.forEach((imgSrc) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "item";
+                itemDiv.style.backgroundImage = `url('${imgSrc}')`;
+                heroList.appendChild(itemDiv);
+              });
+
+              // Re-select list if needed
+              list = document.querySelector(".list");
+            }
+
+            // Dynamic Units Loader for this project
+            const units = JSON.parse(localStorage.getItem("sky_units") || "[]");
+            const projectUnits = units.filter(
+              (u) => u.project === project.name,
+            );
+            const unitsGrid = document.getElementById("project-units-grid");
+
+            if (unitsGrid) {
+              if (projectUnits.length > 0) {
+                unitsGrid.innerHTML = ""; // Clear static cards
+                projectUnits.forEach((unit) => {
+                  const unitImage =
+                    unit.images && unit.images.length > 0
+                      ? unit.images[0]
+                      : project.image || "imgs/newsletter-1.webp";
+                  const devLogoSrc =
+                    unit.devLogo ||
+                    project.devLogo ||
+                    "https://cbe-realestate-egypt.fsn1.your-objectstorage.com/centro/logo/cropped-circle-image-copy.webp";
+                  const priceFormatted = unit.price
+                    ? Number(unit.price).toLocaleString()
+                    : "Contact for Price";
+
+                  const cardHTML = `
+                    <a href="unit-details.html?id=${unit.id}" class="developer-card">
+                      <div class="date" style="position: absolute; top: 20px; left: 20px; font-size: 12px; padding: 10px 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-align: center; z-index: 10; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.6); min-width: 50px;">
+                        <p>${unit.badge || "Property"}</p>
+                      </div>
+                      <div class="developer-img-container" style="width: 100%; padding: 0">
+                        <img src="${unitImage}" class="prop-img" alt="${unit.type}" />
+                      </div>
+                      <div class="developer-details">
+                        <div class="pro-title" style="gap: 10px; display: flex; align-items: start">
+                          <img style="width: 50px; height: 50px" src="${devLogoSrc}" alt="Developer Logo" />
+                          <div style="gap: 10px; width: 100%; display: flex; flex-direction: column; align-items: start;">
+                            <h2 class="title" style="font-size: 21px; font-weight: 600; text-align: start; width: 100%;">
+                              ${unit.type}
+                            </h2>
+                            <div class="attributes">
+                              <span class="d-flex align-items-center w-100 location text-nowrap1" style="display: flex; gap: 10px; align-items: center; width: 100%;">
+                                <img class="ico mr-1" src="https://coldwellbanker-eg.com/themes/coldwell/assets/images/location.svg" alt="Location" />
+                                ${unit.location || project.location}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="prop-price" style="text-align: end; font-size: 15px; font-weight: lighter; margin-top: 10px;">
+                          Starting from <br />
+                          <span style="font-weight: 600; font-size: 18px">${priceFormatted} EGP</span>
+                        </div>
+                      </div>
+                    </a>
+                  `;
+                  unitsGrid.innerHTML += cardHTML;
+                });
+              } else {
+                unitsGrid.innerHTML =
+                  "<p style='color: var(--text-muted); font-size: 16px; padding: 20px;'>No units available for this project yet.</p>";
+              }
+            }
+          }
         }
       });
-    </script> 
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const userStr = localStorage.getItem("sky_current_user");
+        if (userStr) {
+          const user = JSON.parse(userStr);
+          if (user && user.name) {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+
+            // Desktop icon
+            const desktopLoginLink = document.querySelector(
+              '.nav-right .theme-toggle a[href="login.html"]',
+            );
+            if (desktopLoginLink) {
+              desktopLoginLink.innerHTML = `<div style="width: 34px; height: 34px; border-radius: 50%; background-color: var(--accent-gold); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">${firstLetter}</div>`;
+              desktopLoginLink.href = "#"; // Prevent going to login page if already logged in
+              desktopLoginLink.title = "Logout";
+              desktopLoginLink.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+
+            // Mobile menu login button
+            const mobileLoginBtn = document.querySelector(
+              '.mobile-login-btn a[href="login.html"]',
+            );
+            if (mobileLoginBtn) {
+              mobileLoginBtn.innerText = "Logout (" + user.name + ")";
+              mobileLoginBtn.href = "#";
+              mobileLoginBtn.onclick = (e) => {
+                e.preventDefault();
+                localStorage.removeItem("sky_current_user");
+                window.location.reload();
+              };
+            }
+          }
+        }
+      });
+    </script>
     <script src="main.js"></script>
   </body>
 </html>

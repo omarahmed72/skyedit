@@ -195,7 +195,7 @@ function getSlidesPerView() {
 }
 
 function initSlider() {
-  if (!track) return;
+  if (!track || !dotsContainer) return;
   track.innerHTML = "";
   dotsContainer.innerHTML = "";
   slidesPerView = getSlidesPerView();
@@ -526,6 +526,79 @@ function submitListing() {
   btn.innerText = "Processing...";
   btn.disabled = true;
 
+  // Gather data
+  const title = document.getElementById("sell-title")
+    ? document.getElementById("sell-title").value
+    : "";
+  const category = document.getElementById("sell-category")
+    ? document.getElementById("sell-category").value
+    : "";
+  const price = document.getElementById("sell-price")
+    ? document.getElementById("sell-price").value
+    : "";
+  const area = document.getElementById("sell-area")
+    ? document.getElementById("sell-area").value
+    : "";
+
+  // Get active pills
+  const bedroomsActive = document.querySelector(
+    "#bedrooms-pills .pill-option.active",
+  );
+  const bedrooms = bedroomsActive ? bedroomsActive.innerText : "";
+  const bathroomsActive = document.querySelector(
+    "#bathrooms-pills .pill-option.active",
+  );
+  const bathrooms = bathroomsActive ? bathroomsActive.innerText : "";
+
+  const desc = document.getElementById("sell-desc")
+    ? document.getElementById("sell-desc").value
+    : "";
+  const gov = document.getElementById("sell-gov")
+    ? document.getElementById("sell-gov").value
+    : "";
+  const city = document.getElementById("sell-city")
+    ? document.getElementById("sell-city").value
+    : "";
+  const name = document.getElementById("sell-name")
+    ? document.getElementById("sell-name").value
+    : "";
+  const phone = document.getElementById("sell-phone")
+    ? document.getElementById("sell-phone").value
+    : "";
+  const email = document.getElementById("sell-email")
+    ? document.getElementById("sell-email").value
+    : "";
+
+  // Handle Images (take the first preview if exists)
+  const previewContainer = document.getElementById("preview-container");
+  let imageBase64 =
+    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80"; // default
+  if (previewContainer && previewContainer.querySelector("img")) {
+    imageBase64 = previewContainer.querySelector("img").src;
+  }
+
+  const obj = {
+    id: Date.now(),
+    title,
+    category,
+    price,
+    area,
+    bedrooms,
+    bathrooms,
+    desc,
+    gov,
+    city,
+    name,
+    phone,
+    email,
+    image: imageBase64,
+    status: "Pending", // Default status
+  };
+
+  let sellUnits = JSON.parse(localStorage.getItem("sky_sell_units")) || [];
+  sellUnits.push(obj);
+  localStorage.setItem("sky_sell_units", JSON.stringify(sellUnits));
+
   setTimeout(() => {
     btn.innerText = originalText;
     btn.disabled = false;
@@ -534,11 +607,16 @@ function submitListing() {
     // Admin notification simulation
     setTimeout(() => {
       showToast("New Ad Submission Received (Admin)", "admin");
-      console.log("New Ad Data:", "User: Ahmed, Type: Apartment, Price: 4.5M");
+      console.log(
+        "New Ad Data:",
+        `User: ${name}, Type: ${category}, Price: ${price}`,
+      );
     }, 2000);
 
     document.getElementById("sell-form").reset();
-    document.getElementById("preview-container").innerHTML = "";
+    if (document.getElementById("preview-container")) {
+      document.getElementById("preview-container").innerHTML = "";
+    }
     // Reset pills
     document
       .querySelectorAll(".pill-option")
@@ -558,28 +636,8 @@ function showToast(message, type = "success") {
   }, 3000);
 }
 
-function rotateCylinder(direction) {
-  selectedIndex += direction;
-  updateCylinder();
-}
 
-function updateCylinder() {
-  if (!track) return;
-  const angle = theta * selectedIndex * -1;
-  track.style.transform = `translateZ(${-radius}px) rotateY(${angle}deg)`;
-  const cards = document.querySelectorAll(".gallery-card");
-  const activeIndex = ((selectedIndex % cellCount) + cellCount) % cellCount;
-  cards.forEach((card, i) => {
-    if (i === activeIndex) {
-      card.classList.add("active");
-      card.style.opacity = "1";
-    } else {
-      card.classList.remove("active");
-      card.style.opacity = "0.6";
-    }
-  });
-}
-initGallery();
+/* --- Audio Logic --- */
 
 /* --- Audio Logic --- */
 function enableAudio() {
@@ -609,48 +667,52 @@ var nextBtn = document.querySelector(".next"),
 let timeRunning = 3000;
 let timeAutoNext = 7000;
 
-nextBtn.onclick = function () {
-  showSlider("next");
-};
-prevBtn.onclick = function () {
-  showSlider("prev");
-};
 let runTimeOut;
-let runNextAuto = setTimeout(() => {
-  nextBtn.click();
-}, timeAutoNext);
-
-function resettimeAnimation() {
-  runningTime.style.animation = "none";
-  runningTime.offsetHeight; /* trigger reflow */
-  runningTime.style.animation = null;
-  runningTime.style.animation = "runningTime 7s linear 1 forwards";
-}
-
-function showSlider(type) {
-  let sliderItems = document.querySelectorAll(".carousel .list .item");
-
-  if (type === "next") {
-    list.appendChild(sliderItems[0]);
-    carousel.classList.add("next");
-  } else {
-    list.prepend(sliderItems[sliderItems.length - 1]);
-    carousel.classList.add("prev");
-  }
-  clearTimeout(runTimeOut);
-  runTimeOut = setTimeout(() => {
-    carousel.classList.remove("next");
-    carousel.classList.remove("prev");
-  }, timeRunning);
-  clearTimeout(runNextAuto);
-  runNextAuto = setTimeout(() => {
+if (nextBtn && prevBtn && carousel && list) {
+  nextBtn.onclick = function () {
+    showSlider("next");
+  };
+  prevBtn.onclick = function () {
+    showSlider("prev");
+  };
+  let runNextAuto = setTimeout(() => {
     nextBtn.click();
   }, timeAutoNext);
+  
+  function resettimeAnimation() {
+    if (runningTime) {
+      runningTime.style.animation = "none";
+      runningTime.offsetHeight; /* trigger reflow */
+      runningTime.style.animation = null;
+      runningTime.style.animation = "runningTime 7s linear 1 forwards";
+    }
+  }
+
+  function showSlider(type) {
+    let sliderItems = document.querySelectorAll(".carousel .list .item");
+
+    if (type === "next") {
+      list.appendChild(sliderItems[0]);
+      carousel.classList.add("next");
+    } else {
+      list.prepend(sliderItems[sliderItems.length - 1]);
+      carousel.classList.add("prev");
+    }
+    clearTimeout(runTimeOut);
+    runTimeOut = setTimeout(() => {
+      carousel.classList.remove("next");
+      carousel.classList.remove("prev");
+    }, timeRunning);
+    clearTimeout(runNextAuto);
+    runNextAuto = setTimeout(() => {
+      nextBtn.click();
+    }, timeAutoNext);
+    resettimeAnimation();
+  }
+
+  // Start the initial animation
   resettimeAnimation();
 }
-
-// Start the initial animation
-resettimeAnimation();
 
 function toggleAccordion(index) {
   const content = document.getElementById(`content-${index}`);
@@ -686,11 +748,13 @@ function toggleAccordion(index) {
 
 function toggleChat(shouldFocus = true) {
   const widget = document.getElementById("chatbot-widget");
+  if (!widget) return;
   widget.classList.toggle("active");
 
   // Focus input if opening and requested
   if (widget.classList.contains("active") && shouldFocus) {
-    setTimeout(() => document.getElementById("chat-input").focus(), 300);
+    const chatInput = document.getElementById("chat-input");
+    if (chatInput) setTimeout(() => chatInput.focus(), 300);
   }
 }
 
@@ -707,7 +771,7 @@ function sendFromBottomBar() {
 
   // Ensure chat window is open when button is clicked (regardless of text)
   const widget = document.getElementById("chatbot-widget");
-  if (!widget.classList.contains("active")) {
+  if (widget && !widget.classList.contains("active")) {
     toggleChat(false); // Open without stealing focus immediately if triggered by button click to see history
   }
 
@@ -801,7 +865,7 @@ const bottomBarInput = document.getElementById("bottom-bar-input");
 if (bottomBarInput) {
   bottomBarInput.addEventListener("focus", () => {
     const widget = document.getElementById("chatbot-widget");
-    if (!widget.classList.contains("active")) {
+    if (widget && !widget.classList.contains("active")) {
       toggleChat(false); // Don't steal focus
     }
   });
@@ -825,33 +889,193 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ... (باقي الدوال كما هي) ...
 
-// Simple Rule-Based AI (تم تعديله ليصبح مباشراً ومختصراً)
-function getBotResponse(input) {
-  const lowerInput = input.toLowerCase();
 
-  if (lowerInput.includes("hello") || lowerInput.includes("hi")) {
-    return "Welcome to SkyPioneers! Buying, selling, or exploring?";
-  } else if (
-    lowerInput.includes("project") ||
-    lowerInput.includes("residential")
-  ) {
-    return "Check out <a href='projects.html' style='color:var(--accent-gold); font-weight:bold;'>Sky City</a> and <a href='projects.html' style='color:var(--accent-gold); font-weight:bold;'>Blue Horizon</a>.";
-  } else if (lowerInput.includes("price") || lowerInput.includes("cost")) {
-    return "Units start from 2.5M EGP (8 years installments). Use our <a href='calculator.html' style='color:var(--accent-gold);'>Calculator</a>.";
-  } else if (lowerInput.includes("sell")) {
-    return "List your unit directly on our <a href='sell.html' style='color:var(--accent-gold); font-weight:bold;'>Sell Unit</a> page.";
-  } else if (
-    lowerInput.includes("contact") ||
-    lowerInput.includes("number") ||
-    lowerInput.includes("call")
-  ) {
-    // عرض الرقم فقط هنا
-    return "You can reach our sales team at 19900.";
-  } else if (lowerInput.includes("location") || lowerInput.includes("map")) {
-    return "Located in New Capital and North Coast. View our <a href='map.html' style='color:var(--accent-gold);'>Map</a>.";
-  } else {
-    return "Please choose an option or ask about 'Projects', 'Prices', or 'Selling'.";
+/* ========================================= */
+/* GLOBAL SEARCH FEATURE LOGIC               */
+/* ========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Search initializing...");
+  const searchTrigger = document.getElementById("global-search-trigger");
+  const searchExpandable = document.getElementById("global-search-expandable");
+  const searchInput = document.getElementById("global-search-input");
+  const searchClose = document.getElementById("global-search-close");
+  const searchResults = document.getElementById("global-search-results");
+
+  if (!searchTrigger || !searchExpandable || !searchInput || !searchClose || !searchResults) {
+    console.error("Search elements missing:", { searchTrigger, searchExpandable, searchInput, searchClose, searchResults });
+    return;
   }
-}
 
-// ... (باقي الدوال في الأسفل كما هي) ...
+  // Toggle search bar
+  searchTrigger.addEventListener("click", (e) => {
+    console.log("Search trigger clicked");
+    e.stopPropagation();
+    searchExpandable.classList.add("active");
+    searchInput.focus();
+    searchTrigger.style.display = "none";
+  });
+
+  // Close search bar
+  const closeSearch = () => {
+    searchExpandable.classList.remove("active");
+    searchResults.classList.remove("active");
+    searchInput.value = "";
+    setTimeout(() => {
+      searchTrigger.style.display = "flex";
+      searchResults.innerHTML = "";
+    }, 300); // Wait for transition
+  };
+
+  searchClose.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeSearch();
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (
+      !searchExpandable.contains(e.target) &&
+      !searchResults.contains(e.target)
+    ) {
+      closeSearch();
+    }
+  });
+
+  // Real-time search logic
+  let debounceTimer;
+  searchInput.addEventListener("input", (e) => {
+    clearTimeout(debounceTimer);
+    const query = e.target.value.toLowerCase().trim();
+
+    if (query.length === 0) {
+      searchResults.classList.remove("active");
+      return;
+    }
+
+    debounceTimer = setTimeout(() => {
+      performSearch(query);
+    }, 300);
+  });
+
+  function performSearch(query) {
+    // Data sources mapping: Icon, Detail Page URL, LocalStorage Key
+    const sources = [
+      {
+        id: "projects",
+        title: "Projects",
+        icon: "fa-building",
+        url: "project-details.html",
+        key: "sky_projects",
+        parse: (i) => ({ title: i.title, desc: i.developer || i.category }),
+      },
+      {
+        id: "blogs",
+        title: "Blogs",
+        icon: "fa-newspaper",
+        url: "blog-details.html",
+        key: "sky_blogs",
+        parse: (i) => ({ title: i.title, desc: i.author || i.date }),
+      },
+      {
+        id: "explore",
+        title: "Explore",
+        icon: "fa-compass",
+        url: "explore-details.html",
+        key: "sky_explores",
+        parse: (i) => ({ title: i.title, desc: i.location || i.description }),
+      },
+      {
+        id: "careers",
+        title: "Careers",
+        icon: "fa-briefcase",
+        url: "career-details.html",
+        key: "sky_careers",
+        parse: (i) => ({ title: i.title, desc: i.department || i.workplace }),
+      },
+      {
+        id: "developers",
+        title: "Developers",
+        icon: "fa-hard-hat",
+        url: "developer-detalis.html",
+        key: "sky_developers",
+        parse: (i) => ({ title: i.name, desc: i.desc || i.contactEmail }),
+      },
+      {
+        id: "newsletter",
+        title: "Newsletter",
+        icon: "fa-envelope",
+        url: "newsletter-details.html",
+        key: "sky_newsletters",
+        parse: (i) => ({ title: i.title, desc: i.date }),
+      },
+      {
+        id: "units",
+        title: "Units",
+        icon: "fa-home",
+        url: "unit-details.html",
+        key: "sky_units",
+        parse: (i) => ({
+          title: i.title,
+          desc: i.price ? "$" + i.price : i.size,
+        }),
+      },
+    ];
+
+    let hasResults = false;
+    let resultsHTML = "";
+
+    sources.forEach((src) => {
+      const dataStr = localStorage.getItem(src.key);
+      if (!dataStr) return;
+
+      try {
+        const data = JSON.parse(dataStr);
+        if (!Array.isArray(data)) return;
+
+        const filtered = data.filter((item) => {
+          const parsed = src.parse(item);
+          return (
+            (parsed.title && parsed.title.toLowerCase().includes(query)) ||
+            (parsed.desc && parsed.desc.toLowerCase().includes(query))
+          );
+        });
+
+        if (filtered.length > 0) {
+          hasResults = true;
+          resultsHTML += `<div class="search-results-group">
+                        <div class="search-group-title">${src.title}</div>`;
+
+          filtered.slice(0, 3).forEach((item) => {
+            // Limit to 3 per category to avoid huge lists
+            const parsed = src.parse(item);
+            resultsHTML += `<a href="${src.url}?id=${item.id}" class="search-result-item">
+                            <i class="fas ${src.icon}"></i>
+                            <div class="search-result-content">
+                                <span class="search-result-title">${parsed.title || "Untitled"}</span>
+                                <span class="search-result-desc">${parsed.desc || ""}</span>
+                            </div>
+                        </a>`;
+          });
+
+          if (filtered.length > 3) {
+            resultsHTML += `<a href="#" class="search-result-item" style="justify-content: center; color: var(--accent-gold); font-size: 0.8rem;">
+                            View all ${filtered.length} results...
+                        </a>`;
+          }
+          resultsHTML += `</div>`;
+        }
+      } catch (err) {
+        console.error("Search parse error in", src.key, err);
+      }
+    });
+
+    if (!hasResults) {
+      searchResults.innerHTML = `<div class="search-no-results">No results found for "${query}"</div>`;
+    } else {
+      searchResults.innerHTML = resultsHTML;
+    }
+
+    searchResults.classList.add("active");
+  }
+});
