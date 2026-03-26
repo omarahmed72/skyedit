@@ -160,18 +160,10 @@
         <div class="nav-search-wrapper" id="global-search-wrapper">
           <i class="fas fa-search" id="global-search-trigger"></i>
           <div class="nav-search-expandable" id="global-search-expandable">
-            <input
-              type="text"
-              id="global-search-input"
-              placeholder="Search..."
-              autocomplete="off"
-            />
+            <input type="text" id="global-search-input" placeholder="Search..." autocomplete="off">
             <i class="fas fa-times" id="global-search-close"></i>
           </div>
-          <div
-            class="nav-search-results hidden"
-            id="global-search-results"
-          ></div>
+          <div class="nav-search-results hidden" id="global-search-results"></div>
         </div>
         <div class="theme-toggle" onclick="" title="Help Center">
           <a href="help.html">
@@ -356,7 +348,7 @@
 
         <button
           class="bottom-btn glass-panel"
-          onclick="map.flyTo([28.5, 31.0], 6.5)"
+          onclick="filterBy('all', 28.5, 30.5, 6.5, this)"
         >
           <i class="fa-solid fa-earth-africa"></i> View Full Map
         </button>
@@ -379,11 +371,11 @@
     />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
     />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
     />
     <script
       defer
@@ -391,7 +383,7 @@
     ></script>
     <script
       defer
-      src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
+      src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
     ></script>
     <script src="map.js"></script>
     <script src="main.js" defer></script>
